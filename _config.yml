@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Jang Min jee
+title: Jang Minjee
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
+author: Jang Minjee
 language: en
 timezone: ''
 
@@ -102,4 +102,7 @@ theme: hueman
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: <repository url>
+  branch: [branch]
+  message: [message]
