@@ -7,7 +7,7 @@ tags: Adversarial Speaker Verification
 ---
 
 Journal/Conference: ICASSP IEEE
-Year(출간연도): 2019
+Year(published year): 2019
 주제: Speaker Verification
 
 # Adversarial Speaker Verification
@@ -36,7 +36,7 @@ The target labels of the condition network can be categorical (environment types
 
 적대적 학습은 [22] 논문에서 먼저 적용되었는데 이 논문과의 차이점은, 두가지 소음 컨디션을 서로 다른 방법으로 막은 것(22 논문에서는 환경 개선 보다는 unlabeled 타겟 도메인 데이터를 훈련하여 적응 시키는 걸 목표로 함), 그리고 본 논문은 네트워크에 직접적으로 음성 피처를 인풋으로 넣어 훈련하는 반면, 22 논문은 i-벡터를 인풋으로 넣었고 이는 computational한 시간과 자원이 더 들어감.
 
-** ASV 실험을 소음에 적응 시키기 위해 수행 **
+** Train ASV model to adapt to noise **
 
 
 
