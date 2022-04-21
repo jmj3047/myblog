@@ -9,6 +9,35 @@ tags: hueman
 
 ##### 1.[Starting Hexo Blog](https://futurecreator.github.io/2016/06/14/get-started-with-hexo/)
 
+```python
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop
+$ hexo init your_blog_folder
+
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop
+$ cd your_blog_folder/
+
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop/your_blog_folder
+$ echo "# your_blog_folder" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/your_id/your_blog_folder.git
+git push -u origin master
+
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop/your_blog_folder (master)
+$ git add .
+
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop/your_blog_folder (master)
+$ git commit -m "updated"
+
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop/your_blog_folder (master)
+$ git push
+
+username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop/your_blog_folder (master)
+$ code .
+```
+
 
 
 ##### 2.[Applying Hueman Theme](https://futurecreator.github.io/2016/06/14/hexo-apply-hueman-theme/)
