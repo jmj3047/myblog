@@ -13,10 +13,10 @@ from pyspark.sql import SparkSession
 from pyspark.sql import *
 from pyspark.sql import functions as F
 
-#스파크 세션을 생성: 인메모리에다가 프로세스를 올림
+#Create Spark Session
 spark = SparkSession.builder.master("local[1]").appName("MLSampleTutorial").getOrCreate()
 
-#데이터 불러오기
+#Load Data
 df = spark.read.csv("data/AA_DFW_2015_Departures_Short.csv.gz", header = True)
 
 print("file loaded")
