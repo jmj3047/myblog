@@ -2,8 +2,8 @@
 title: ImageNet Classification with Deep Convolutional Neural Networks
 date: 2022-04-21
 categories:
-  - Convolutional Neural Network
-tags: Image Classification, Computer Vision
+  - Computer Vision
+tags: Convolutional Neural Networks, Image Classification
 ---
 
 
