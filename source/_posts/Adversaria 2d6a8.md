@@ -107,5 +107,4 @@ Deep feature F 를 condition invariant 하게 만들려면, 소음들 각각의 
 여기서 λ가 speaker classification 손실함수와 condition 함수 사이의 균형을 통제.
 GRL은 forward propagation 에서 identity transform 역할을 하며 back propagation 에서 경사도를 – λ로 곱함.
 
--논문 원본:
-    [ADVERSARIAL SPEAKER VERIFICATION](public\2022\04\17\Adversaria2d6a8\ADVERSARIAL_SPEAKER_VERIFICATION.pdf)
+-논문 원본:  **[ADVERSARIAL SPEAKER VERIFICATION](https://arxiv.org/abs/1904.12406)**
