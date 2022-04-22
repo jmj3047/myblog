@@ -128,26 +128,18 @@ if __name__ == "__main__":
 import requests
 from bs4 import BeautifulSoup
 
-import pandas as pd
-
 def crawling(soup):
-    div = soup.find_all("p", class_='title')
-    print(type(div))  #<class 'bs4.element.Tag'>
-    # print(div)
-    # print(div.find_all('a')) #list형태
+    tbody_df = soup.find("tbody")
+    # print(tbody_df)
+    
     result = []
     
-    for a in div:
+    for a in tbody_df.find_all('p', class_='title'):
         # print(a.get_text())
-        result.append(a.get_text())
-    
+        # print(type(a.get_text()))
+        result.append(a.get_text().strip("\n"))
+        
     print(result)
-
-    df = pd.DataFrame({'news_title': result})
-    print(df)
-    df.to_csv("musictitle.csv")
-    
-    
     print("Crawling Success!")
     
 
