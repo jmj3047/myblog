@@ -3,7 +3,11 @@ title: Unsupervised representation learning with deep convolutional generative a
 date: 2022-04-21
 categories:
   - Generative Model
-tags: DCGAN, Convolutional Neural Networks, Image Classification, GAN
+tags: 
+  - DCGAN
+  - Convolutional Neural Networks
+  - Image Classification
+  - GAN
 mathjax: true
 ---
 

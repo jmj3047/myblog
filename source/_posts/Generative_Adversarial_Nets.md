@@ -3,7 +3,9 @@ title: Generative Adversarial Nets
 date: 2022-04-21
 categories:
   - Generative Model
-tags: GAN, Generative Model
+tags: 
+  - GAN
+  - Generative Model
 mathjax: true
 ---
 

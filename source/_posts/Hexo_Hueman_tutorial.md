@@ -9,7 +9,7 @@ tags: hueman
 
 ##### 1.[Starting Hexo Blog](https://futurecreator.github.io/2016/06/14/get-started-with-hexo/)
 
-```python
+```bash
 username@LAPTOP-D1EUIRLS MINGW64 ~/Desktop
 $ hexo init your_blog_folder
 
