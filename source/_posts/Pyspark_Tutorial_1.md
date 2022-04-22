@@ -1,5 +1,5 @@
 ---
-title: Pyspark Tutorial_1
+title: Pyspark Tutorial(1)
 date: 2022-04-21
 categories:
   - Python 
