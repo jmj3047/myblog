@@ -1,5 +1,5 @@
 ---
-title: Web Crawling_Basic
+title: Basic Web Crawling
 date: 2022-04-22
 categories:
   - Python
