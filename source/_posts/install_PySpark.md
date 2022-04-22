@@ -2,7 +2,8 @@
 title: How to install PySpark
 date: 2022-04-19
 categories:
-  - Python 
+  - Python
+  - Pyspark
 tags: pyspark
 ---
 

@@ -3,6 +3,7 @@ title: Pyspark Tutorial_1
 date: 2022-04-21
 categories:
   - Python 
+  - Pyspark
 tags: pyspark
 ---
 

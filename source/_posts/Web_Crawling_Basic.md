@@ -1,8 +1,9 @@
 ---
-title: Web Crawling
+title: Web Crawling_Basic
 date: 2022-04-22
 categories:
   - Python
+  - HTML
 tags:
    - HTML
    - Web Crawling
@@ -37,6 +38,7 @@ pip install beautifulsoup4
 pip install numpy pandas matplotlib seaborn
 pip install requests
 ```
+
 
 ---
 - Reference: [https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup)
