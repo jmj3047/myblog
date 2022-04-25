@@ -167,4 +167,10 @@ Generator 는 연속적인 분포의 함수를 가정합니다. 따라서언어 
 WGAN에 Gradient penalty를 적용하여 기존의 weight clipping 을 적용함으로 인해 발생하는 문제를 해결할 수 있음을 제시하였습니다.
 
 ---
+>Summarize
+- GAN의 가장 큰 문제는 학습환경이 매우 불안정하다는 것이다. 생성자와 구분자 둘 중에 하나가 실력이 월등이 좋아진다면 밸런스가 붕괴되고 모델이 정확히 학습되지 않고 학습이 완료된 후에도 mode dropping 이 생기는데 이는 구분자가 그 역할을 충분히 하지 못해 모델이 최적점까지 학습이 안 된 것이다.
+- 따라서 이 문제를 해결하기 위해 본 논문에서는 WGAN 방법을 도입했다.
+- 간단히 설명하면 GAN의 discriminator보다 선생님 역할을 잘 할 수 있는 critic을 사용함으로써 gradient를 잘 전달시키고 critic과 generator를 최적점까지 학습할 수 있다는 것이다. 그렇다면 이를 적용하면 학습시킬 때 생성자와 구분자의 밸런스가 잘 맞는지 주의깊게 보지 않아도 되고 학습한 이후에 발생하는 mode droppin이 해결 가능하다.
+- 식을 해석해보면 생성자가 Lipschitz 함수 조건을 만족하는가 하지않는가에 대한 기준이 하나 더 생기는것 이다.
+---
 - Link: **[Improved Training of Wasserstein GANs](https://arxiv.org/abs/1704.00028)**
