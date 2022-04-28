@@ -80,3 +80,8 @@ video.movies
 >db.movies.deleteOne({title : "Star Wars: Episode IV - A New Hope"})
 { "acknowledged" : true, "deletedCount" : 1 }
 ```
+
+---
+
+Reference
+- 몽고DB 완벽 가이드: 실전 예제로 배우는 NoSQL 데이터베이스 기초부터 활용까지
