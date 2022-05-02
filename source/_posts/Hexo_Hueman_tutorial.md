@@ -82,5 +82,7 @@ MathJax.Hub.Config({
 
 ##### 7.[Deleting Posts](https://futurecreator.github.io/2017/01/15/how-to-delete-post-in-hexo/)
 
+##### 8.[Error in Hueman Theme](https://pictureyou-neo.github.io/categories/2-Web/Hexo/)
+
 
 `To Be Continued..`
