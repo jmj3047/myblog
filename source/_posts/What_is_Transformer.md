@@ -13,10 +13,7 @@ tags:
 
 트랜스포머(Transformer)는 구글에서 발표한 논문 “Attention is all you need”에 나오는 모델이다. 아래 글은 이 논문 abstract의 일부분이다. 
 
-> The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also **connect the encoder and decoder through an attention mechanism**
-. We propose a new simple network architecture, the Transformer, **based solely on attention mechanisms**
-, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly **less time to train**
-. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU ...
+> The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also **connect the encoder and decoder through an attention mechanism**. We propose a new simple network architecture, the Transformer, **based solely on attention mechanisms**, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly **less time to train**. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU ...
 > 
 
 여기서도 알 수 있듯이, 트랜스포머는 어텐션(Attention) mechanism을 기반으로 여러개의 인코더와 디코더를 연결한 구조를 갖고 있다. 또한 CNN, RNN, LSTM 등의 구조를 사용하지 않았기 때문에 학습 시간이 훨씬 감소된 성능을 내었다고 한다. 그렇다면 그 구조가 무엇인지 더 알아보도록 하자. 
@@ -27,7 +24,7 @@ tags:
 
 포지셔널 인코딩 값을 더해주기 위해서는 사인함수와 코사인함수를 사용한 아래 두 함수를 사용한다. 
 
-![Untitled](images/What_is_Transformer/Untitled.png)
+![](images/What_is_Transformer/Untitled.png)
 
 위 식에서 pos는 입력된 데이터의 임베딩 벡터(몇번째 단어인지)를, i는 임베딩 벡터내의 차원의 인덱스(0~512)를 뜻한다. 임베딩 벡터내의 차원이란 트랜스포머 모델의 인코더와 디코더에서 정해진 입력과 출력의 크기를 말한다. 논문상에서 이 차원을 512로 설정했으면 이 차원은 인코더의 값을 디코더로 보낼때 값을 유지하도록 한다.
 
@@ -35,7 +32,7 @@ tags:
 
 ### (2)인코더(Encoder)의 구조
 
-![Untitled](images/What_is_Transformer/Untitled%201.png)
+![](images/What_is_Transformer/Untitled%201.png)
 
 위 이미지는 트랜스포머 논문에 함께 실려 있는 이미지로, 트랜스포머의 구조를 나타낸다. 
 여기서 왼쪽 부분이 트랜스포머의 인코더 부분인데, 인코더의 구조는 어떻게 이루어졌을까?
@@ -56,11 +53,11 @@ tags:
 
 그렇다면 셀프 어텐션 값을 구하기 위해서 입력된 문장의 단어 벡터(쿼리)에 대해 쿼리(query),키(key), 값(value) 벡터가 정의되어야 할 것이다. 그 과정은 아래 [이미지](https://wikidocs.net/31379)를 통해 쉽게 이해할 수 있다. 
 
-![Untitled](images/What_is_Transformer/Untitled%202.png)
+![](images/What_is_Transformer/Untitled%202.png)
 
 ‘student’라는 단어 벡터가 입력되었을 때, 각각 쿼리, 키 값의 가중치 행렬을 곱해주어 쿼리, 키, 값 벡터를 얻어낸다. 이렇게 쿼리 벡터, 키 벡터, 값 벡터를 얻어냈다면 쿼리 벡터는 모든 키 벡터에 대해 어텐션 스코어(attention score)를 구하게 되고, 이를 이용하여 모든 값 벡터를 가중합 하여 어텐션 값을 구하게 된다. 
 
-![Untitled](images/What_is_Transformer/Untitled%203.png)
+![](images/What_is_Transformer/Untitled%203.png)
 
 한편, 이러한 연산은 각 단어마다가 아닌 문장 전체에 대해서 행렬 연산으로도 일괄적으로 연산이 가능한데, 위와 같이 문장에 대한 쿼리 벡터, 키 벡터의 연산을 통해 값 벡터 행렬을 구할 수 있게 된다. 
 
@@ -72,7 +69,7 @@ tags:
 
 앞에서 트랜스포머의 인코더에서는 어텐션이 병렬적으로 수행되는 멀티 헤드 어텐션이 수행된다고 했다. 논문에서는 512차원의 벡터를 8로 나누어 54차원의 Query, Key, Value 벡터로 바꾸어서 어텐션 함수를 병렬적으로 수행한 것인데, 그렇다면 왜 이렇게 수행한 것일까?
 
-![Untitled](images/What_is_Transformer/Untitled%204.png)
+![](images/What_is_Transformer/Untitled%204.png)
 
 즉, 차원을 나누어서 어텐션 함수를 수행한 뒤, 가중치 행렬을 곱해주고 이를 다시 합치게 되는건데, 논문에 따르면 single attention function을 하는 것보다 병렬적으로 수행하는 것이 모델이 학습하는 데에는 더 효과적이었으며, 모델이 다른 영역(과거시점과 미래시점)에 있는 정보들을 참조할 수 있다고한다. 따라서 출력된 값들은 인코더의 입력 값의 차원과 동일하게 유지된다. 
 
@@ -82,7 +79,7 @@ tags:
 
 Feed Forward는 일종의 신경망으로 Feed Forward Neural Network를 줄여서 FFNN이라고 한다. FFNN의 종류도 여러가지가 있는데, 트랜스 포머의 인코더 층에는 포지션 와이즈(Position-wise) FFNN을 사용한다. 포지션 와이즈 FFNN은 Fully-connected FFNN과 같은 기능을 하는데, 아래와 같은 연산을 수행한다. 
 
-![Untitled](images/What_is_Transformer/Untitled%205.png)
+![](images/What_is_Transformer/Untitled%205.png)
 
 위 식에서 x의 값은 Multi-Head Attention에서 출력된 행렬 값이다. 반면, 가중치를 의미하는 W1, W2, b1, b2는 가중치 값으로 인코더 마다 다른 값을 가지지만 하나의 인코더 층 안에서는 문장과 단어들마다 동일하게 사용된다고 한다. 이렇게 피드 포워드 신경망까지 거치게 되면 한 인코더의 출력값이 도출 되고, 이 값은 다시 두번째 인코더 입력으로 들어가게 되며 이 과정이 반복된다. 
 
@@ -101,7 +98,7 @@ Residual connection과 layer normalization에 대해 짧게 요약하자면, res
 
 ### (3)디코더(Decoder)의 구조
 
-![Untitled](images/What_is_Transformer/Untitled%201.png)
+![](images/What_is_Transformer/Untitled%201.png)
 
 다시 트랜스포머의 구조를 살펴보자. 지금까지 왼쪽에 있는 인코더에 대해 살펴 보았고, 이제 오른쪽에 있는 디코더에 대해 살펴보도록 하겠다. 
 
