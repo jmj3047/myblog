@@ -2,8 +2,10 @@
 title: Hexo Hueman Tutorial
 date: 2022-04-21
 categories:
+  - Setting
+tags: 
+  - Hueman
   - Hexo
-tags: hueman
 ---
 
 

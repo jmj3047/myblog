@@ -779,6 +779,6 @@ output = predict(output)
 
 - Reference
     - [https://velog.io/@seolini43/파이썬Transformer로-오피스-챗봇-만들기-코드](https://velog.io/@seolini43/%ED%8C%8C%EC%9D%B4%EC%8D%ACTransformer%EB%A1%9C-%EC%98%A4%ED%94%BC%EC%8A%A4-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%BD%94%EB%93%9C)
-    - [https://velog.io/@seolini43/파이썬Transformer로-오피스-챗봇-만들기-이론편](https://velog.io/@seolini43/%ED%8C%8C%EC%9D%B4%EC%8D%ACTransformer%EB%A1%9C-%EC%98%A4%ED%94%BC%EC%8A%A4-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9D%B4%EB%A1%A0%ED%8E%B8)
+
 
 **code: [https://github.com/jmj3047/mj_chatbot_prac/blob/c5bec233b833b24345deeffe7391621415dc1dcb/chatbot_backend.py](https://github.com/jmj3047/mj_chatbot_prac/blob/c5bec233b833b24345deeffe7391621415dc1dcb/chatbot_backend.py)
