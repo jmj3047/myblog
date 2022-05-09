@@ -44,7 +44,7 @@ Transformer 모델은 seq2seq으로 대표되는 인코더-디코더 구조를 s
 
 ### Encoder and Decoder Stacks
 
-![](images\Attention_is_all_you_need\Screen_Shot_2021-11-08_at_3.29.12_PM.png)
+![](images/What_is_Transformer/Untitled%201.png)
 
 인코더(Encoder)
 
