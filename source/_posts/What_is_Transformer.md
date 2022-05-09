@@ -2,10 +2,10 @@
 title: What is Transformer
 date: 2022-05-06
 categories:
-  - Python
+  - NLP
 tags: 
   - Transformer
-  - NLP
+  - Attention
 ---
 
 
