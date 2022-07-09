@@ -52,7 +52,7 @@ Frame level의 특징 추출을 하고, Input과 다음 레이어의 변화에 �
 
 
 
-![](images\Deep_Embedding_Learning_for_Text-Dependent_Speaker_Verification\Untitled.png)
+![](images/DELTV/Untitled.png)
 
 프레임 레벨 단계의 경우 각 DenseBlock은 5개의 컨볼루션 레이어(Conv2D), 지수 선형 단위(ELU) 및 인스턴스 정규화(IN)로 구성된다.
 
@@ -72,7 +72,7 @@ Frame level의 특징 추출을 하고, Input과 다음 레이어의 변화에 �
 
 ### **Bidirectional Attentive Pooling**
 
-![](images/Deep_Embedding_Learning_for_Text-Dependent_Speaker_Verification/Untitled%201.png)
+![](images/DELTV/Untitled%201.png)
 
  
 
@@ -86,13 +86,13 @@ bidirectional gated recurrent unit (BGRU) layer + attentive pooling : utterance 
 
 제안된 풀링 방법인 양방향 주의 풀링(BAP)은 다음과 같이 표현될 수 있다.
 
-![](images/Deep_Embedding_Learning_for_Text-Dependent_Speaker_Verification/Untitled%202.png)
+![](images/DELTV/Untitled%202.png)
 
 BAP 계층은 양방향 순차 모델링과 주의 메커니즘을 모두 활용하여 장기적인 시간적 컨텍스트 정보를 캡처한다.
 
 ## **Result**
 
-![](images/Deep_Embedding_Learning_for_Text-Dependent_Speaker_Verification/Untitled%203.png)
+![](images/DELTV/Untitled%203.png)
 
 Dataset: FFSVC2020
 The first 30 utterances are of fixed content: ‘ni hao mi ya’ in Mandarin Chinese for TD-SV tasks. 
