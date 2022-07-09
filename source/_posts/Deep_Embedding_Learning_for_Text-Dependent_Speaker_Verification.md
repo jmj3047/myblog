@@ -3,7 +3,9 @@ title: Deep Embedding Learning for Text-Dependent Speaker Verification
 date: 2022-07-05
 categories:
   - Speaker Verification 
-tags: TD-SV
+tags: 
+  - TD-SV
+  - Deep/Machine Learning Paper Study
 ---
 Journal/Conference: Interspeech
 Year(published year): 2020

@@ -6,6 +6,7 @@ categories:
 tags: 
   - Convolutional Neural Networks
   - Image Classification
+  - Deep/Machine Learning Paper Study
 ---
 
 

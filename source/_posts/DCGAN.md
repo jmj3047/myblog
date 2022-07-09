@@ -8,6 +8,7 @@ tags:
   - Convolutional Neural Networks
   - Image Classification
   - GAN
+  - Deep/Machine Learning Paper Study
 mathjax: true
 ---
 

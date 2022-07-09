@@ -3,7 +3,9 @@ title: Adversarial Speaker Verification
 date: 2022-04-17
 categories:
   - Speaker Verification 
-tags: Adversarial Speaker Verification
+tags: 
+  - Adversarial Speaker Verification
+  - Deep/Machine Learning Paper Study
 ---
 
 Journal/Conference: ICASSP IEEE

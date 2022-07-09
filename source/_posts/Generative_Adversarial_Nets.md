@@ -6,6 +6,7 @@ categories:
 tags: 
   - GAN
   - Generative Model
+  - Deep/Machine Learning Paper Study
 mathjax: true
 ---
 
