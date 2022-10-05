@@ -6,6 +6,7 @@ categories:
 tags: 
   - Hueman
   - Hexo
+  - English
 ---
 
 
