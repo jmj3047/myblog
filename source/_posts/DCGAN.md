@@ -2,6 +2,7 @@
 title: Unsupervised representation learning with deep convolutional generative adversarial networks
 date: 2022-04-21
 categories:
+  - Paper
   - Generative Model
 tags: 
   - DCGAN

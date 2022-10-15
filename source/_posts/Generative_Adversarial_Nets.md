@@ -2,6 +2,7 @@
 title: Generative Adversarial Nets
 date: 2022-04-21
 categories:
+  - Paper
   - Generative Model
 tags: 
   - GAN

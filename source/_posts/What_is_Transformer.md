@@ -2,6 +2,7 @@
 title: What is Transformer
 date: 2022-05-06
 categories:
+  - Paper
   - NLP
 tags: 
   - Transformer

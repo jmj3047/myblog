@@ -6,7 +6,6 @@ categories:
 tags: 
   - Probabilistic sampling
   - Nonprobability sampling
-  - WP_edu
   - English
 ---
 

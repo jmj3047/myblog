@@ -4,7 +4,6 @@ date: 2022-08-12
 categories:
   - Basic ML 
 tags: 
-  - WP_edu
   - ML Analysis
 ---
 

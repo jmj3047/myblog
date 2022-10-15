@@ -3,6 +3,7 @@ title: Making Korean Chatbot with doc2vec(2)
 date: 2022-05-06
 categories:
   - Python
+  - Python
 tags: 
   - Doc2vec
   - Chatbot

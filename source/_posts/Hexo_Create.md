@@ -3,6 +3,7 @@ title: Hexo Blog 생성 및 재연결
 date: 2022-10-06
 categories:
   - Setting 
+  - Hexo
 tags: 
   - Hexo
 ---

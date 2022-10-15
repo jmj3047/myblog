@@ -6,7 +6,6 @@ categories:
 tags: 
   - Clustering
   - ML Analysis
-  - WP_edu
   - English
 ---
 

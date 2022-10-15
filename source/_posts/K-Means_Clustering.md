@@ -7,7 +7,7 @@ tags:
   - K-Means Clustering
   - Clustering
   - ML Analysis
-  - WP_edu
+  - Python
   - English
 ---
 

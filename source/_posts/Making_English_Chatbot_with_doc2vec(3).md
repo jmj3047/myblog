@@ -3,6 +3,7 @@ title: Making English Chatbot with doc2vec(3)
 date: 2022-05-06
 categories:
   - Python
+  - Python
 tags: 
   - Doc2vec
   - Chatbot

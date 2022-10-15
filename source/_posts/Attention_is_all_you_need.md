@@ -2,6 +2,7 @@
 title: Attention is all you need
 date: 2022-05-10
 categories:
+  - Paper
   - NLP
 tags: 
   - Transformer

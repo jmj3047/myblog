@@ -2,6 +2,7 @@
 title: Improved Training of Wasserstein GANs
 date: 2022-04-22
 categories:
+  - Paper
   - Generative Model
 tags: 
   - WGAN-GP

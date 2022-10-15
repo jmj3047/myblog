@@ -3,6 +3,7 @@ title: Making Chatbot with doc2vec tutorial(1)
 date: 2022-05-06
 categories:
   - Python
+  - Python
 tags: 
   - Doc2vec
   - Chatbot

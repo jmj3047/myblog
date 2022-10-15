@@ -3,6 +3,7 @@ title: Setting Git & Virtualenv
 date: 2022-05-06
 categories:
   - Setting
+  - Git
 tags: 
   - Git
   - Virtualenv

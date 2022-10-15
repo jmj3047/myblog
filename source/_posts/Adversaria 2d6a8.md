@@ -2,6 +2,7 @@
 title: Adversarial Speaker Verification
 date: 2022-04-17
 categories:
+  - Paper
   - Speaker Verification 
 tags: 
   - Adversarial Speaker Verification

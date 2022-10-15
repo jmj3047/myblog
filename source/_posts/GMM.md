@@ -7,7 +7,7 @@ tags:
   - Gaussian Mixture Model
   - Clustering
   - ML Analysis
-  - WP_edu
+  - Python
   - English
 ---
 
