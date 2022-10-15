@@ -11,7 +11,7 @@ tags:
   - English
 ---
 
-
+## 1. What is K-means Clustering
 - The K-Means clustering algorithm does not automatically identify and group the number of clusters by looking at the data.
 - The number of clusters should be specified and the initial value should be selected accordingly by user.
     - How to determine the number of clusters
@@ -23,6 +23,8 @@ tags:
     - Each center point determines a group, and individual data is assigned to the same group as the center point close to itself.
     - It does not end at once (depending on the form of the data) but repeats the process of updating the center of the group and assigning groups of individual data again.
 - It belongs to the hard clustering algorithm, which is a clustering that unconditionally assigns a group of data points to a point close to the center.
+
+## 2. Pros & Cons
 - Advantages
     - The process is intuitive, easy to understand, and the algorithm is simple so that it is easy to implement.
     - It does not require complex calculations, so it can be applied to large-scale data.
@@ -35,10 +37,11 @@ tags:
     This has the meaning of clustering only when the distance between clusters is kept as far apart as possible, but as the dimensionality increases, the distance between individual data becomes closer, so this effect may not be observed.
     - The number of clusters is not set automatically, but must be set in advance. However, the optimal number of clusters can be determined using indicators such as Dunn Index and Silhouette Index.
     - Because of Euclidean Distance, it cannot be used if there is a categorical variable. In this case, it is possible to use the extended K-Modes Clustering algorithm.
-- Using python: scikit-learn
-    - Put 3 in n_clusters and init_center in init, and create a KMeans instance.
-    - If you put data(X) into the fit function, clustering is performed.
-    - The final label can be obtained through the labels_ field.
+
+## 3. Using python: scikit-learn
+- Put 3 in n_clusters and init_center in init, and create a KMeans instance.
+- If you put data(X) into the fit function, clustering is performed.
+- The final label can be obtained through the labels_ field.
     
     ```python
     import warnings
@@ -50,7 +53,7 @@ tags:
     labels = kmeans.labels_
     ```
     
-    - Visualization
+- Visualization
     
     ```python
     fig = plt.figure(figsize=(7,7))

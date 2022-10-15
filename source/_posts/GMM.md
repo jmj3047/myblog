@@ -11,6 +11,7 @@ tags:
   - English
 ---
 
+## 1. What is GMM
 - It is one of several models applying the Expectation Maximum (EM) algorithm.
 - What is EM algorithm?
     - EM algorithm is basically an algorithm mainly used for Unsupervised learning.
@@ -30,7 +31,8 @@ tags:
 - This process is called parameter estimation in GMM, and two typical estimates are made and the EM method is applied for this parameter estimation.
     - Means and variance of individual normal distributions
     - Probability of which normal distribution each data corresponds
-- Code
+
+## 2. Code
 
 ```python
 import numpy as np
