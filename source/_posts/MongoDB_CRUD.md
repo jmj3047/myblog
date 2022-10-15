@@ -8,7 +8,6 @@ tags:
 
 ---
 
-<!-- {% githubCard user:jmj3047 %} -->
 
 - Initial setting
 
