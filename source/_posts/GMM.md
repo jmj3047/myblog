@@ -1,6 +1,6 @@
 ---
 title: Gaussian Mixture Model
-date: 2022-09-08
+date: 2022-09-10
 categories:
   - Basic ML
 tags: 

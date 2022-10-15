@@ -1,6 +1,6 @@
 ---
 title: K-Means Clustering
-date: 2022-09-08
+date: 2022-09-09
 categories:
   - Basic ML
 tags: 
