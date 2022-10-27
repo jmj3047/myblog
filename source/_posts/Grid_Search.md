@@ -93,7 +93,7 @@ print(f"최고 정확도: {grid_dtree.best_score_}")
 최고 정확도: 0.9666666666666667
 ```
 
-- print out the optimal parameters which is max_depth:3, min_samples_split:2 and the score is 0.96
+- Print out the optimal parameters which is max_depth:3, min_samples_split:2 and the score is 0.96
 - In this case, the function that gives the best parameter and the highest score is best_params_, best_score_.
 
 ---
