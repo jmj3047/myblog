@@ -1,6 +1,6 @@
 ---
 title: SpeakerGAN, Speaker identification with conditional generative adversarial network
-date: 2022-11-04
+date: 2022-11-05
 categories:
   - Paper
   - Generative Model
