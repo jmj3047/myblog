@@ -2,7 +2,8 @@
 title: Data Sampling
 date: 2022-09-07
 categories:
-  - Basic ML
+  - Data Analysis
+  - Basic
 tags: 
   - Probabilistic sampling
   - Nonprobability sampling

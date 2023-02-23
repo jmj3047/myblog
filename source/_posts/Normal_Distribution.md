@@ -2,13 +2,14 @@
 title: Difference between Normal Distribution & Standard Normal Distribution
 date: 2022-11-11
 categories:
-  - Basic ML
+  - Data Analysis
+  - Basic
 tags: 
   - Normal Distribution
   - Standard Normal Distribution
   - ML Analysis
 ---
-### Difference between Normal Distribution & Standard Normal Distribution
+### 정규분표와 표준정규분포함수의 차이
 
 본 포스팅에서는 정규분포(Normal distribution)와 표준 정규 분포(Standard normal distribution)에 대해 다루도록 한다. 정규 분포의 확률밀도 함수와 예상치(평균), 분산 그리고 증명에 대해 다루며 표준정규분포에 대해서는 확률밀도함수, 누적분포함수, 그리고 표준정규분포를 이용한 정규분포의 확률계산 등의 내용이 다뤄진다. 
 

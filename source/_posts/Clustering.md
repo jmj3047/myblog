@@ -2,7 +2,8 @@
 title: Clustering
 date: 2022-09-08
 categories:
-  - Basic ML
+  - Data Analysis
+  - Basic
 tags: 
   - Clustering
   - ML Analysis

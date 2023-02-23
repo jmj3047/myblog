@@ -2,7 +2,8 @@
 title: Density-Based Spatial Clustering of Applications with Noise
 date: 2022-09-12
 categories:
-  - Basic ML
+  - Data Analysis
+  - Model 
 tags: 
   - DBSCAN
   - Clustering

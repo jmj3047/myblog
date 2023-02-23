@@ -2,7 +2,8 @@
 title: Light Gradient Boosting Machine
 date: 2022-05-10
 categories:
-  - Basic ML 
+  - Data Analysis
+  - Model 
 tags: 
   - Deep/Machine Learning Paper Study
 ---

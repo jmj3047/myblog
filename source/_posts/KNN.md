@@ -2,7 +2,8 @@
 title: K-Nearest Neighbor
 date: 2022-04-21
 categories:
-  - Basic ML 
+  - Data Analysis
+  - Model 
 tags: 
   - Deep/Machine Learning Paper Study
 ---

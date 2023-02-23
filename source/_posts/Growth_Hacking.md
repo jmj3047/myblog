@@ -2,7 +2,8 @@
 title: Growth Hacking, AARRR, Funnel, Retention
 date: 2022-08-12
 categories:
-  - Basic ML 
+  - Data Analysis
+  - Basic
 tags: 
   - ML Analysis
 ---

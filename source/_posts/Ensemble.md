@@ -2,7 +2,8 @@
 title: Ensemble Model
 date: 2022-09-15
 categories:
-  - Basic ML
+  - Data Analysis
+  - Model 
 tags: 
   - Ensemble Model
   - ML Analysis

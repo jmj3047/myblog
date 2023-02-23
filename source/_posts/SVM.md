@@ -2,7 +2,8 @@
 title: Support Vector Machine
 date: 2022-05-06
 categories:
-  - Basic ML 
+  - Data Analysis
+  - Model 
 tags: 
   - Deep/Machine Learning Paper Study
 ---

@@ -2,7 +2,8 @@
 title: Gaussian Mixture Model
 date: 2022-09-10
 categories:
-  - Basic ML
+  - Data Analysis
+  - Model 
 tags: 
   - Gaussian Mixture Model
   - Clustering

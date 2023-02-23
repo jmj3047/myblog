@@ -2,7 +2,8 @@
 title: Probability Distribution Function & Probability Density Function
 date: 2022-11-20
 categories:
-  - Basic ML
+  - Data Analysis
+  - Basic
 tags: 
   - Probability Distribution Function
   - Probability Density Function

@@ -2,7 +2,8 @@
 title: Comparison K means & GMM
 date: 2022-09-11
 categories:
-  - Basic ML
+  - Data Analysis
+  - Model 
 tags: 
   - K-Means Clustering
   - Gaussian Mixture Model

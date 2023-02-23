@@ -2,7 +2,8 @@
 title: 임계치 조절
 date: 2022-09-20
 categories:
-  - Basic ML
+  - Data Analysis
+  - Basic
 tags: 
   - Threshold Adjustment
   - Confusion Matrix

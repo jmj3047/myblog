@@ -2,7 +2,8 @@
 title: K-Means Clustering
 date: 2022-09-09
 categories:
-  - Basic ML
+  - Data Analysis
+  - Model 
 tags: 
   - K-Means Clustering
   - Clustering

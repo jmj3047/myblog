@@ -2,7 +2,8 @@
 title: Grid Search CV
 date: 2022-09-16
 categories:
-  - Basic ML
+  - Data Analysis
+  - Basic 
 tags: 
   - Grid Search CV
   - English

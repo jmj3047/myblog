@@ -2,7 +2,8 @@
 title: Definition of Distance
 date: 2022-04-17
 categories:
-  - Basic ML 
+  - Data Analysis
+  - Basic
 tags: 
   - Deep/Machine Learning Paper Study
 ---
