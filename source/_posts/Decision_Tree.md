@@ -2,7 +2,8 @@
 title: Decision Tree Classifier
 date: 2022-09-13
 categories:
-  - Basic ML
+  - Data Analysis
+  - Model 
 tags: 
   - Decision Tree Classifier
   - ML Analysis
