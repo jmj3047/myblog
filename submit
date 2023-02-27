@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo `hexo generate`
+echo `hexo deploy`
+echo `git add .`
+echo `git commit -m 'updated from bash file'`
+echo `git push origin master`
