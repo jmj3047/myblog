@@ -3,7 +3,6 @@ title: Mac bash 파일로 hexo, git 명령어 자동화
 date: 2023-02-27
 categories:
   - Setting
-  - Git
 tags: 
   - Git
   - Hexo 

@@ -3,7 +3,6 @@ title: Hexo Hueman Tutorial
 date: 2022-04-21
 categories:
   - Setting
-  - Hexo
 tags: 
   - Hueman
   - Hexo
