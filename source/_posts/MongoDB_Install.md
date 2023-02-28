@@ -3,6 +3,7 @@ title: MongoDB Install & Basic Command
 date: 2022-04-25
 categories:
   - Data Base
+  - MongoDB
 tags: 
   - MongoDB
 ---

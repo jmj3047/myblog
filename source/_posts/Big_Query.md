@@ -3,9 +3,9 @@ title: Big Query
 date: 2022-09-29
 categories:
   - Data Base
+  - GCP
 tags: 
   - Big Query
-  - SQL
 ---
 
 ### 1. 쿼리 실행순서

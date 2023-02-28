@@ -3,6 +3,7 @@ title: MongoDB CRUD
 date: 2022-04-25
 categories:
   - Data Base
+  - MongoDB
 tags: 
   - MongoDB
 
