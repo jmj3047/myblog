@@ -35,20 +35,20 @@ tags:
 
 - GCP BigQuery로 이동하여 프로젝트를 만들고, 프로젝트 밑에 `+ADD DATA` 를 클릭한다
 
-    ![](images/BQML_Pred/Untitled.png)
+    ![ ](images/BQML_Pred/Untitled.png)
      
 - `Public Datasets` 를 선택한다
     
-    ![](images/BQML_Pred/Untitled%201.png)
+    ![ ](images/BQML_Pred/Untitled%201.png)
     
 
 - 데이터 셋중 아무거나 선택 한 후 `VIEW DATASET` 을 선택하면 새 창이 뜨면서 구글 퍼블릭데이터 셋이 연결 된다.
     
-    ![](images/BQML_Pred/Untitled%202.png)
+    ![ ](images/BQML_Pred/Untitled%202.png)
     
 - 이번 포스팅에서 다룰 데이터는 `bigquery-public-data.ml_datasets.census_adult_income` 이다. 아래처럼 창이 뜨면 빅쿼리SQL을 사용할 준비가 다 되었다.
     
-    ![](images/BQML_Pred/Untitled%203.png)
+    ![ ](images/BQML_Pred/Untitled%203.png)
     
 ---
 
@@ -56,12 +56,12 @@ tags:
 
 - 내 프로젝트를 선택하고 옆에 점세개를 누르고 `Create dataset` 을 눌러서 데이터 세트를 만든다.
     
-    ![](images/BQML_Pred/Untitled%204.png)
+    ![ ](images/BQML_Pred/Untitled%204.png)
     
 - 데이터 세트 ID에 `census` 를 입력한다
 - 리전을 미국(US)로 선택한다 → public dataset이 US멀티 리전에 있기 때문. 같은 리전에 두어야 혼선을 막을수 있다.
     
-    ![](images/BQML_Pred/Untitled%205.png)
+    ![ ](images/BQML_Pred/Untitled%205.png)
     
 - 만들어진 데이터 셋을 확인할 수 있다.
 
@@ -105,7 +105,7 @@ tags:
     
 - 쿼리 실행 결과
     
-    ![](images/BQML_Pred/Untitled%206.png)
+    ![ ](images/BQML_Pred/Untitled%206.png)
     
 - 분석
     - `income_bracket` : `<=50K` 또는 `>50K` 값중 하나만 있음
@@ -150,7 +150,7 @@ tags:
     - MOD(X,Y): X를 Y로 나눴을때의 나머지
     - 위 쿼리를 수행시키면 1단계에서 만든 census에 input_view가 만들어졌음을 알수 있다.
         
-        ![](images/BQML_Pred/Untitled%207.png)
+        ![ ](images/BQML_Pred/Untitled%207.png)
         
 ---
 
@@ -201,11 +201,11 @@ WHERE
   dataframe = 'training'
 ```
 
-![](images/BQML_Pred/Untitled%208.png)
+![ ](images/BQML_Pred/Untitled%208.png)
 
 - SCHEMA 탭은 BigQuery ML이 로지스틱 회귀를 수행하는데 사용한 속성을 나열한다.
     
-    ![](images/BQML_Pred/Untitled%209.png)
+    ![ ](images/BQML_Pred/Untitled%209.png)
     
 ---
 
@@ -213,9 +213,9 @@ WHERE
 
 1. 4단계의 `CREATE MODEL` 문을 수행했을때 모델의 결과 창에 `EVALUATION` 탭으로 확인할 수 있다.
     
-    ![](images/BQML_Pred/Untitled%2010.png)
+    ![ ](images/BQML_Pred/Untitled%2010.png)
     
-    ![](images/BQML_Pred/Untitled%2011.png)
+    ![ ](images/BQML_Pred/Untitled%2011.png)
     
 2. ML.EVALUATE 함수는 실제 데이터를 기준으로 예측 값을 평가한다.
     
@@ -240,7 +240,7 @@ WHERE
     - input_view 의 데이터를 평가 데이터로 사용한다.
     - 실행 결과
         
-        ![](images/BQML_Pred/Untitled%2012.png)
+        ![ ](images/BQML_Pred/Untitled%2012.png)
         
     - 로지스틱 회귀를 수행했으므로 결과에 `precision`, `recall`, `accuracy`, `f1_score`, `log_loss`, `roc_auc` 열이 포함된다.
 
@@ -275,7 +275,7 @@ WHERE
     - `prediction` 데이터 프레임에 있는 모든 응답자의 소득 계층을 예측한다.
 - 실행 결과: `predicted_income_bracket`은 `income_bracket`의 예측값
     
-    ![](images/BQML_Pred/Untitled%2013.png)
+    ![ ](images/BQML_Pred/Untitled%2013.png)
     
 ---
 
@@ -304,7 +304,7 @@ WHERE
     
 - 실행 결과
     
-    ![](images/BQML_Pred/Untitled%2014.png)
+    ![ ](images/BQML_Pred/Untitled%2014.png)
     
 - 로지스틱 회귀모델에서 Shapley 값은 머신 러닝 모델의 예측 결과에 각 특성이 기여하는 정도를 평가하기 위해 사용된다. 이 값을 통해 모델의 예측 결과를 해석하고, 모델의 예측 결과를 개선하기 위해 어떤 특성을 수정해야 하는지를 결정하는 데 도움을 준다.
 - `top_k_features` 가 3으로 설정되었기 때문에 제공된 테이블의 행당 특성 기여 학목 3개를 출력함.
@@ -348,7 +348,7 @@ WHERE
         
 - 실행 결과
     
-    ![](images/BQML_Pred/Untitled%2015.png)
+    ![ ](images/BQML_Pred/Untitled%2015.png)
     
 
 
