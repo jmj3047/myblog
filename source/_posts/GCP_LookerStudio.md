@@ -21,7 +21,7 @@ tags:
 
 ## public-dataset 가져오기
 
-- 이전 포스트의 0단계와 동일하다. [https://jmj3047.github.io/2023/02/28/BQML_Pred/](https://jmj3047.github.io/2023/02/28/BQML_Pred/)
+- 이전 포스트의 [0단계]https://jmj3047.github.io/2023/02/28/BQML_Pred/)와 동일하다.
 
 ## 데이터 확인 및 EDA
 
