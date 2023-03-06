@@ -64,6 +64,10 @@ tags:
     - 올바른 레이블이 주어진 예측의 비율입니다. → precision과 recall 을 비교했을 때 학습 모델이 맞춘 비율
 - **F1 score :** Harmonic mean of precision and recall.
     - 정확도 및 회수율의 조화 평균입니다.
+    - Precision 과 Recall은 서로 Trade-off 관계를 가지면서 접근하는 방식도 Precision은 모델의 예측, Recall은 정답 데이터 기준이므로 서로 상이 합니다. 
+    - 하지만 두 지표 모두 모델의 성능을 확인하는 데 중요하므로 둘 다 사용되어야 합니다. 따라서 두 지표를 평균값으로 통해 하나의 값으로 나타내는 방법으로 F1 score를 사용합니다. 
+    - 극단적으로 Precision과 Recall 중에 한쪽이 1에 가깝고 한쪽이 0에 가까운 경우 산술 평균과 같이 0.5가 아니라 0에 가깝도록 만들어 줍니다. 따라서 **F1 score를 높이려면 Precision, Recall이 균일한 값이 필요** 하기 때문에 두 지표 성능을 모두 높일 수 있도록 해야 합니다. 
+    - $F_1 = 2*\frac{precision X recall}{precision + recall}$
 - **Log loss :** A measure for model performance between 0 (perfect) and 1. The greater the log-loss, the greater the predicted probability diverges from the actual label.
     - 0(완벽)에서 1 사이의 모델 성능 측정값입니다. 로그 손실이 클수록 예측 확률이 실제 레이블과 차이가 커집니다.
 - **ROC AUC :** Area under the receiver operating characteristic curve.
@@ -113,3 +117,4 @@ This table shows how often the model classified each label correctly (in blue), 
 - Reference
     - [https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall?hl=ko](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall?hl=ko)
     - [https://developers.google.com/machine-learning/crash-course/classification/true-false-positive-negative?hl=ko](https://developers.google.com/machine-learning/crash-course/classification/true-false-positive-negative?hl=ko)
+    - [https://gaussian37.github.io/ml-concept-ml-evaluation/#f1-score-1](https://gaussian37.github.io/ml-concept-ml-evaluation/#f1-score-1)
