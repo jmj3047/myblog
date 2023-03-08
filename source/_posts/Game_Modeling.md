@@ -444,6 +444,8 @@ FROM
   ML.EVALUATE(MODEL bqmlga4.churn_automl)
 ```
 
+![ ](images/Game_Modeling/Untitled%209.png)
+
 ## 모델 예측
 
 - 이탈 성향에 대한 예측을 할 수 있음
