@@ -1,5 +1,5 @@
 ---
-title: BQML을 사용한 개인 소득 예측
+title: BQML을 이용한 개인 소득 예측
 date: 2023-02-28
 categories:
   - Data Base
