@@ -26,7 +26,7 @@ tags:
 
 4. 뾰족하게 구부러진 부분이나 특정 지점이 팔처럼 굽어지는 부분을 K로 지정합니다.
 
-![Untitled](0311_K-Means%20Clustering(2)%20b15d0f604acc4759916f035fab026aab/Untitled.png)
+![ ](images/K-Means_Clustering_2/Untitled.png)
 
 ### **Within Cluster Sum of Squares(**WCSS)
 
@@ -36,11 +36,11 @@ tags:
 2. 클러스터의 모든 포인트에 대해 이 프로세스를 반복한 다음 클러스터의 값을 합산하고 포인트 수로 나눈다.
 3. 마지막으로 모든 클러스터의 평균을 계산합니다. 이렇게 하면 평균 WCSS가 계산됩니다.
 
-![Untitled](0311_K-Means%20Clustering(2)%20b15d0f604acc4759916f035fab026aab/Untitled%201.png)
+![ ](images/K-Means_Clustering_2/Untitled%201.png)
 
 ## Davies Bouldin Index(DBI)
 
-![Untitled](0311_K-Means%20Clustering(2)%20b15d0f604acc4759916f035fab026aab/Untitled%202.png)
+![ ](images/K-Means_Clustering_2/Untitled%202.png)
 
 - n = cluster 개수
 - $c_x$ = cluster $x$의 중심점
@@ -50,15 +50,15 @@ tags:
 - 이 지표가 낮은 클러스터링 알고리즘이 좋은 클러스터링 알고리즘으로 평가 됨
 - 간단한 예제를 통해 이해해 보자
     
-    ![Untitled](0311_K-Means%20Clustering(2)%20b15d0f604acc4759916f035fab026aab/Untitled%203.png)
+    ![ ](images/K-Means_Clustering_2/Untitled%203.png)
     
     - 다음과 같이 점 4개가 주어지고 점(1,1)과 점 (1,3)을 중심으로 할때 → 각 그룹의 중심은 (1,3)과 (3,3)으로 나타낼 수 있음.
     
-    ![Untitled](0311_K-Means%20Clustering(2)%20b15d0f604acc4759916f035fab026aab/Untitled%204.png)
+    ![ ](images/K-Means_Clustering_2/Untitled%204.png)
     
     - 반면 점 (1,1)과 점(1,5)가 중심이 되었을 때 → 각 그룹의 중심은 (1,2)와 (5,2)로 나타남
     
-    ![Untitled](0311_K-Means%20Clustering(2)%20b15d0f604acc4759916f035fab026aab/Untitled%205.png)
+    ![ ](images/K-Means_Clustering_2/Untitled%205.png)
     
     - 위에서 구한 두 가지 경우들에 대해 각각 DBI값을 구한다면
         - 그룹의 중심이 (1,3)과 (3,3)인 경우: 2
