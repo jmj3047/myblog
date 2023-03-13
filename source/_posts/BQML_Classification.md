@@ -22,7 +22,7 @@ tags:
 ## 환경 구축
 
 - GCP와 주피터 노트북을 연결
-- config파일이 필요(이전포스트 설명)
+- config파일이 필요([이전포스트 설명](https://jmj3047.github.io/2023/03/03/Kaggle_GCP/))
     
     ### PIP install packages and dependencies
     
