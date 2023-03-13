@@ -400,9 +400,10 @@ ex) 손으로 쓴 숫자를 사전 처리 → k = 10
      비즈니스 이해관계자가 세 개의 서로 다른 마케팅 캠페인만 제공하고자 하고 세 개의 고객 클러스터를 식별해야 하는 경우 → k=3
 - 그러나 현업에서 위의 예시처럼 딱 떨어지는 사용 사례는 거의 없기 때문에 보통 k의 범위를 지정하고 그 안에서 결과값이 좋은 k를 선택하기도 함.
 - k 값을 결정하기 위한 수단으로 엘보우 방법을 수행한후 [데이비스-볼딘 점수](https://en.wikipedia.org/wiki/Davies–Bouldin_index)로 평가함.
-- DBI가 작을수록 cluster를 자세히 구분했다고 말할수 있음
+- DBI가 작을수록 cluster를 자세히 구분했다고 말할수 있음([관련 포스트](https://jmj3047.github.io/2023/03/11/K-Means_Clustering_2/))
 - 아래에서는 엘보 방법을 모두 수행하고 데이비스-볼딘 점수를 얻기 위한 몇 가지 모델을 생성함.
 - low_k, high_k: 하이퍼 파라미터, 두 값 사이의 모델을 생성.
+
     
     ```python
     # Define upper and lower bound for k, then build individual models for each. 
