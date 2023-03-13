@@ -183,7 +183,7 @@ tags:
 
 ## **BigQuery ML에서 수요 예측 모델 빌드**
 
-- BigQuery ML은 `[ARIMA_PLUS](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=ko)` 알고리즘을 사용하여 [수요 예측](https://cloud.google.com/architecture/demand-forecasting-overview?hl=ko) 모델을 빌드하고 배포하는 데 사용될 수 있음. 이 섹션에서는 BigQuery ML을 사용하여 매장 내 제품 수요를 예측하는 모델을 빌드.
+- BigQuery ML은 `[ARIMA_PLUS]`(https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series?hl=ko) 알고리즘을 사용하여 [수요 예측](https://cloud.google.com/architecture/demand-forecasting-overview?hl=ko) 모델을 빌드하고 배포하는 데 사용될 수 있음. 이 섹션에서는 BigQuery ML을 사용하여 매장 내 제품 수요를 예측하는 모델을 빌드.
 
 ### 학습 데이터 준비
 
@@ -229,7 +229,7 @@ tags:
      `retail.training_data`
     ```
     
-    - `[ML.FORECAST](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=ko)`함수는 `n`시간 범위에 걸쳐 예상되는 수요를 예측하는 데 사용됨
+    - `[ML.FORECAST]`(https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-forecast?hl=ko)함수는 `n`시간 범위에 걸쳐 예상되는 수요를 예측하는 데 사용됨
 - 다음 SQL을 실행하여 향후 30일 동안의 유기농 바나나 수요를 예측
     
     ```sql
