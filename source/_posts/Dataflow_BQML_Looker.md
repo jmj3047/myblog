@@ -2,7 +2,7 @@
 title: Datastream, Dataflow, BigQuery ML, Looker Studio를 사용하여 수요 예측 빌드 및 시각화
 date: 2023-03-13
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

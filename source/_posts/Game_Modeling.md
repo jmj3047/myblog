@@ -2,7 +2,7 @@
 title: BQML을 이용한 게임유저 경향 모델링
 date: 2023-03-08
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

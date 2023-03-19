@@ -2,7 +2,7 @@
 title: Mac VScode GCP 인증 관련 오류
 date: 2023-03-09
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - GCP

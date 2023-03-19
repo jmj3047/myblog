@@ -2,7 +2,7 @@
 title: Python으로 kaggle 데이터 GCP에 적재
 date: 2023-03-03
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

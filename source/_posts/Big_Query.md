@@ -2,7 +2,7 @@
 title: Big Query
 date: 2022-09-29
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

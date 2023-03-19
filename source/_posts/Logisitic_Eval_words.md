@@ -2,7 +2,7 @@
 title: 로지스틱 회귀 모델 평가시 나오는 용어들 정리
 date: 2023-03-06
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

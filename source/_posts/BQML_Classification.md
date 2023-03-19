@@ -2,7 +2,7 @@
 title: BQML을 이용한 고객 분류
 date: 2023-03-10
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

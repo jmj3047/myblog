@@ -2,7 +2,7 @@
 title: GCP - Looker Studio 연결하여 대시보드 작성
 date: 2023-03-02
 categories:
-  - Data Base
+  - Data Platform/Base
   - GCP
 tags: 
   - Big Query

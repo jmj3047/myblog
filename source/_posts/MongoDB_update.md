@@ -2,7 +2,7 @@
 title: MongoDB Update Operator
 date: 2022-04-28
 categories:
-  - Data Base
+  - Data Platform/Base
   - MongoDB
 tags: 
   - MongoDB
