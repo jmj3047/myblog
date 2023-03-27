@@ -88,3 +88,10 @@ tags:
 
 - 애초에 데이터부터 잘못 설계가 된 실험
 - 전날 데이터를 갖고 다음날을 예측 해야 하는데 당일 데이터로 당일을 예측해 버림 → 안정확한게 더 이상한것
+
+---
+- Reference
+    - [BigQuery ML을 사용하여 펭귄 체중 예측](https://cloud.google.com/bigquery-ml/docs/linear-regression-tutorial?hl=ko#step_four_evaluate_your_model)
+    - [Mean_Absolute_Error](https://computer-nerd-coding.tistory.com/1)
+    - [MAE,MSE,RMSE](https://mizykk.tistory.com/102)
+    - [R2_Explained_Variance_Score](http://machinelearningkorea.com/2019/06/09/%EA%B2%B0%EC%A0%95%EA%B3%84%EC%88%98-r2%EC%99%80-%EC%84%A4%EB%AA%85%EB%B6%84%EC%82%B0%EC%A0%90%EC%88%98-explained-variance-score/)
