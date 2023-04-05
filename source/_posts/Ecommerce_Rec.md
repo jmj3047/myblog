@@ -13,7 +13,11 @@ tags:
 
 - kaggle instacart 데이터로 추천 모델링 시스템을 만들기
 - 빅쿼리, Vertex AI를 사용하여 모델을 만들고 예측하기
-- 유저수를 10000명으로 줄여서 예측
+- [참고한 유투브의 추천시스템](https://jmj3047.github.io/2023/03/31/DNN_Youtube_Rec/)은 평점 feature가 있지만 이 데이터에는 존재 하지 않음. 따라서 재주문 여부와 주문회차를 평점으로 가정하고 모델에 도입함
+- 200만 유저 중에 10000명으로 제한하였고, 모델 평가에 대한 지표는 nDCG를 사용함
+
+# 모델에 대한 간략한 설명
+![ ](images/Ecommerce_Rec/structure.png)
 
 # **사용한 데이터셋 및 cpu/gpu 성능**
 
