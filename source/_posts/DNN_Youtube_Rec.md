@@ -9,7 +9,6 @@ tags:
   - Deep Nueral Networks
 ---
 
-
 Journal/Conference: Google
 Year(published year): 2016
 Author: Paul Covington, Jay Adams, Emre Sargin
