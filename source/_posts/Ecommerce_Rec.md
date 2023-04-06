@@ -1,5 +1,5 @@
 ---
-title: 이커머스 추천모델링
+title: Ecommerce Recommendation System
 date: 2023-04-03
 categories:
   - Data Platform/Base
