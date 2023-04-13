@@ -147,4 +147,19 @@ tags:
         - Modern machine learning algorithms like deep learning handle high-dimensional data more effectively
         - Less need for PCA in these applications
 ## Reinforcement
-    TBC..
+- **1. Reinforcement learning introduction**
+    - the key idea is rather than you needing to tell the algorithm what is the right output y for every single input, all you have to do instead is specify a reward function that tells it when it's doing well and when it's doing poorly. And it's the job of the algorithm to automatically figure out how to choose good actions.
+    
+    ![ ](images/ML_Part3/Untitled%2016.png)
+    
+    ![ ](images/ML_Part3/Untitled%2017.png)
+    
+    - the goal is given a board position to pick a good action using a policy Pi. This formalism of a reinforcement learning application actually has a name. It's called a Markov decision process
+    
+    ![ ](images/ML_Part3/Untitled%2018.png)
+    
+    - in a Markov decision process, the future depends only on where you are now, not on how you got here.
+- **2. State-action value function**
+    - In reinforcement learning, there's a key equation called the Bellman equation that will help us to compute the state action value function.
+        
+        ![ ](images/ML_Part3/Untitled%2019.png)
