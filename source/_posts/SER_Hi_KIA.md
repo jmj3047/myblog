@@ -100,14 +100,9 @@ Subject: Emotion Recognition, Wake-Up Words
 - *One is using hand-craft audio features based on domain knowledge. The other is fine-tuning a pretrained*
 *neural network model with the small dataset by leveraging the generalization capability of the model trained with a largescale dataset.*
 
-### A. Hand-craft Features → 이부분 선행연구 찾아보기
+### A. Hand-craft Features
 
 - 주파수, 에너지 및 스펙트럼 도메인 기능을 포함하는 확장된 Geneva Minimalistic Acoustic Parameter Set(eGeMAPS) [22]를 사용
-    - *F. Eyben, K. R. Scherer, B. W. Schuller, J. Sundberg, E. AndrÂe, C. Busso,*
-    *L. Y. Devillers, J. Epps, P. Laukka, S. S. Narayanan et al., ªThe geneva*
-    *minimalistic acoustic parameter set (gemaps) for voice research and*
-    *affective computing,º IEEE transactions on affective computing, vol. 7,*
-    *no. 2, pp. 190±202, 2015. → 이거도 읽기*
 - 88차원의 eGeMAPS 특징은 고정된 평균과 표준 편차 값을 사용하여 z-점수로 표준화
 - Figure 3은 전체 데이터셋에서 에너지와 음높이 분포의 두 바이올린 그림을 보여줌
     
@@ -124,19 +119,11 @@ Subject: Emotion Recognition, Wake-Up Words
 #### Pretrained Wav2vec2.0
 
 - Wav2vec2.0 [29]은 원시 오디오 신호에서 의미 있는 표현을 추출하기 위해 훈련된 transformer 기반 모델입니다.
-    - *A. Baevski, Y. Zhou, A. Mohamed, and M. Auli, ªwav2vec 2.0:*
-    *A framework for self-supervised learning of speech representations,º*
-    *Advances in Neural Information Processing Systems (NeurIPS), vol. 33,*
-    *pp. 12 449±12 460, 2020.*
 - Wav2vec2.0은 CNN을 기반으로 한 로컬 인코더, transformer를 기반으로 한 컨텍스트 네트워크 및 양자화 모듈로 구성되어 있습니다. 로컬 인코더는 원시 파형에서 직접 low-level representation을 추출합니다. 이러한 표현을 기반으로 컨텍스트 네트워크는 대조 손실(contrastive loss)을 사용하여 과거 표현에서 미래 표현을 예측하도록 학습됩니다. 컨텍스트 네트워크의 출력은 학습된 high-level representations입니다.
 
 #### *Fine-tuning methods*
 
 - 우리는 Wav2vec2.0을 사용하여 특징을 추출하고 average pooling을 통해 문장 수준의 기능을 얻었습니다. 이전 연구를 따라[28], 우리는 Wav2vec2.0의 모듈에 대한 다양한 세부 조정 전략을 탐구하였습니다.
-    - *Y. Xia, L.-W. Chen, A. Rudnicky, and R. M. Stern, ªTemporal context*
-    *in speech emotion recognition,º in Conference of the International*
-    *Speech Communication Association (INTERSPEECH), vol. 2021, 2021,*
-    *pp. 3370±3374.*
 - 첫째, 감정 지도 없이 긴급한 libri-speech corpus로 학습된 vanila Wav2vec2.0에서 감정 인식 성능을 측정하는 것입니다(세부 조정 없음). 둘째, 로컬 인코더 또는 컨텍스트 네트워크(각각 저수준 또는 고수준 표현에 대한 책임)를 세밀하게 조정하는 것입니다. 마지막으로 전체 네트워크를 세밀하게 조정합니다
 
 ### *C. Experiment Setup*
