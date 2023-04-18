@@ -63,6 +63,7 @@ tags:
     1. **Spectrogram generation**: This involves converting audio files into spectrograms, which produce a high-dimensional space of data that can be further reduced by applying a convolutional neural network model.
     2. **Time series analysis**: This involves analyzing audio data as a set of time series and extracting relevant features from it.
     3. **Sound engineering**: This involves using domain knowledge from the field of sound engineering to extract relevant features from audio data.
+
 **4. polynomial regression(다항 회귀)**
 - Polynomial regression is a form of regression analysis in which the relationship between the independent variable x and the dependent variable y is modeled as an nth degree polynomial in x.
 - Polynomial regression fits a nonlinear relationship between the value of x and the corresponding conditional mean of y, denoted E(y|x).
