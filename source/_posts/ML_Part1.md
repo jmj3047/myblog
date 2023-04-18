@@ -70,19 +70,13 @@ tags:
 - Although polynomial regression fits a nonlinear model to the data, as a statistical estimation problem it is linear, in the sense that the regression function E(y|x) is linear in the unknown parameters that are estimated from the data.
 - example
     
-    Suppose we have a dataset with the following x and y values:
+    - Suppose we have a dataset with the following x and y values: `x = [1, 2, 3, 4, 5] y = [2, 6, 12, 20, 30]`
     
-    x = [1, 2, 3, 4, 5] y = [2, 6, 12, 20, 30]
+    - If we plot these points on a graph, we can see that the relationship between x and y is not linear. However, we can use polynomial regression to fit a curve to these points.
     
-    If we plot these points on a graph, we can see that the relationship between x and y is not linear. However, we can use polynomial regression to fit a curve to these points.
+    - First, we need to decide on the degree of the polynomial. In this case, let’s use a second-degree polynomial (a quadratic equation). This means our model will have the form: `y = a * x^2 + b * x + c`, where a, b, and c are coefficients that we need to estimate from the data.
     
-    First, we need to decide on the degree of the polynomial. In this case, let’s use a second-degree polynomial (a quadratic equation). This means our model will have the form:
-    
-    y = a * x^2 + b * x + c
-    
-    where a, b, and c are coefficients that we need to estimate from the data.
-    
-    We can use the **`polyfit`** function from the **`numpy`** library to estimate these coefficients:
+    - We can use the **`polyfit`** function from the **`numpy`** library to estimate these coefficients:
     
     ```python
     import numpy as np
@@ -93,16 +87,16 @@ tags:
     coefficients = np.polyfit(x, y, deg=2)
     ```
     
-    This will return an array of coefficients **`[a, b, c]`**. In this case, the coefficients are **`[1.0, -1.7763568394002505e-15, 1.0]`**.
+    - This will return an array of coefficients **`[a, b, c]`**. In this case, the coefficients are **`[1.0, -1.7763568394002505e-15, 1.0]`**.
     
-    Now that we have the coefficients of our polynomial model, we can use it to make predictions for new x values. For example:
+    - Now that we have the coefficients of our polynomial model, we can use it to make predictions for new x values. For example:
     
     ```python
     x_new = 6
     y_new = coefficients[0] * x_new**2 + coefficients[1] * x_new + coefficients[2]
     ```
     
-    This will give us a predicted y value of **`42`**for **`x=6`**
+    - This will give us a predicted y value of **`42`**for **`x=6`**
             
 ## Classification 
 1. Classification and Logistic Regression
