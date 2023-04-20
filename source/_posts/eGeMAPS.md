@@ -22,6 +22,64 @@ Subject: Acoustic Parameter Set, eGeMAPS
 - FAU AIBO를 제외한 모든 데이터베이스와 9개의 최고 SVM 복잡도(C=0.0025)에서 UAR(Unweighted Average Recall)을 평균화합니다.
 - 각 화자에 대한 표준화와 균형 잡힌 훈련 세트를 위해 인스턴스 업샘플링이 수행됩니다.
 
+#### 88개 파라미터 정리
+- **기본 GeMAPS, 62개 파라미터**
+    1. Pitch
+    2. Jitter
+    3. Formant 1 frequency
+    4. Formant 2 frequency
+    5. Formant 3 frequency
+    6. Formant 1
+    7. Shimmer
+    8. Loudness
+    9. Harmonics-to-noise ratio (HNR)
+    10. Alpha Ratio
+    11. Hammarberg Index
+    12. Spectral Slope 0-500 Hz
+    13. Spectral Slope 500-1500 Hz
+    14. Formant 1 relative energy
+    15. Formant 2 relative energy
+    16. Formant 3 relative energy
+    17. Harmonic difference H1-H2
+    18. Harmonic difference H1-A3
+    - 위 18개의 산술평균과 변동계수를 적용 -> 36개 + loudness 8가지 함수 추가 적용 파라미터+ pitch 8가지 함수 추가 적용 파라미터 -> 52개
+    53. Alpha Ratio의 산술평균
+    54. Hammarberg Index의 산술평균
+    55. 0-500 Hz 스펙트럼 기울기의 산술평균 (무성음 구간 전체)
+    56. 500-1500 Hz 스펙트럼 기울기의 산술평균 (무성음 구간 전체)
+    57. the rate of loudness peaks
+    58. continuously voiced regions의 평균 길이(F0 > 0)
+    59. continuously voiced regions의 표준편차(F0 > 0)
+    60. unvoiced regions (approximating pauses)의 평균 길이(F0 = 0)
+    61. unvoiced regions (approximating pauses)의 표준편차(F0 = 0)
+    62. continuous voiced regions의 초당 개수 (pseudo syllable rate)
+
+-  **extended GeMAPS(eGeMAPS), 추가 26개 파라미터**
+    -  7개의 LLD에 대해 산술평균과 변동계수 적용 -> 14개의 discriptor 추가
+        1. MFCC 1 (MFCC의 첫번째 계수)
+        2. MFCC 2
+        3. MFCC 3
+        4. MFCC 4
+        5. Spectral flux
+        6. Formant 2 bandwidth
+        7. Formant 2 bandwidth
+    - 11개의 discriptor가 추가 
+        1. 무성영역에서만 spectral flux의 산술 평균
+        2. 유성영역에서만 spectral flux의 산술 평균
+        3. 유성영역에서만 spectral flux의 변동 계수
+        4. 유성 영역에서만 MFCC 1의 변동 계수
+        5. 유성 영역에서만 MFCC 2의 변동 계수
+        6. 유성 영역에서만 MFCC 3의 변동 계수
+        7. 유성 영역에서만 MFCC 4의 변동 계수
+        8. 유성 영역에서만 MFCC 1의 산술 평균
+        9. 유성 영역에서만 MFCC 2의 산술 평균
+        10. 유성 영역에서만 MFCC 3의 산술 평균
+        11. 유성 영역에서만 MFCC 4의 산술 평균
+    + equivalent soud level
+    - 이렇게 하면 확장된 파라미터에는 14+11+1 26개의 파라미터가 추가 됨
+
+
+
 ## 0.abstract
 
 - GeMAPS는 음성과 감정 컴퓨팅 분야에서 사용되는 기본 표준 음향 파라미터 세트입니다.
