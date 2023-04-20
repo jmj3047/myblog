@@ -16,7 +16,6 @@ Subject: Emotion Recognition, Wake-Up Words
 
 # Hi,KIA: A Speech Emotion Recognition Dataset for Wake-Up Words
 
-
 > Summary 
 
 - 새로운 공개 데이터셋인 Hi, KIA, 감정 레이블이 지정된 WUW 데이터셋을 제안함
