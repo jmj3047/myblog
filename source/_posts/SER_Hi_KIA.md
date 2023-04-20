@@ -101,7 +101,7 @@ Subject: Emotion Recognition, Wake-Up Words
 
 ### A. Hand-craft Features
 
-- 주파수, 에너지 및 스펙트럼 도메인 기능을 포함하는 확장된 Geneva Minimalistic Acoustic Parameter Set(eGeMAPS) [22]를 사용
+- 주파수, 에너지 및 스펙트럼 도메인 기능을 포함하는 확장된 [Geneva Minimalistic Acoustic Parameter Set(eGeMAPS) [22]](https://jmj3047.github.io/2023/04/21/eGeMAPS/)를 사용
 - 88차원의 eGeMAPS 특징은 고정된 평균과 표준 편차 값을 사용하여 z-점수로 표준화
 - Figure 3은 전체 데이터셋에서 에너지와 음높이 분포의 두 바이올린 그림을 보여줌
     

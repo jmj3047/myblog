@@ -90,18 +90,15 @@ Subject: Acoustic Parameter Set, eGeMAPS
 
 - 18개의 Low-Level descriptors
     - **Frequency related parameters`(1~6)`:**
-        1. **Pitch**, logarithmic F0 on a semitone frequency scale,
-        starting at 27.5 Hz (semitone 0). 
+        1. **Pitch**, logarithmic F0 on a semitone frequency scale, starting at 27.5 Hz (semitone 0). 
             - 피치, 27.5Hz(반음 0)에서 시작하는 반음 주파수 스케일에서 로그 F0입니다.
             - 이 문장은 F0 값에 대한 설명입니다. F0 값은 음성 신호에서 기본 주파수를 나타내며, 이 값은 세미톤 주파수 스케일에서 로그함수로 변환됩니다. 이 스케일은 27.5 Hz (세미톤 0)에서 시작하며, 각 세미톤 간의 주파수 차이는 2^(1/12)로 계산됩니다. 따라서, 예를 들어, 세미톤 1은 29.136 Hz이고, 세미톤 2는 30.868 Hz입니다. 이러한 변환을 통해 F0 값을 보다 직관적으로 이해할 수 있습니다.
-        2. **Jitter**, deviations in individual consecutive F0 period
-        lengths.
+        2. **Jitter**, deviations in individual consecutive F0 period lengths.
             - 지터는 개별 연속 F0 주기 길이의 편차입니다.
             - 이 문장은 음성 파라미터 중 하나인 Jitter에 대한 설명입니다. Jitter는 연속적인 F0 주기의 길이에서 발생하는 변동을 나타내는 지표입니다. 즉, F0 주기의 길이가 일정하지 않고 변동이 크면 Jitter 값이 높아집니다. 이러한 변동은 음성 신호에서 발생하는 국소적인 성대 운동 불규칙성으로 인해 발생할 수 있습니다. Jitter 값은 음성 장애 진단 및 감정 분석 등에 사용됩니다.
         3. **Formant 1 frequency**, 
         4. **Formant 2 frequency**, 
-        5.  **Formant 3 frequency,** centre frequency of
-        first, second, and third formant
+        5.  **Formant 3 frequency,** centre frequency of first, second, and third formant
             - 1,2,3 번째 formant의 중심 주파수
         6. **Formant 1**, bandwidth of first formant.
             - 첫번째 formant의 중심 파라미터
@@ -109,29 +106,22 @@ Subject: Acoustic Parameter Set, eGeMAPS
         7. **Shimmer**, difference of the peak amplitudes of consecutive F0 periods.
             - 쉬머는 연속된 F0 기간의 피크 진폭의 차이입니다.
             - 이 문장은 음성 파라미터 중 하나인 Shimmer에 대한 설명입니다. Shimmer는 연속적인 F0 주기에서 peak amplitude의 차이를 나타내는 지표입니다. 즉, F0 주기에서 peak amplitude의 차이가 크면 Shimmer 값이 높아집니다. 이러한 변동은 음성 신호에서 발생하는 국소적인 성대 운동 불규칙성으로 인해 발생할 수 있습니다. Shimmer 값은 음성 장애 진단 및 감정 분석 등에 사용됩니다.
-        8. **Loudness**, estimate of perceived signal intensity
-        from an auditory spectrum.
+        8. **Loudness**, estimate of perceived signal intensity from an auditory spectrum.
             - 청각 스펙트럼에서 감지된 신호강도의 estimate
-        9. **Harmonics-to-noise ratio (HNR)**, relation of energy
-        in harmonic components to energy in noise-like components.
+        9. **Harmonics-to-noise ratio (HNR)**, relation of energy in harmonic components to energy in noise-like components.
             - Harmonics 대 잡음비(HNR)는 Harmonics 성분의 에너지와 잡음 성분의 에너지를 고조파 성분의 에너지와 잡음 성분의 에너지의 관계입니다.
             - 이 문장은 음성 파라미터 중 하나인 Harmonics-to-noise ratio (HNR)에 대한 설명입니다. HNR은 음성 신호에서 harmonic components와 noise-like components 간의 에너지 비율을 나타내는 지표입니다. 즉, HNR 값이 높을수록 음성 신호에서 harmonic components의 비중이 높아지고, HNR 값이 낮을수록 noise-like components의 비중이 높아집니다. 이러한 지표는 음성 신호에서 발생하는 잡음과 왜곡 등을 분석하고, 음성 장애 진단 및 감정 분석 등에 사용됩니다.
     - **Spectral (balance) parameters`(10~18)`:**
-        10. **Alpha Ratio**, ratio of the summed energy from
-        50-1000 Hz and 1-5 kHz
+        10. **Alpha Ratio**, ratio of the summed energy from 50-1000 Hz and 1-5 kHz
             - 50-1000Hz, 1-5kHz에서 합산된 에너지의 비율
             - 음성 신호의 저주파 대역과 고주파 대역 간의 에너지 비율을 나타내는 지표
             - Alpha Ratio는 저주파 영역과 고주파 영역의 에너지 비율을 나타내는 파라미터입니다. 구체적으로, 50-1000 Hz와 1-5 kHz에서의 총 에너지 비율을 나타냅니다.
             - Alpha Ratio는 음성 신호의 성질을 분석하는 데 사용됩니다. 예를 들어, Alpha Ratio가 높은 경우 저주파 성분이 많은 음성 신호일 가능성이 높습니다. 이러한 정보는 음성 질환 진단 및 치료에 유용하게 사용될 수 있습니다.
-        11. **Hammarberg Index**, ratio of the strongest energy
-        peak in the 0-2 kHz region to the strongest peak in
-        the 2–5kHz region.
+        11. **Hammarberg Index**, ratio of the strongest energy peak in the 0-2 kHz region to the strongest peak in the 2–5kHz region.
             - 0-2kHz 영역에서 가장 강한 에너지 피크와 2-5kHz 영역에서 가장 강한 피크의 비율
             - 이 문장은 음성 파라미터 중 하나인 Hammarberg Index에 대한 설명입니다. Hammarberg Index는 음성 신호에서 0-2 kHz 영역과 2-5 kHz 영역에서 가장 강한 에너지 peak 간의 비율을 나타내는 지표입니다. 즉, Hammarberg Index 값이 높을수록 0-2 kHz 영역에서의 에너지 peak가 높아지고, Hammarberg Index 값이 낮을수록 2-5 kHz 영역에서의 에너지 peak가 높아집니다. 이러한 지표는 음성 신호에서 발생하는 고음과 저음 등을 분석하고, 음성 장애 진단 및 감정 분석 등에 사용됩니다.
         12. **Spectral Slope 0-500 Hz** 
-        13. **Spectral Slope 500-1500 Hz**, linear
-        regression slope of the logarithmic power spectrum
-        within the two given bands.
+        13. **Spectral Slope 500-1500 Hz**, linear regression slope of the logarithmic power spectrum within the two given bands.
             - 0-500 Hz 과 500-1500 Hz, 주어진 두 대역 내에서 로그 파워 스펙트럼의 선형 회귀 기울기
             - 이 문장은 음성 파라미터 중 하나인 Spectral Slope 0-500 Hz and 500-1500 Hz에 대한 설명입니다. Spectral Slope는 주어진 두 개의 주파수 범위 (0-500 Hz 및 500-1500 Hz) 내에서 로그 스케일의 파워 스펙트럼의 선형 회귀 기울기를 나타내는 지표입니다. 즉, Spectral Slope 값이 높을수록 파워 스펙트럼이 빠르게 감소하고, Spectral Slope 값이 낮을수록 파워 스펙트럼이 천천히 감소합니다. 이러한 지표는 음성 신호에서 발생하는 저역대와 고역대의 에너지 분포를 분석하고, 음성 장애 진단 및 감정 분석 등에 사용됩니다.
             - 파워 스펙트럼은 시간 도메인의 신호를 주파수 도메인으로 변환한 것입니다. 즉, 파워 스펙트럼은 주파수별로 신호의 에너지를 나타내는 그래프입니다. 파워 스펙트럼을 계산하면 주파수 영역에서 신호의 성분을 분석할 수 있습니다. 이러한 분석은 음성 인식, 음성 합성, 음성 변조 및 음성 감정 분석 등에 사용됩니다.
