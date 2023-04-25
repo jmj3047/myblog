@@ -106,3 +106,8 @@ deploy:
   repo: https://github.com/jmj3047/jmj3047.github.io.git
   branch: master
   # message: [message]
+
+sitemap:
+    path: sitemap.xml
+    tag: false  #tag 는 사이트맵에서 제외
+    category: false #category 사이트맵에서 제외
