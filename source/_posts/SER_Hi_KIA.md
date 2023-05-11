@@ -24,7 +24,7 @@ Subject: Emotion Recognition, Wake-Up Words
 - 개발된 두가지 분류 모델은 전통적인 hand-craft feature와 pre-trained neural network를 이용한 transfer-learning 접근 방식을 사용하여 구현되었으며  이 데이터셋에서 짧은 발화 수준의 감정 인식에 대한 기준 결과를 제시함
 - 이러한 결과들은 앞으로 VUI 기반 어플리케이션에 활용될 것으로 기대됨
 
-## *I.* Introduction
+## I. Introduction
 
 - 음성 인식 기술은 음성 사용자 인터페이스(VUIs)를 통해 다양한 응용 프로그램에서 사용되고 있다. VUIs는 사용자에게 보이지 않는 인터페이스로서, 기존의 인터페이스보다 감정적인 커뮤니케이션을 더 잘 전달할 수 있다. 특히, 차량 내 VUIs는 운전 중 안전을 보장하고 운전자의 감정적인 경험을 향상시키는 데 큰 관심을 받고 있다. WUW(Wake-up words)를 발화하여 VUIs를 활성화하는 것이 가장 일반적인 사용 방법 중 하나이다. 이 연구에서는 Hi,KIA 데이터셋을 사용하여 WUW 발화 시 사용자의 감정 상태를 분류하는 모델을 개발하였다. Hi,KIA 데이터셋은 488개의 한국어 발화 샘플로 구성되어 있으며, 4가지 감정 상태(분노, 기쁨, 슬픔, 중립)로 레이블링되어 있다. 이 모델은 차량 내 VUIs에서 WUW를 발화한 사용자의 감정 상태를 인식하는 데 활용될 수 있다.
 - Wake up word emotion recognition
@@ -45,9 +45,9 @@ Subject: Emotion Recognition, Wake-Up Words
     - WUW SER 데이터셋은 짧은 발화와 키워드로 제한됨
     - 최근에 Release된 Ok Aura의 경우 데이터 셋도 많고 스피커도 많지만 labeled된 데이터가 218개 밖에 없음.
 
-## *II.* DATASET
+## II. DATASET
 
-### *A. Scenario Selection*
+### A. Scenario Selection
 
 - 시나리오는 "Hi, KIA (WUW)"로 시작하는 텍스트 스크립트로 제공되며, 감정 상태를 유발하는 문맥 문장으로 끝남
 - affective computing 분야에서 경험이 있는 8명의 대학원생들이 VUI가 특정 감정에서 사용되는 시나리오를 제안하도록 요청
@@ -69,13 +69,13 @@ Subject: Emotion Recognition, Wake-Up Words
 - 각 카드에는 차 내부 위에 녹음 가이드로 사용될 문장이 제시
 - 해당 문장의 상황을 설명하는 참조 이미지를 배경으로 제공
 
-### *B. Recording and Post-processing*
+### B. Recording and Post-processing
 
 - 4명의 목소리 배우들을 온라인으로 모집. 평균 연령은 31.38세이며 표준 편차는 3.90세
 - 마우스 위치를 마이크로부터 30cm 이상 떨어뜨리도록
 - 12개 시나리오에 대해 총 576개의 오디오 파일을 수집
 
-### *C. Human Validation*
+### C. Human Validation
 
 - 8명의 대학원생들이 576개의 녹음 파일을 무작위로 선정하여, 각 녹음 파일이 '화남', '기쁨', '슬픔', '중립' 중 어떤 감정을 나타내는지 분류
 - 만약 녹음 파일이 인식하기 어려웠다면 'unknown'으로 분류
@@ -92,7 +92,7 @@ Subject: Emotion Recognition, Wake-Up Words
 
 ![ ](images/SER_Hi_KIA/Untitled%203.png)
 
-## *III. WAKE-UP WORD EMOTION RECOGNITION*
+## III. WAKE-UP WORD EMOTION RECOGNITION
 
 - 데이터셋의 크기가 작기 때문에 두 가지 학습 전략을 탐구
 - 하나는 도메인 지식에 기반한 수작업 오디오 특징을 사용하는 것이고, 다른 하나는 대규모 데이터셋으로 학습된 모델의 일반화 능력을 활용하여 작은 데이터셋으로 사전 학습된 신경망 모델을 세밀하게 조정하는 것
@@ -110,7 +110,7 @@ Subject: Emotion Recognition, Wake-Up Words
     - 일반적인 경향은 고기분 상태 그룹('화난', '기쁜')이 저기분 상태 그룹('슬픈', '보통')과 잘 구별됨
     - **딥 뉴럴 네트워크 기반의 기능과 비교하기 위해, 문장 수준의 eGeMAPS 기능을 로지스틱 회귀 분류기의 input으로 사용**
 
-### *B. Fine-Tuning with Pretrained Wav2vec 2.0*
+### B. Fine-Tuning with Pretrained Wav2vec 2.0
 
 - 최근 연구에서는 음성 감정 인식을 위해 딥 러닝을 사용하는 것이 일반적입니다. 그러나 annotation이 달린 데이터의 부족으로 인해 이러한 방법들은 제한되어 있습니다.
 - 이 문제를 해결하기 위해, Wav2vec와 같은 대규모 사전 학습된 신경망을 사용한 전이 학습이 감정 인식 정확도를 향상시켰습니다. Hi, KIA와 함께, 우리는 Wav2vec2.0을 사용하여 유사한 전이 학습을 수행하였습니다.
@@ -120,20 +120,20 @@ Subject: Emotion Recognition, Wake-Up Words
 - Wav2vec2.0 [29]은 원시 오디오 신호에서 의미 있는 표현을 추출하기 위해 훈련된 transformer 기반 모델입니다.
 - Wav2vec2.0은 CNN을 기반으로 한 로컬 인코더, transformer를 기반으로 한 컨텍스트 네트워크 및 양자화 모듈로 구성되어 있습니다. 로컬 인코더는 원시 파형에서 직접 low-level representation을 추출합니다. 이러한 표현을 기반으로 컨텍스트 네트워크는 대조 손실(contrastive loss)을 사용하여 과거 표현에서 미래 표현을 예측하도록 학습됩니다. 컨텍스트 네트워크의 출력은 학습된 high-level representations입니다.
 
-#### *Fine-tuning methods*
+#### Fine-tuning methods
 
 - 우리는 Wav2vec2.0을 사용하여 특징을 추출하고 average pooling을 통해 문장 수준의 기능을 얻었습니다. 이전 연구를 따라[28], 우리는 Wav2vec2.0의 모듈에 대한 다양한 세부 조정 전략을 탐구하였습니다.
 - 첫째, 감정 지도 없이 긴급한 libri-speech corpus로 학습된 vanila Wav2vec2.0에서 감정 인식 성능을 측정하는 것입니다(세부 조정 없음). 둘째, 로컬 인코더 또는 컨텍스트 네트워크(각각 저수준 또는 고수준 표현에 대한 책임)를 세밀하게 조정하는 것입니다. 마지막으로 전체 네트워크를 세밀하게 조정합니다
 
-### *C. Experiment Setup*
+### C. Experiment Setup
 
-#### *Data split and Metrics*
+#### Data split and Metrics
 
 - speaker independence를 위해 8-fold cross-validation을 실행: 7명을 train, validation에 사용하고 1명을 test로 사용 → 그 결과가 WA(Weighted Accuracy)와 UA(Unweighted Accuracy)로 보고 됨
     - WA: 모든 클래스를 대상으로 한 전체 정확도
     - UA: 각 클래스의 평균 정확도
 
-#### *Hyper-parameters*
+#### Hyper-parameters
 
 - 사전 훈련된 모델인 wav2vec2.0-base를 사용하여 실험을 수행
     - 2개의 transformer 블록과 7개의 컨볼루션 블록으로 구성
@@ -142,7 +142,7 @@ Subject: Emotion Recognition, Wake-Up Words
     - AdamW [31]를 사용하여 모델을 최적화하였으며, 학습률은 5e^5, epoch는 200
     - full audio data: 16,000 Hz sampling rate와 1 batch size
 
-## *IV. RESULTS*
+## IV. RESULTS
 
 ![ ](images/SER_Hi_KIA/Untitled%205.png)
 
