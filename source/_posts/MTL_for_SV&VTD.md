@@ -70,7 +70,7 @@ The features are input to a stack of 4 bidirectional LSTM layers with 256 units 
 
 The training data for this model is 5000 hours of anonymised audio data that is manually transcribed, where all of the recordings are sampled from intentional voice assistant invocations and are assumed to be near-field.
 
-![Untitled](images/MTL_for_SV&VTD/Untitled.png)
+![ ](images/MTL_for_SV&VTD/Untitled.png)
 
 Fig. 1. The left branch of the model represents the voice trigger detector, the right branch is the speaker verification model. Solid horizontal arrows represent layers with tied weights, dashed arrows represent layers with weights that may or may not be tied.
     모델의 왼쪽 분기는 음성 트리거 검출기를 나타내고, 오른쪽 분기는 화자 검증 모델이다. 실선 화살표는 묶인 가중치가 있는 레이어를 나타내고 점선 화살표는 묶일 수도 있고 묶이지 않을 수도 있는 가중치가 있는 레이어를 나타냅니다.    

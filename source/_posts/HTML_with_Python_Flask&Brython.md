@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
 - 소스를 실행하고, terminal 에서 'python flask_test.py' 입력 후 http://127.0.0.1:5000 으로 접근
     
-    ![Untitled](images/HTML_with_Python_Flask&Brython/Untitled.png)
+    ![ ](images/HTML_with_Python_Flask&Brython/Untitled.png)
     
 
 ### Process for starting Flask Application
