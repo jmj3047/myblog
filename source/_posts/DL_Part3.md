@@ -3,7 +3,7 @@ title: Structuring Machine Learning Projects
 date: 2023-05-05
 categories:
   - Data Analysis
-  - Model
+  - Basic
 tags: 
   - ML Analysis
   - Coursera
