@@ -106,5 +106,3 @@ Coursera [Deep Learning Course 1](https://www.coursera.org/learn/neural-networks
 ![ ](images/DL1_Quiz/49.png)
 
 ![ ](images/DL1_Quiz/50.png)
-
----
