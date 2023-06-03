@@ -11,7 +11,7 @@ tags:
 
 ## 개요
 
-Coursera [Deep Learning Course 1](https://www.coursera.org/learn/neural-networks-deep-learning?specialization=deep-learning)
+Coursera [Deep Learning Course 1](https://www.coursera.org/learn/neural-networks-deep-learning?specialization=deep-learning) Quiz
 
 ## 1.Introduction to Deep Learning
 
