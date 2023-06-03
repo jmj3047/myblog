@@ -13,7 +13,7 @@ tags:
 
 ## Course
 
-- [Lecture 2](https://www.coursera.org/learn/deep-neural-network/home/module/1) in [Deep Learning](https://www.coursera.org/specializations/deep-learning)
+- [Lecture 2](https://www.coursera.org/learn/deep-neural-network/home/module/2) in [Deep Learning](https://www.coursera.org/specializations/deep-learning)
 
 ## Regularization
 
