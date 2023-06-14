@@ -9,7 +9,6 @@ tags:
   - Transfer Learning
   - Domain Adaptation
   - Cross-domain
-  - English
 ---
 
 Journal/Conference : IEEE 5th Intl Conference on Big Data Security on Cloud (BigDataSecurity), IEEE Intl Conference on High Performance and Smart Computing,(HPSC) and IEEE Intl Conference on Intelligent Data and Security (IDS)
