@@ -105,10 +105,6 @@ In Experiment 8, the authors used later fusion to combine the output features of
 
 Fusion refers to the process of combining information from multiple sources to produce a single output. In the context of the SER system described in the paper, fusion is used to combine the output features of the Wav2vec 2.0 and huBERT models in order to produce a more robust and accurate feature vector for the Downstream model to work with. By combining the strengths of the two models, the authors were able to improve the overall performance of the SER system.
 
-- huBERT를 사용하면 monomodal model이 아니지 않나?
-    - The huBERT model used in the SER system described in the paper is a pre-trained language model that is used to extract text-based features from the input speech signal. This means that the SER system is not strictly monomodal, as it relies on both speech and text modalities to perform emotion recognition.
-    - However, it is worth noting that the authors of the paper still refer to the system as a monomodal SER system, as the focus of the paper is on the use of different Upstream models to extract features from the speech signal. The use of the huBERT model is seen as a way to complement the speech-based features extracted by the Wav2vec 2.0 model, rather than as a separate modality in its own right.
-    - Overall, the SER system described in the paper can be seen as a hybrid system that combines both speech and text-based features to perform emotion recognition. This approach has been shown to be effective in improving the accuracy of the system, as it allows the system to capture both the acoustic and linguistic aspects of the speech signal.
 
 ### Experiments to be used as baselines
 
@@ -126,6 +122,3 @@ It is important to emphasize that the Fbank used here does not have explicit pit
 
 표 설명: In column 2 of Table 1, under the term (#), we indicate the number of the 11 experiments evaluated. In column 3 we indicate the input modality used in each experiment. In column 4 under the term Upstream model we can find the indication of the Input feature; if the Upstream model has been fine-tuned (FT); and if the Upstream model has been Averaged (AVG). The symbol “+” in experiment 7 (huBERT + W2V2) indicates early fusion of the features and the symbol “&” in the experiments 8 and 11 indicates later fusion of the features. In column 5 under the term Downstream model we can find the indication of the Aggregator Model used (AGG); the Classification Model (Classifier) used; and if the full Downstream Model has been averaged (AVG). Since the test sets of IEMOCAP are slightly imbalanced between different emotion categories, in column 6 of Table 1 under the term Accuracy we report both Weighted Accuracy (WACC) and Unweighted Accuracy (UACC). Finally, in column 1 of Table 1 under the term SET we have: in (1.A) the subset of experiments from Figure 3 that use Mean Pooling as Aggregator; in (1.B) the subset of experiments from Figure 3 that use ECAPA-TDNN as Aggregator and in (2) the baseline experiments described in Figure 4.
 
-## Question
-
-결국 W2V2를 사용하고 huBERT를 fine tune 했는데 왜 multi modal이 아닌 mono modal 인가..?
