@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>ARIMA model | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ML Analysis,ARIMA" />
+    
+    <meta name="description" content="정상성(stationarity) 시계열은 시계열의 특징이 해당 시계열이 관측된 시간에 무관 추세나 계절성이 있는 시계열은 정상성을 나타내는 시계열이 아님 → 추세와 계절성은 서로 다른 시간에 시계열의 값에 영향을 줄 것이기 때문. 백색 잡음(white noise) 시계열: 정상성을 나타내는 시계열 → 언제 관찰하는지에 상관이 없고 시간에 따라 어떤 시점에서">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARIMA model">
+<meta property="og:url" content="https://jmj3047.github.io/2023/05/16/ARIMA/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="정상성(stationarity) 시계열은 시계열의 특징이 해당 시계열이 관측된 시간에 무관 추세나 계절성이 있는 시계열은 정상성을 나타내는 시계열이 아님 → 추세와 계절성은 서로 다른 시간에 시계열의 값에 영향을 줄 것이기 때문. 백색 잡음(white noise) 시계열: 정상성을 나타내는 시계열 → 언제 관찰하는지에 상관이 없고 시간에 따라 어떤 시점에서">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/ARIMA/Untitled.png">
+<meta property="article:published_time" content="2023-05-15T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-17T11:51:58.842Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="ML Analysis">
+<meta property="article:tag" content="ARIMA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/ARIMA/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Analysis/Model/">Model</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ARIMA" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ARIMA model
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/05/16/ARIMA/" class="article-date">
+       <time datetime="2023-05-15T15:00:00.000Z" itemprop="datePublished">2023-05-16</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/05/16/ARIMA/" class="article-date">
+     <time datetime="2023-05-17T11:51:58.842Z" itemprop="dateModified">2023-05-17</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ARIMA/" rel="tag">ARIMA</a>, <a class="tag-link-link" href="/tags/ML-Analysis/" rel="tag">ML Analysis</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h3 id="정상성-stationarity"><a href="#정상성-stationarity" class="headerlink" title="정상성(stationarity)"></a>정상성(stationarity)</h3><ul>
+<li>시계열은 시계열의 특징이 해당 시계열이 관측된 시간에 무관</li>
+<li>추세나 계절성이 있는 시계열은 정상성을 나타내는 시계열이 아님 → 추세와 계절성은 서로 다른 시간에 시계열의 값에 영향을 줄 것이기 때문.</li>
+<li>백색 잡음(white noise) 시계열: 정상성을 나타내는 시계열 → 언제 관찰하는지에 상관이 없고 시간에 따라 어떤 시점에서 보더라도 똑같이 보일것이기 때문.</li>
+</ul>
+<p><img src="/images/ARIMA/Untitled.png" alt=" "></p>
+<ul>
+<li>(a) 200 거래일 동안의 구글 주식 가격; (b) 200 거래일 동안의 구글 주식 가격의 일일 변동; (c) 미국의 연간 파업 수; (d) 미국에서 판매되는 새로운 단독 주택의 월별 판매액; (e) 미국에서 계란 12개의 연간 가격 (고정 달러); (f) 호주 빅토리아 주에서 매월 도살한 돼지의 전체 수; (g) 캐나다 북서부의 맥킨지 강 지역에서 연간 포획된 스라소니의 전체 수; (h) 호주 월별 맥주 생산량; (i) 호주 월별 전기 생산량.</li>
+<li>분명하게 계절성이 보이는 (d), (h), (i)는 후보가 되지 못합니다. 추세가 있고 수준이 변하는 (a), (c), (e), (f), (i)도 후보가 되지 못합니다. 분산이 증가하는 (i)도 후보가 되지 못합니다. 그러면 (b)와 (g)만 정상성을 나타내는 시계열 후보로 남았습니다.</li>
+<li>언뜻 보면 시계열 (g)에서 나타나는 뚜렷한 주기(cycle) 때문에 정상성을 나타내는 시계열이 아닌 것처럼 보일 수 있습니다. 하지만 이러한 주기는 불규칙적(aperiodic)입니다 — 먹이를 구하기 힘들만큼 살쾡이 개체수가 너무 많이 늘어나 번식을 멈춰서, 개체수가 작은 숫자로 줄어들고, 그 다음 먹이를 구할 수 있게 되어 개체수가 다시 늘어나는 식이기 때문입니다. 장기적으로 볼 때, 이러한 주기의 시작이나 끝은 예측할 수 없습니다. 따라서 이 시계열은 정상성을 나타내는 시계열입니다.</li>
+</ul>
+<h3 id="ACF-Autocorrelation-Function"><a href="#ACF-Autocorrelation-Function" class="headerlink" title="ACF (Autocorrelation Function)"></a>ACF (Autocorrelation Function)</h3><ul>
+<li><p>정상성 확인하는 방법 중 하나</p>
+<p>  <img src="/images/ARIMA/Untitled%201.png" alt=" "></p>
+<ul>
+<li>x축은 lag, y축은 ACF</li>
+</ul>
+</li>
+<li><p>lag&#x3D;1: 한 시점 미룬 데이터와의 차이를 의미</p>
+</li>
+<li><p>자기 자신과 자기 자신 이전 데이터와의 correlation &#x3D; Autocorrelation lag 1이다.</p>
+</li>
+<li><p>lag&#x3D;2: 자신 자신 데이터와 두 시점 미룬 데이터와의 correlation &#x3D; Autocorrelation lag 2</p>
+</li>
+<li><p>lag&#x3D;20: 현재 데이터와 20 시점을 shift한 데이터와의 correlation &#x3D; Autocorrelation lag 20</p>
+</li>
+<li><p>이 그래프에서는 5시점 shift한 것과 autocorrelation이 꽤 있는 것으로 보임</p>
+</li>
+<li><p>ACF를 통해서 정상성을 알아보는 방법 정리</p>
+<ul>
+<li>일정한 패턴이 없거나 갑자기 떨어지는 패턴 &#x3D;&gt; stationary</li>
+<li>일정하게 떨어지거나 올라갔다 내려갔다하면서 굉장히 천천히 떨어지는 패턴 &#x3D;&gt; nonstationary</li>
+</ul>
+</li>
+</ul>
+<h3 id="Autoregressive-AR-Models"><a href="#Autoregressive-AR-Models" class="headerlink" title="Autoregressive (AR) Models"></a>Autoregressive (AR) Models</h3><ul>
+<li>dependent variable인 Y의 lag를 independent variables인 X로 사용하는 모델</li>
+</ul>
+<p><img src="/images/ARIMA/Untitled%202.png" alt=" "></p>
+<ul>
+<li>첫번째 X가 바로 <em>yt</em>−1, 즉 y의 한 시점전 데이터, <em>yt</em>−2는 두 시점 전 데이터,…, <em>yt</em>−<em>p</em>는 p 시점 전 데이터를 의미한다.</li>
+<li>자기자신을 X로 삼기때문에 <em>X</em>1 &#x3D; <em>yt</em>−1, <em>X</em>2 &#x3D;<em>yt</em>−2,..,<em>Xp</em> &#x3D; <em>yt</em>−<em>p</em>로 생각하면 된다.</li>
+<li><em>ϕ</em>0는 인털셉</li>
+<li><em>yt</em>를 모델링할 때 <em>yt</em>의 lag된 변수들(자신의 과거 데이터)을 X 삼아서 회귀모델을 만듦 .(Auto &#x3D; self라고 생각하면 됨)</li>
+<li>multiple regression model과 다른 점<ul>
+<li>자기자신을 갖고 모델링을 하기 때문에 독립성이 없다.</li>
+<li><em>ϕ</em>0 (계수)를 추정할 때 일반적으로 사용했던 최소제곱법은 사용할 수 없다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Moving-Average-MA-Models"><a href="#Moving-Average-MA-Models" class="headerlink" title="Moving Average (MA) Models"></a>Moving Average (MA) Models</h3><p><img src="/images/ARIMA/Untitled%203.png" alt=" "></p>
+<ul>
+<li><em>yt</em>를 <em>ε</em>(엡실론&#x3D;error)으로 모델링</li>
+<li>t시점의 데이터(<em>yt</em>)를 t 시점의 에러(<em>εt</em>)와 과거의 에러들로 표현</li>
+<li>연속적인 에러 term으로 y와d의 관계를 모델링하는 방법</li>
+</ul>
+<h3 id="Autoregressive-and-Moving-Average-ARMA"><a href="#Autoregressive-and-Moving-Average-ARMA" class="headerlink" title="Autoregressive and Moving Average (ARMA)"></a>Autoregressive and Moving Average (ARMA)</h3><p><img src="/images/ARIMA/Untitled%204.png" alt=" "></p>
+<ul>
+<li>AR과 MA을 합친 모델</li>
+<li>t시점의 데이터(<em>yt</em>)를 자기자신의 lag된 값들, t시점의 error와 전 시점의 error들로 표현함</li>
+</ul>
+<h3 id="Autoregressive-Integrated-Moving-Average-ARIMA"><a href="#Autoregressive-Integrated-Moving-Average-ARIMA" class="headerlink" title="Autoregressive Integrated Moving Average (ARIMA)"></a>Autoregressive Integrated Moving Average (ARIMA)</h3><ul>
+<li>p: order of the AR part of the model</li>
+<li>d: order of differencing</li>
+<li>q: order of the MA part of the model</li>
+<li>differencing을 했다는 것을 “integrated”로 표현함</li>
+<li>I 라는 것은 differencing을 몇번 했는지를 의미</li>
+<li>p,d,q<ul>
+<li>AR → p</li>
+<li>I → d</li>
+<li>MA → q</li>
+</ul>
+</li>
+<li>AR모델에서 p &#x3D; independent variable의 개수를 나타냄</li>
+<li>MR모델에서 q, <em>θ</em>의 개수, 즉 파라미터의 개수를 나타냄</li>
+<li>d &#x3D; 몇번 differencing을 했냐</li>
+</ul>
+<h3 id="시계열-데이터-모델을-구현할-때-주의해야-할-상황"><a href="#시계열-데이터-모델을-구현할-때-주의해야-할-상황" class="headerlink" title="시계열 데이터 모델을 구현할 때 주의해야 할 상황"></a>시계열 데이터 모델을 구현할 때 주의해야 할 상황</h3><ul>
+<li>AR, MA, ARMA 이 모델들을 구현하기 위해서는 분석해야되는 데이터가 stationary해야된다. nonstationary인 경우, 이 모델들을 적용할 수 없다.</li>
+<li>일상생활엔 nonstationary한 데이터들이 훨씬 더 많다. 따라서 stationary한 데이터로 바꾼 뒤에 이 모델링을 할 수 있다.</li>
+<li>어떻게 nonstationary를 stationary로 바꾸는 가장 간단한 방법이 바로 differencing(차분)</li>
+</ul>
+<h3 id="차분-differencing"><a href="#차분-differencing" class="headerlink" title="차분(differencing)"></a>차분(differencing)</h3><ul>
+<li>현 시점 데이터에서 d 시점 이전 데이터를 뺀 것</li>
+<li>연이은 관측값들의 차이를 계산하는 것</li>
+</ul>
+<p><img src="/images/ARIMA/Untitled%205.png" alt=" "></p>
+<ul>
+<li><p>원래 데이터와 원래 데이터를 한번 shift한 것을 빼주면 결과가 나오는데 이것이 바로 첫번째 differencing한 결과이다.</p>
+<p>  <img src="/images/ARIMA/Untitled%206.png" alt=" "></p>
+<ul>
+<li>1차 차분이란 t시점의 데이터와 t-1시점의 데이터의 차이</li>
+<li>2차 차분이란 t시점의 데이터와 t-2시점의 데이터의 차이</li>
+<li>d차 차분이란 t시점의 데이터와 t-d시점의 데이터의 차이</li>
+</ul>
+</li>
+<li><p>X(원래 데이터)는 nonstationary여도 differencing을 한 결과(Y)는 stationary로 바뀔 확률이 매우 크다</p>
+</li>
+<li><p>(a)의 구글(Google) 주식 가격이 정상성을 나타내는 시계열이 아니었지만 패널 (b)의 일별 변화는 정상성을 나타냈다는 것에 주목합시다. 이 그림은 정상성을 나타내지 않는 시계열을 정상성을 나타내도록 만드는 한 가지 방법을 나타냅니다.</p>
+<p>  <img src="/images/ARIMA/Untitled%207.png" alt=" "></p>
+</li>
+<li><p>로그 같은 변환은 시계열의 분산 변화를 일정하게 만드는데 도움이 될 수 있습니다. 차분(differencing)은 시계열의 수준에서 나타나는 변화를 제거하여 시계열의 평균 변화를 일정하게 만드는데 도움이 될 수 있습니다. 결과적으로 추세나 계절성이 제거(또는 감소)됩니다.</p>
+</li>
+<li><p>정상성을 나타내지 않는 시계열을 찾아낼 때 데이터의 시간 그래프를 살펴보는 것만큼, ACF 그래프도 유용합니다. 정상성을 나타내지 않는 데이터에서는 ACF가 느리게 감소하지만, 정상성을 나타내는 시계열에서는, ACF가 비교적 빠르게 0으로 떨어질 것입니다. 그리고 정상성을 나타내지 않는 데이터에서 r1 은 종종 큰 양수 값을 갖습니다.</p>
+</li>
+</ul>
+<p><img src="/images/ARIMA/Untitled%208.png" alt=" "></p>
+<h3 id="ARIMA-Order-of-Differencing"><a href="#ARIMA-Order-of-Differencing" class="headerlink" title="ARIMA - Order of Differencing"></a>ARIMA - Order of Differencing</h3><p><img src="/images/ARIMA/Untitled%209.png" alt=" "></p>
+<ul>
+<li><p>만약 original 데이터가 stationary이면 differencing은 필요없다.</p>
+</li>
+<li><p>만약 original 데이터가 constant average trend(일정하게 증가하거나 감소하는 패턴)이면 1차 차분이면 충분하다.</p>
+</li>
+<li><p>오른쪽의 그래프와 같이 더 복잡한 패턴을 가지고 있다면 2차 차분까지 가야된다.</p>
+</li>
+<li><p><strong>대부분의 데이터가 2차 차분으로 충분하다.</strong></p>
+</li>
+<li><p>3차 차분까지 했을 때 stationary가 되는 데이터는 AR,MA,ARMA 모델로는 적합하지 않은 데이터라고 생각하면 됨</p>
+</li>
+<li><p><strong>1st Differencing (1차 차분)</strong></p>
+<p>  <img src="/images/ARIMA/Untitled%2010.png" alt=" "></p>
+</li>
+<li><p><strong>2nd Differencing (2차 차분)</strong></p>
+<p>  <img src="/images/ARIMA/Untitled%2011.png" alt=" "></p>
+</li>
+<li><p>1차와 2차의 차이가 없으므로 2차 차분까지 할 필요가 없어보임.</p>
+</li>
+<li><p>nonstationary가 stationary로 변했는지 그냥 봤을 때는 잘 모르므로 ACF를 확인하자.</p>
+<p>  <img src="/images/ARIMA/Untitled%2012.png" alt=" "></p>
+<ul>
+<li>원래 데이터는 ACF에서 일정하게 감소하는 패턴</li>
+<li>1차 차분한 것은 일정한 패턴이 없다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Reference<ul>
+<li><a target="_blank" rel="noopener" href="https://otexts.com/fppkr/stationarity.html">https://otexts.com/fppkr/stationarity.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@sjina0722/%EC%8B%9C%EA%B3%84%EC%97%B4%EB%B6%84%EC%84%9D-ARIMA-%EB%AA%A8%EB%8D%B8">https:&#x2F;&#x2F;velog.io&#x2F;@sjina0722&#x2F;시계열분석-ARIMA-모델</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2023/05/16/ARIMA/" data-id="clhrn7qjc0000s4u69cuhfgg1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "ARIMA model",
+        "image": "https://jmj3047.github.io/images/ARIMA/Untitled.png",
+        "keywords": "ML Analysis ARIMA",
+        "genre": "Data Analysis Model",
+        "datePublished": "2023-05-16",
+        "dateCreated": "2023-05-16",
+        "dateModified": "2023-05-17",
+        "url": "https://jmj3047.github.io/2023/05/16/ARIMA/",
+        "description": "정상성(stationarity)
+시계열은 시계열의 특징이 해당 시계열이 관측된 시간에 무관
+추세나 계절성이 있는 시계열은 정상성을 나타내는 시계열이 아님 → 추세와 계절성은 서로 다른 시간에 시계열의 값에 영향을 줄 것이기 때문.
+백색 잡음(white noise) 시계열: 정상성을 나타내는 시계열 → 언제 관찰하는지에 상관이 없고 시간에 따라 어떤 시점에서",
+        "wordCount": 832
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/05/21/DL4_Quiz/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Convolutional Neural Networks_Quiz
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/05/11/Transfer_Learning_SER/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Transfer Learning for Speech Emotion Recognition</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

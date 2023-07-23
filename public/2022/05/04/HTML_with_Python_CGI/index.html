@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>HTML with Python_CGI | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Web Server,CGI" />
+    
+    <meta name="description" content="** code: https:&#x2F;&#x2F;github.com&#x2F;jmj3047&#x2F;mj_chatbot_prac&#x2F;blob&#x2F;c5bec233b833b24345deeffe7391621415dc1dcb&#x2F;cgi_webpython.py Making Website with CGI Constructing Web Server: Download and Install">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML with Python_CGI">
+<meta property="og:url" content="https://jmj3047.github.io/2022/05/04/HTML_with_Python_CGI/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="** code: https:&#x2F;&#x2F;github.com&#x2F;jmj3047&#x2F;mj_chatbot_prac&#x2F;blob&#x2F;c5bec233b833b24345deeffe7391621415dc1dcb&#x2F;cgi_webpython.py Making Website with CGI Constructing Web Server: Download and Install">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/HTML_with_Python_CGI/Untitled.png">
+<meta property="article:published_time" content="2022-05-03T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-04T08:38:19.000Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Web Server">
+<meta property="article:tag" content="CGI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/HTML_with_Python_CGI/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/HTML/">HTML</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-HTML_with_Python_CGI" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        HTML with Python_CGI
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/05/04/HTML_with_Python_CGI/" class="article-date">
+       <time datetime="2022-05-03T15:00:00.000Z" itemprop="datePublished">2022-05-04</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/05/04/HTML_with_Python_CGI/" class="article-date">
+     <time datetime="2022-05-04T08:38:19.000Z" itemprop="dateModified">2022-05-04</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CGI/" rel="tag">CGI</a>, <a class="tag-link-link" href="/tags/Web-Server/" rel="tag">Web Server</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>** code: <a target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_chatbot_prac/blob/c5bec233b833b24345deeffe7391621415dc1dcb/cgi_webpython.py">https://github.com/jmj3047/mj_chatbot_prac&#x2F;blob&#x2F;c5bec233b833b24345deeffe7391621415dc1dcb&#x2F;cgi_webpython.py</a></p>
+<h3 id="Making-Website-with-CGI"><a href="#Making-Website-with-CGI" class="headerlink" title="Making Website with CGI"></a>Making Website with CGI</h3><ol>
+<li>Constructing Web Server: Download and Install Apche <ul>
+<li><p>Official: Installing Apache in window(<a target="_blank" rel="noopener" href="https://httpd.apache.org/docs/2.4/platform/windows.html">https://httpd.apache.org/docs/2.4/platform/windows.html</a>)</p>
+</li>
+<li><p>Beginner version: Install Bitnami Wamp Stack</p>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled.png"></p>
+</li>
+<li><p>push 1 or 2</p>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled%201.png"></p>
+</li>
+<li><p>click this button below</p>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled%202.png"></p>
+<h5 id="it-takes-some-time-to-install-it"><a href="#it-takes-some-time-to-install-it" class="headerlink" title="it takes some time to install it"></a>it takes some time to install it</h5></li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li>Constructing Web Server: Bitnami Wamp Stack<ul>
+<li><p>Start Bitnami Wamp Stack</p>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled%203.png"></p>
+</li>
+<li><p>Click Go to Application: If you can see the site like the picture below, success!</p>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled%204.png"></p>
+</li>
+<li><p>Start or Stop the server: Click Manage Server</p>
+<ul>
+<li>If program below is shut down, go to the folder where ‘bitnami wamp stack’ installed and click ‘manager-windows.exe’</li>
+</ul>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled%203.png"></p>
+<p>  <img src="/images/HTML_with_Python_CGI/Untitled%205.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li>Using Python in Web(HTML): Setting Apache<ul>
+<li><p>Install python and apache</p>
+</li>
+<li><p>find folder where apach installed(‘D:\wamp\apache2\conf’) &gt; ‘conf’ folder &gt; httpd.conf</p>
+</li>
+<li><p>open httpd.conf file and search:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule cgid_module modules/mod_cgid.so</span><br></pre></td></tr></table></figure>
+<p>  and if ‘#’ exists in front of code, delete it</p>
+</li>
+<li><p>Find <Directory code> tag in httpd.conf and add some lines</p>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Directory</span> &quot;/<span class="attr">Applications</span>/<span class="attr">mampstack-8.0.5-0</span>/<span class="attr">apache2</span>/<span class="attr">htdocs</span>&quot;&gt;</span></span><br><span class="line">      #</span><br><span class="line">      # Possible values for the Options directive are &quot;None&quot;, &quot;All&quot;,</span><br><span class="line">      # or any combination of:</span><br><span class="line">      #   Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI 			MultiViews</span><br><span class="line">      #</span><br><span class="line">      # Note that &quot;MultiViews&quot; must be named *explicitly* --- &quot;Options All&quot;</span><br><span class="line">      # doesn&#x27;t give it to you.</span><br><span class="line">      #</span><br><span class="line">      # The Options directive is both complicated and important.  Please see</span><br><span class="line">      # http://httpd.apache.org/docs/2.4/mod/core.html#options</span><br><span class="line">      # for more information.</span><br><span class="line">      #</span><br><span class="line">      Options Indexes FollowSymLinks</span><br><span class="line"></span><br><span class="line">      #</span><br><span class="line">      # AllowOverride controls what directives may be placed in .htaccess files.</span><br><span class="line">      # It can be &quot;All&quot;, &quot;None&quot;, or any combination of the keywords:</span><br><span class="line">      #   AllowOverride FileInfo AuthConfig Limit</span><br><span class="line">      #</span><br><span class="line">      AllowOverride None</span><br><span class="line"></span><br><span class="line">      #</span><br><span class="line">      # Controls who can get stuff from this server.</span><br><span class="line">      #</span><br><span class="line">      Require all granted</span><br><span class="line"></span><br><span class="line">		********** add this code ********** </span><br><span class="line">      <span class="tag">&lt;<span class="name">Files</span> *<span class="attr">.py</span>&gt;</span></span><br><span class="line">          Options ExecCGI</span><br><span class="line">          AddHandler cgi-script .py</span><br><span class="line">      <span class="tag">&lt;/<span class="name">Files</span>&gt;</span></span><br><span class="line">    ***********************************</span><br><span class="line">  </span><br><span class="line">	<span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>htdocs 디렉토리 내 확장자가 py인 모든 파일은 CGI기능을 활성시키고 CGI로 실행하라는 의미</li>
+</ul>
+</li>
+<li><p>Restart Apache Web Server in manager-osx</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li>Python file setting <ul>
+<li><a target="_blank" rel="noopener" href="http://index.py/">index.py</a> 가 있는 htdocs 디렉토리에서 index.py 실행 후 아래같이 입력(다른 파이썬 파일을 만들어도 상관 없음)</li>
+</ul>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python3 &gt;&gt;&gt; python.exe 경로 환경변수에 저장해줬다면 !Python만 해도 됨  </span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Content-Type: text/html&quot;</span>)</span><br><span class="line">  <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>index.html 의 코드 넣기( 다른 html 파일 이어도 됨): index.py가 실행되었을 때 index.html 의 코드가 출력되게 해주는 코드</li>
+</ul>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Content-Type: text/html&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;&#x27;&lt;!doctype html&gt;  # ---&gt; 줄바꿈을 위해 docsting (&#x27;&#x27;&#x27;</span> <span class="string">&#x27;&#x27;&#x27;) 사용</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;</span></span><br><span class="line"><span class="string">  &lt;title&gt;WEB1 - Welcome&lt;/title&gt;</span></span><br><span class="line"><span class="string">  &lt;meta charset=&quot;utf-8&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;h1&gt;&lt;a href=&quot;index.html&quot;&gt;WEB&lt;/a&gt;&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;ol&gt;</span></span><br><span class="line"><span class="string">    &lt;li&gt;&lt;a href=&quot;qs-1.html&quot;&gt;HTML&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;li&gt;&lt;a href=&quot;qs-2.html&quot;&gt;CSS&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;li&gt;&lt;a href=&quot;qs-3.html&quot;&gt;JavaScript&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;/ol&gt;</span></span><br><span class="line"><span class="string">  &lt;h2&gt;WEB&lt;/h2&gt;</span></span><br><span class="line"><span class="string">  &lt;p&gt;The World Wide Web (abbreviated WWW or the Web) is an information space where documents and other web resources are identified by Uniform Resource Locators (URLs), interlinked by hypertext links, and can be accessed via the Internet.[1] English scientist Tim Berners-Lee invented the World Wide Web in 1989. He wrote the first web browser computer program in 1990 while employed at CERN in Switzerland.[2][3] The Web browser was released outside of CERN in 1991, first to other research institutions starting in January 1991 and to the general public on the Internet in August 1991.</span></span><br><span class="line"><span class="string">  &lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>웹 브라우저 주소창에 localhost:8080&#x2F;index.py 입력하고 접속</li>
+<li>index.html 파일의 내용이 잘 출력된다면 구현 성공</li>
+<li>Internal Server Error 가 확인된다면 에디터에서 apache2&#x2F;logs 디렉토리 내 error_log 파일에 있는 에러 코드 확인 및 구글링</li>
+</ul>
+</li>
+</ol>
+<h3 id="EXAMPLE"><a href="#EXAMPLE" class="headerlink" title="EXAMPLE"></a>EXAMPLE</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!C:\Python310\python.exe ---&gt;파이썬 경로</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 한글이 꺠지지 않으려면 꼭 넣어야 함</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line">sys.stdout =codecs.getwriter(<span class="string">&quot;utf-8&quot;</span>)(sys.stdout.detach())</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cgi</span><br><span class="line"><span class="comment"># cgitb는 CGI 프로그래밍시 디버깅을 위한 모듈로 cgitb.enable()할 경우 런타임 에러를 웹브라우저로 전송함</span></span><br><span class="line"><span class="comment"># cgitb.enable() 하지 않은 상태로 실행 중 오류가 발생한 경우 웹서버는 클라이언트에게 HTTP응답 코드 500을 전송함</span></span><br><span class="line"><span class="keyword">import</span> cgitb</span><br><span class="line">cgitb.enable()</span><br><span class="line"><span class="comment"># HTTP 규격에서 헤더 전송 이후에는 반드시 줄 바꿈을 하게되어 있음으로 마지막에 \r\n을 전송</span></span><br><span class="line"><span class="comment"># 마지막에 \r\n을 전송하지 않으면 브라우저 측에서 오류가 발생</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Content-type: text/html;charset=utf-8\r\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">      &lt;!doctype html&gt;</span></span><br><span class="line"><span class="string">      &lt;html&gt;</span></span><br><span class="line"><span class="string">      &lt;head&gt;</span></span><br><span class="line"><span class="string">      &lt;meta charset=&#x27;utf-8&#x27;&gt;</span></span><br><span class="line"><span class="string">      &lt;h1&gt;안녕?&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;h2&gt;Thank you so much&lt;/h2&gt;</span></span><br><span class="line"><span class="string">      &lt;h3&gt;This page is made by Python&lt;/h3&gt;     </span></span><br><span class="line"><span class="string">      &quot;&quot;&quot;</span>)</span><br><span class="line">a = <span class="number">3</span>+<span class="number">4</span>+<span class="number">5</span></span><br><span class="line">b = a/<span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;b는 :&#x27;</span>, b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&lt;/head&gt;&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&lt;/html&gt;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h4><p><img src="/images/HTML_with_Python_CGI/Untitled%206.png"></p>
+<hr>
+<ul>
+<li>Reference<ul>
+<li><a target="_blank" rel="noopener" href="https://daekiry.tistory.com/4?category=928946">https://daekiry.tistory.com/4?category=928946</a></li>
+<li><a target="_blank" rel="noopener" href="https://daekiry.tistory.com/5?category=928946">https://daekiry.tistory.com/5?category=928946</a></li>
+<li><a target="_blank" rel="noopener" href="https://daekiry.tistory.com/6">https://daekiry.tistory.com/6</a></li>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@ssoulll/python-%EC%9B%B9-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-CGI%EB%A1%9C-%EA%B5%AC%ED%98%84">https:&#x2F;&#x2F;velog.io&#x2F;@ssoulll&#x2F;python-웹-페이지를-CGI로-구현</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2022/05/04/HTML_with_Python_CGI/" data-id="clgw0znbb00204du64vs09ncs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "HTML with Python_CGI",
+        "image": "https://jmj3047.github.io/images/HTML_with_Python_CGI/Untitled.png",
+        "keywords": "Web Server CGI",
+        "genre": "Python HTML",
+        "datePublished": "2022-05-04",
+        "dateCreated": "2022-05-04",
+        "dateModified": "2022-05-04",
+        "url": "https://jmj3047.github.io/2022/05/04/HTML_with_Python_CGI/",
+        "description": "** code: https://github.com/jmj3047/mj_chatbot_prac&#x2F;blob&#x2F;c5bec233b833b24345deeffe7391621415dc1dcb&#x2F;cgi_webpython.py
+Making Website with CGI
+Constructing Web Server: Download and Install ",
+        "wordCount": 1103
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/05/06/What_is_Transformer/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            What is Transformer
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/05/04/HTML_with_Python_Flask&Brython/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">HTML with Python_Flask &amp; Brython</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

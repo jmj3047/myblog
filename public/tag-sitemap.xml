@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speaker-Normalization/</loc>
+        <lastmod>2023-07-18T16:52:28.193Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Self-Supervised-Learning/</loc>
+        <lastmod>2023-07-18T16:52:28.193Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speech-Emotion-Recognition/</loc>
+        <lastmod>2023-07-18T16:52:28.193Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Self-Supervised-Features/</loc>
+        <lastmod>2023-07-18T00:21:15.630Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Quiz/</loc>
+        <lastmod>2023-07-17T11:06:33.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Coursera/</loc>
+        <lastmod>2023-07-17T11:06:33.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/ML-Operations/</loc>
+        <lastmod>2023-07-17T10:30:48.185Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/AI-Studies/</loc>
+        <lastmod>2023-07-17T10:30:48.185Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/English/</loc>
+        <lastmod>2023-07-17T10:30:48.185Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speaker-Independent/</loc>
+        <lastmod>2023-07-05T07:14:22.920Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Domain-Adversarial-Layer/</loc>
+        <lastmod>2023-07-05T07:14:22.920Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Domain-Invariant-Feature-Learning/</loc>
+        <lastmod>2023-07-05T07:14:22.920Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/ML-Analysis/</loc>
+        <lastmod>2023-06-22T15:34:36.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Center-Loss/</loc>
+        <lastmod>2023-06-14T05:51:27.335Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Adversarial-Domain-Adaptation/</loc>
+        <lastmod>2023-06-14T05:51:27.335Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Cross-domain/</loc>
+        <lastmod>2023-06-14T05:46:15.955Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Domain-Adaptation/</loc>
+        <lastmod>2023-06-14T05:46:15.955Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Transfer-Learning/</loc>
+        <lastmod>2023-06-14T05:46:15.955Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/ARIMA/</loc>
+        <lastmod>2023-05-17T11:51:58.842Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Brython/</loc>
+        <lastmod>2023-05-17T11:50:35.489Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Flask/</loc>
+        <lastmod>2023-05-17T11:50:35.489Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Web-Server/</loc>
+        <lastmod>2023-05-17T11:50:35.489Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speaker-Verification/</loc>
+        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Voice-Trigger-Detection/</loc>
+        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Multi-Task-Learning/</loc>
+        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Wake-Up-Words/</loc>
+        <lastmod>2023-05-11T14:36:21.812Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Hexo/</loc>
+        <lastmod>2023-05-07T09:49:23.606Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speech-Feature-Extraction/</loc>
+        <lastmod>2023-04-27T14:20:29.636Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speech-Representations/</loc>
+        <lastmod>2023-04-24T00:29:44.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Acoustic-Parameter-Set/</loc>
+        <lastmod>2023-04-20T21:06:58.521Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/AI-tool/</loc>
+        <lastmod>2023-04-18T09:07:08.073Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Gen-App-Builder/</loc>
+        <lastmod>2023-04-18T09:07:08.073Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Kaggle/</loc>
+        <lastmod>2023-04-06T09:04:17.102Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Vertex-AI/</loc>
+        <lastmod>2023-04-06T09:01:21.752Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Deep-Nueral-Networks/</loc>
+        <lastmod>2023-04-06T09:01:21.752Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Recommendation-System/</loc>
+        <lastmod>2023-04-06T09:01:21.752Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Looker-Studio/</loc>
+        <lastmod>2023-03-27T10:45:16.078Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/BigQueryML/</loc>
+        <lastmod>2023-03-27T10:45:16.078Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Big-Query/</loc>
+        <lastmod>2023-03-27T10:45:16.078Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/MongoDB/</loc>
+        <lastmod>2023-03-19T07:04:36.264Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Error/</loc>
+        <lastmod>2023-03-19T07:03:36.636Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Auth/</loc>
+        <lastmod>2023-03-19T07:03:36.636Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/GCP/</loc>
+        <lastmod>2023-03-19T07:03:36.636Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/kaggle/</loc>
+        <lastmod>2023-03-19T07:03:08.028Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Python/</loc>
+        <lastmod>2023-03-19T07:03:08.028Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/ML-Process/</loc>
+        <lastmod>2023-03-19T07:02:35.325Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/DataFlow/</loc>
+        <lastmod>2023-03-19T07:02:20.896Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/K-Means-Clustering/</loc>
+        <lastmod>2023-03-13T11:06:45.805Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Clustering/</loc>
+        <lastmod>2023-03-13T11:06:45.805Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Virtualenv/</loc>
+        <lastmod>2023-02-28T07:50:54.784Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Git/</loc>
+        <lastmod>2023-02-28T07:50:54.784Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Bash/</loc>
+        <lastmod>2023-02-28T07:50:29.954Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Automation/</loc>
+        <lastmod>2023-02-28T07:50:29.954Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Hueman/</loc>
+        <lastmod>2023-02-28T07:50:13.607Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Time-Series/</loc>
+        <lastmod>2023-02-23T01:50:54.354Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/PACF/</loc>
+        <lastmod>2023-02-23T01:50:54.354Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/ACF/</loc>
+        <lastmod>2023-02-23T01:50:54.354Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Decision-Tree-Classifier/</loc>
+        <lastmod>2023-02-23T01:40:32.401Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Probability-Density-Function/</loc>
+        <lastmod>2023-02-23T01:38:48.226Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Probability-Distribution-Function/</loc>
+        <lastmod>2023-02-23T01:38:48.226Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Standard-Normal-Distribution/</loc>
+        <lastmod>2023-02-23T01:38:44.907Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Normal-Distribution/</loc>
+        <lastmod>2023-02-23T01:38:44.907Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/ROC-curve/</loc>
+        <lastmod>2023-02-23T01:38:08.678Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/F1-measure/</loc>
+        <lastmod>2023-02-23T01:38:08.678Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Precision-Recall/</loc>
+        <lastmod>2023-02-23T01:38:08.678Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Confusion-Matrix/</loc>
+        <lastmod>2023-02-23T01:38:08.678Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Threshold-Adjustment/</loc>
+        <lastmod>2023-02-23T01:38:08.678Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Grid-Search-CV/</loc>
+        <lastmod>2023-02-23T01:37:20.820Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Ensemble-Model/</loc>
+        <lastmod>2023-02-23T01:36:55.728Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/DBSCAN/</loc>
+        <lastmod>2023-02-23T01:36:29.696Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Gaussian-Mixture-Model/</loc>
+        <lastmod>2023-02-23T01:36:14.673Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Nonprobability-sampling/</loc>
+        <lastmod>2023-02-23T01:35:23.520Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Probabilistic-sampling/</loc>
+        <lastmod>2023-02-23T01:35:23.520Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Deep-Machine-Learning-Paper-Study/</loc>
+        <lastmod>2023-02-23T01:34:43.368Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Generative-Adversarial-Network/</loc>
+        <lastmod>2022-11-10T15:27:17.845Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speaker-Identification/</loc>
+        <lastmod>2022-11-10T15:27:17.845Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speaker-GAN/</loc>
+        <lastmod>2022-11-10T15:27:17.845Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Pandas-Dataframe/</loc>
+        <lastmod>2022-10-18T15:05:07.992Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Attention/</loc>
+        <lastmod>2022-10-15T08:08:32.440Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Transformer/</loc>
+        <lastmod>2022-10-15T08:08:32.440Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/NLP/</loc>
+        <lastmod>2022-10-15T08:08:18.515Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Chatbot/</loc>
+        <lastmod>2022-10-15T08:08:18.515Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Doc2vec/</loc>
+        <lastmod>2022-10-15T08:08:14.439Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/WGAN/</loc>
+        <lastmod>2022-10-15T08:05:10.371Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/WGAN-GP/</loc>
+        <lastmod>2022-10-15T08:05:10.371Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Image-Classification/</loc>
+        <lastmod>2022-10-15T08:05:10.371Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Convolutional-Neural-Networks/</loc>
+        <lastmod>2022-10-15T08:04:25.032Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Generative-Model/</loc>
+        <lastmod>2022-10-15T08:03:52.639Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/GAN/</loc>
+        <lastmod>2022-10-15T08:03:52.639Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/TD-SV/</loc>
+        <lastmod>2022-10-15T08:03:47.207Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Adversarial-Speaker-Verification/</loc>
+        <lastmod>2022-10-15T08:03:42.984Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/DCGAN/</loc>
+        <lastmod>2022-10-15T08:03:41.524Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/CGI/</loc>
+        <lastmod>2022-05-04T08:38:19.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/BeautifulSoup/</loc>
+        <lastmod>2022-04-22T08:17:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Web-Crawling/</loc>
+        <lastmod>2022-04-22T08:17:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/HTML/</loc>
+        <lastmod>2022-04-22T08:17:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/pyspark/</loc>
+        <lastmod>2022-04-22T07:33:20.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

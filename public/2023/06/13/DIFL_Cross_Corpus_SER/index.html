@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Domain Invariant Feature Learning for Cross Corpus Speech Emotion Recognition | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Speech Emotion Recognition,Adversarial Domain Adaptation,Center Loss,Domain Invariant Feature Learning" />
+    
+    <meta name="description" content="Journal&#x2F;Conference : ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)Year(published year): 2022Author: Yuan Gao, Shogo Okada, Longbiao Wang, Jiax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Domain Invariant Feature Learning for Cross Corpus Speech Emotion Recognition">
+<meta property="og:url" content="https://jmj3047.github.io/2023/06/13/DIFL_Cross_Corpus_SER/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="Journal&#x2F;Conference : ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)Year(published year): 2022Author: Yuan Gao, Shogo Okada, Longbiao Wang, Jiax">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/DIFL_Cross_Corpus_SER/Untitled.png">
+<meta property="article:published_time" content="2023-06-12T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-14T05:51:27.335Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Speech Emotion Recognition">
+<meta property="article:tag" content="Adversarial Domain Adaptation">
+<meta property="article:tag" content="Center Loss">
+<meta property="article:tag" content="Domain Invariant Feature Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/DIFL_Cross_Corpus_SER/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-DIFL_Cross_Corpus_SER" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Domain Invariant Feature Learning for Cross Corpus Speech Emotion Recognition
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/06/13/DIFL_Cross_Corpus_SER/" class="article-date">
+       <time datetime="2023-06-12T15:00:00.000Z" itemprop="datePublished">2023-06-13</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/06/13/DIFL_Cross_Corpus_SER/" class="article-date">
+     <time datetime="2023-06-14T05:51:27.335Z" itemprop="dateModified">2023-06-14</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Adversarial-Domain-Adaptation/" rel="tag">Adversarial Domain Adaptation</a>, <a class="tag-link-link" href="/tags/Center-Loss/" rel="tag">Center Loss</a>, <a class="tag-link-link" href="/tags/Domain-Invariant-Feature-Learning/" rel="tag">Domain Invariant Feature Learning</a>, <a class="tag-link-link" href="/tags/Speech-Emotion-Recognition/" rel="tag">Speech Emotion Recognition</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Journal&#x2F;Conference : ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)<br>Year(published year): 2022<br>Author: Yuan Gao, Shogo Okada, Longbiao Wang, Jiaxing Liu, Jianwu Dang<br>Subject: Speech Emotion Recognition, Domain Adaptation, Center Loss</p>
+<h1 id="Domain-Invariant-Feature-Learning-for-Cross-Corpus-Speech-Emotion-Recognition"><a href="#Domain-Invariant-Feature-Learning-for-Cross-Corpus-Speech-Emotion-Recognition" class="headerlink" title="Domain Invariant Feature Learning for Cross Corpus Speech Emotion Recognition"></a>Domain Invariant Feature Learning for Cross Corpus Speech Emotion Recognition</h1><blockquote>
+<p>Summary</p>
+</blockquote>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled.png" alt=" "></p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%201.png" alt=" "></p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%202.png" alt=" "></p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%203.png" alt=" "></p>
+<h2 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h2><h3 id="연구의-필요성"><a href="#연구의-필요성" class="headerlink" title="연구의 필요성"></a>연구의 필요성</h3><p>기존 SER의 접근 방식은 동일한 데이터 셋에서 훈련 및 테스트 됨. </p>
+<p>자연환경에서 대규모 주석이 달린 감정 발화를 수집하는 것은 시간이 오래 걸리기 때문에 기존 데이터 세트에는 적은 수의 음성 샘플이 포함되어 있어 강력한 딥러닝 모델을 훈련하기에는 충분하지 않음. </p>
+<p>또한 실제 환경에서 음성의 감정 정보는 도메인 정보의 변화로 인해 학습하기 어려움. </p>
+<p>따라서 SER 시스템을 미지의 데이터 세트에 적용할 경우에는 인식 성능이 크게 저하되는 경우가 많음.</p>
+<p>실제 어플리케이션을 다루기 위해 다양한 데이터 세트를 사용하여 모델을 평가해야 함. </p>
+<p>최근 연구에서는 연구자들이 cross corpus SER에서 CNN, RNN, 및 attention의 성능을 평가하기도 함[11,12]</p>
+<h3 id="contribution"><a href="#contribution" class="headerlink" title="contribution"></a>contribution</h3><p>SER의 일반화 능력을 더욱 향상 시키기 위해 adversarial domain adaptation 방법을 사용하여 학습 데이터와 테스트 데이터 간의 도메인 차이를 줄였음. </p>
+<p>구체적으로 adversarial training을 통해 latent representation의 화자, 코퍼스 및 기타 도메인 정보를 제거함. </p>
+<p>domain adaptation은 feature extractor와 domain classifier 사이의 gradient를 역전시킴으로써 이루어지며 이를 통해 모델은 비감정적 정보의 학습 손실을 최대화 할 수 있음. </p>
+<p>또한 기존 연구에서 일반적으로 사용되는 감정 분류기는 softmax 손실함수를 사용하여 decision boundary를 찾고 감정을 구분함.</p>
+<p>feature representation에 차별성을 두기 위해 center loss를 통합함, 그리고 그것은 feature extractor를 위한joint supervision처럼 feature representation과 해당 클래스 center의 거리를 최소화 하기 위해 훈련되었음. </p>
+<h2 id="II-Adversarial-Domain-Adaptation-For-Feature-Extraction"><a href="#II-Adversarial-Domain-Adaptation-For-Feature-Extraction" class="headerlink" title="II. Adversarial Domain Adaptation For Feature Extraction"></a>II. Adversarial Domain Adaptation For Feature Extraction</h2><p>Fig 1에서 볼 수 있듯이, 우리는 특징 추출을 위해 deep CNN과 BLSTM layer을 사용하며, 이 layer의 parameter는 [13]에서 쓰인것과 유사함. </p>
+<p>우리는 Domain Adversarial Neural Network(DANN)으로 feature extractor를 조정하였음. </p>
+<p>또한 feature representation의 intra-class 변화를 줄이기 위해 center loss를 사용했음. </p>
+<p>DANN과 center loss 둘다 domain divergence를 해결할수 있음. </p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%204.png" alt=" "></p>
+<h3 id="Domain-Adversarial-Training"><a href="#Domain-Adversarial-Training" class="headerlink" title="Domain Adversarial Training"></a>Domain Adversarial Training</h3><p>이 연구에서는 비감정적인 정보를 제거하기 위해 특징 추출기에 DANN을 통합했음. </p>
+<p>DANN은 multi-task learning 모델</p>
+<p>DANN의 recognition target은 emotion classifier(LE), domain classifier(LD)이다. </p>
+<p>본 연구에서 LD의 domain recognition target은 코퍼스, 언어, 성별이다. </p>
+<p>하나의 training과정 안에서 domain adaptation과 feature representation 학습을 달성하기 위해 [14]는 domain classifier과 feature extractor 사이에 gradient reversal layer(GRL)을 두었음. </p>
+<p>GRL은 역전파 과정에서 특정 음의 상수를 도메인 분류 작업의 기울기에 곱할수 있음. </p>
+<p>소스 도메인과 타겟 도메인에서 학습한 feature distribution이 우리 모델과 구별되지 않도록 DANN 학습을 시킴. </p>
+<p>이렇게 GRL을 통해 domain invariant representation을 추출하여 코퍼스 간 감정인식을 위한 일반화 능력을 향상할수 있음. </p>
+<p>제안된 feature extraction 모델의 objective function은 다음과 같음. </p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%205.png" alt=" "></p>
+<p>LE: center loss와 softmax loss를 결합한 emotion classifier의 loss function(자세한 내용은 Center Loss)</p>
+<p>이 특정 작업에서는 앞서 언급한 비감정적인 정보를 feature extractor G(x, $\theta$)가 학습하지 않도록  $\gamma$를 0.3으로 설정 했음. </p>
+<p>DANN 학습을 통해 모델은 feature distribution의 domain shift를 제거할 수 있음. </p>
+<p>domain classifier의 손실함수는 다음과 같이 표현됨</p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%206.png" alt=" "></p>
+<p>Lg, Ll, Lc는 성별, 언어, 말뭉치의 loss function</p>
+<p>LE를 최소화 하고 LD를 최대화 하는 안정점을 찾아냄으로써 우리가 제안한 feature extractor는 emotion classifier의 input에서 domain divergence를 크게 줄일 수 있음. </p>
+<h3 id="Center-Loss"><a href="#Center-Loss" class="headerlink" title="Center Loss"></a>Center Loss</h3><p>제안된 feature extractor외에도 softmax loss와 center loss[15]를 joint supervision으로 emotion classifier LE에추가적으로 적용함. </p>
+<p>softmax loss function은 SER에서 다양한 감정의 decision boundary를 찾기 위해 일반적으로 사용됨.</p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%207.png" alt=" "></p>
+<p>M: 미니 배치의 크기, N: emotion class의 개수. </p>
+<p>본 연구에서는 training sample과 test sample에 대해 동일한 emotion annotation을 정의했지만, 서로 다른 데이터 세트의 feature distribution이 분리 가능한 cluster로 나타나지 않았음. 그리고 그것은 cross corpus SER이 일반적인 close-set identification 작업보다 더 어렵게 만듦. </p>
+<p>이 문제를 해결하기 위해서 center loss를 도입하여 각 감정 카테고리에 대한 class center c를 학습함으로써 feature distribution의 클래스 내(intra-class) 거리를 줄였음. </p>
+<p>이 loss function은 input feature와 해당 class center 사이의 유클리드 거리로 계산됨. </p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%208.png" alt=" "></p>
+<p>Class center c를 보다 효율적으로 업데이트 하기 위해 loss function은 각 미니배치에 대해서 학습되었음.</p>
+<p>5번 식에서 m은 새 미니배치에 있는 클래스 i의 샘플 개수. </p>
+<p>감정 분류기 전체의 objective function은 다음식으로 정의됨</p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%209.png" alt=" "></p>
+<p>각 loss term의 가중치를 control하기 위해 $\lambda$를 0.5로 설정.</p>
+<p>center loss와 softmax loss를 결합하여 모델을 동통으로 최적화 함으로써 cross corpus SER 작업을 위한 robust한 feature representation을 추출할 수 있음.</p>
+<h2 id="III-Experimental-Setup"><a href="#III-Experimental-Setup" class="headerlink" title="III. Experimental Setup"></a>III. Experimental Setup</h2><h3 id="Emotional-Speech-Dataset"><a href="#Emotional-Speech-Dataset" class="headerlink" title="Emotional Speech Dataset"></a>Emotional Speech Dataset</h3><p>네가지 감정 코퍼스를 사용해 모델을 평가합니다: IEMOCAP, MSP-IMPROV, SAVEE, Emo-DB</p>
+<p>IEMOCAP: 오디오, 비디오, 얼굴 모션 정보를 포함한 12시간 분량의 시청각 데이터와 10명의 화자와 텍스트 필사본이 포함되어 있음. 실험에는 스크립트 데이터와 즉흥 데이터 모두 5531 발화를 사용. 행복, 슬픔, 분노, 중립의 감정이 기록돼 있음. </p>
+<p>MSP-IMPROV: 다이나믹 세션에서 상호작용하는 배우로부터 기록된 다중모드 감정 데이터 베이스. 12명의 배우러부터 녹음된 8438개의 감정 문장 발화로 구성되어 있음. 행복, 슬픔, 분노, 중립의 감정 카테고리</p>
+<p>SAVEE: 남성 피험자 4명의 audio-visual 녹음을 포함하고 있음. 480개의 원어민 영어 발화로 구성되어 있고 행복, 슬픔, 혐오, 분노, 지루함, 두려움인 6가지 감정에 대해서 60개, 중립에 대해 120개의 발화가 포함됨</p>
+<p>Emo-DB: 10명의 전문 배우가 녹음환경에서 연기. 배우들은 각 문장을 7가지 감정 상태(중립, 지루함, 혐오, 슬픔, 분노, 행복, 두려움)로 표현함. 총 535개 발화</p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%2010.png" alt=" "></p>
+<h3 id="Experimental-Settings"><a href="#Experimental-Settings" class="headerlink" title="Experimental Settings"></a>Experimental Settings</h3><p>두가지 검증 체계를 사용하여 모델을 평가</p>
+<ol>
+<li>cross-corpus evaluation: 모델은 IEMOCAP에 대해서만 훈련하고 나머지는 세개의 말뭉치에서 테스트</li>
+<li>Multi-corpus evaluation: 네개의 데이터 세트를 모두 train set(80%)와 test set(20%)으로 나누고 각 코퍼스의 테스트 데이터를 사용하여 모델을 평가. train set과 test set은 화자가 겹치지 않음.</li>
+</ol>
+<p>optimizer로는 adadelta를 사용했으며 미니배치사이즈는 128.</p>
+<p>전처리 과정에서 모든 데이터는 16kHz로 다운샘플링 하였음. </p>
+<p>input feature로는 spectrogram을 사용하였고 input 발화는 265ms로 분할되며 각 세그먼트에 대해 25ms의 프레임 size로 input spectrogram이 계산됨. </p>
+<p>input spectrogram의 time X frequency는 32 X 129. </p>
+<h2 id="IV-Results-and-Analysis"><a href="#IV-Results-and-Analysis" class="headerlink" title="IV. Results and Analysis"></a>IV. Results and Analysis</h2><p>Unweighted Accuracy(UA)를 평가기준으로 선택</p>
+<p>baseline: CNN + BLSTM의 조합. </p>
+<p>제안된 두개의 DANN-based approaches 들을 비교</p>
+<ol>
+<li>DANN_1: domain classifier의 인식 대상이 화자와 corpus</li>
+<li>DANN_2: speaker classification이 언어와 성별 인식으로 대체</li>
+</ol>
+<p>C: center loss, S: softmax loss</p>
+<p>multi corpus 실험 결과, domain recognition 대상은 DANN 1의 경우 화자와 코퍼스이고 DANN 2의 경우 성별, 언어, 말뭉치. </p>
+<p><img src="/images/DIFL_Cross_Corpus_SER/Untitled%2011.png" alt=" "></p>
+<h3 id="Multi-corpus-Evaluation"><a href="#Multi-corpus-Evaluation" class="headerlink" title="Multi- corpus Evaluation"></a>Multi- corpus Evaluation</h3><p>표2에서 다중 코퍼스 평가 결과를 제시. arousal 인식의 경우 DANN 2는 비교 실험보다 작지만 꾸준한 개선으로 네가지 데이터 세트 모두에서 가장 우수한 성능을 달성. </p>
+<p>valence의 경우 대부분의 비교 실험은 Emo DB에서 낮은 성능을 보였음. </p>
+<p>EmoDB 훈련세트는 주로 negative input으로 이루어져 있음. 또한 EmoDB와 다른 데이터 세트의 언어 불일치로 인해 이 데이터세트의 인식 성능은 상대적으로 낮음.</p>
+<p>이러한 상황임에도 불구하고 모델은 positive, negative에 대해 비교적 동등한 인식 정확도를 보였고 UA를 10.45%나 향상 시켰음. </p>
+<p>또한 제안된 center loss는 모델이 더 많은 discriminative feature representation을 추출하고 평균 정확도를 3.28%나 향상 시킴. </p>
+<p>결과는 제안된 모델이 데이터 세트 전반에서 감정 정보를 일반화 할 수 있음을 보여줌</p>
+<h3 id="Cross-corpus-Evaluation"><a href="#Cross-corpus-Evaluation" class="headerlink" title="Cross-corpus Evaluation"></a>Cross-corpus Evaluation</h3><p>교차 코퍼스 평가결과는 제안된 모델의 효과를 입증함. </p>
+<p>표3과 4에서 볼수 있듯이 DANN 기반 모델의 평균 성능은 arousal에서 baseline에 비해 크게 향상된 것으로 나타났음. </p>
+<p>또한 네가지 데이터 세트에는 화자 수가 많기 때문에 화자 인식은 이 작업에서 높은 정확도를 달성하기 어려움. 따라서 DANN_2가 DANN_1보다 더 나은 평균 성능을 생성함. </p>
+<p>그러나 valence 인식 같은 경우 DANN과 baseline모두 상대적으로 낮은 성능(60%미만)을 보였음. </p>
+<p>Emo DB의 valence인식의 경우 언어 불일치로 인해 네가지 비교 실험 인식 성능이 확률 수준(chance level) 이하임. </p>
+<p>이러한 결과는 DANN 학습이 Valence 인식의 경우에 더 달성하기 어렵다는 것을 나타내며 이는 [20]에도 자세하게 나와있음. </p>
+<h2 id="V-Conclusion"><a href="#V-Conclusion" class="headerlink" title="V. Conclusion"></a>V. Conclusion</h2><p>이 논문에서 cross corpus SER 시스템의 일반화 능력을 높이기 위한 adversarial domain adaptation 과 center loss에 대해 조사했음. </p>
+<p>SER의 domain invariant feature learning의 단계로 특징 추출을 DANN으로 수정하고 다른 데이터 세트에서 도메인 차이를 줄였음. </p>
+<p>또한 감정인식을 위한 discriminative feature representation을 학습하기 위해 center loss와 softmax loss function을 통합함. </p>
+<p>실험 결과에 따르면</p>
+<ol>
+<li>arousal에 비해 deep learning 모델은 valence information을 일반화 시키는게 더 어려움. </li>
+<li>제안된 모델은 기존의 딥러닝 기반 모델보다 더 유명한 평균 결과를 달성하여 효과를 입증함.</li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2023/06/13/DIFL_Cross_Corpus_SER/" data-id="clivanyap0000wsu6hao47q9l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Domain Invariant Feature Learning for Cross Corpus Speech Emotion Recognition",
+        "image": "https://jmj3047.github.io/images/DIFL_Cross_Corpus_SER/Untitled.png",
+        "keywords": "Speech Emotion Recognition Adversarial Domain Adaptation Center Loss Domain Invariant Feature Learning",
+        "genre": "Paper Speech Emotion Recognition",
+        "datePublished": "2023-06-13",
+        "dateCreated": "2023-06-13",
+        "dateModified": "2023-06-14",
+        "url": "https://jmj3047.github.io/2023/06/13/DIFL_Cross_Corpus_SER/",
+        "description": "Journal&#x2F;Conference : ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)Year(published year): 2022Author: Yuan Gao, Shogo Okada, Longbiao Wang, Jiax",
+        "wordCount": 1238
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/06/19/DL5_Quiz/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Sequence Model_Quiz
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/06/03/DL_Part5/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Sequence Model</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://jmj3047.github.io/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Speech-Emotion-Recognition/</loc>
+        <lastmod>2023-07-18T16:52:28.193Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/</loc>
+        <lastmod>2023-07-18T16:52:28.193Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Analysis/Basic/</loc>
+        <lastmod>2023-07-17T11:06:33.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Analysis/</loc>
+        <lastmod>2023-07-17T11:06:33.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Analysis/Model/</loc>
+        <lastmod>2023-07-17T10:30:48.185Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Python/HTML/</loc>
+        <lastmod>2023-05-17T11:50:35.489Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Python/</loc>
+        <lastmod>2023-05-17T11:50:35.489Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Multi-Task-Learning/</loc>
+        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Setting/</loc>
+        <lastmod>2023-05-07T09:49:23.606Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Speech-Representations/</loc>
+        <lastmod>2023-04-24T00:29:44.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Platform-Base/GCP/</loc>
+        <lastmod>2023-04-18T09:07:08.073Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Platform-Base/</loc>
+        <lastmod>2023-04-18T09:07:08.073Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Recommendation-System/</loc>
+        <lastmod>2023-04-05T08:46:31.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Platform-Base/MongoDB/</loc>
+        <lastmod>2023-03-19T07:04:36.264Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Generative-Model/</loc>
+        <lastmod>2022-11-10T15:27:17.845Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Python/Python/</loc>
+        <lastmod>2022-10-18T15:05:07.992Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/NLP/</loc>
+        <lastmod>2022-10-15T08:08:32.440Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Computer-Vision/</loc>
+        <lastmod>2022-10-15T08:04:25.032Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Speaker-Verification/</loc>
+        <lastmod>2022-10-15T08:03:47.207Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Python/Django/</loc>
+        <lastmod>2022-05-06T08:28:34.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Python/Pyspark/</loc>
+        <lastmod>2022-04-22T07:33:20.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

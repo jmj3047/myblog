@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Improved Training of Wasserstein GANs | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Deep/Machine Learning Paper Study,Image Classification,WGAN-GP,WGAN" />
+    
+    <meta name="description" content="Journal&#x2F;Conference: NIPSYear(published year): 2017Author: Ishaan Gulrajani, Faruk Ahmed, Martín Arjovsky, Vincent Dumoulin, Aaron C. CourvilleSubject: DCGAN, Generative Model Improved Training of">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Improved Training of Wasserstein GANs">
+<meta property="og:url" content="https://jmj3047.github.io/2022/04/22/WGAN/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="Journal&#x2F;Conference: NIPSYear(published year): 2017Author: Ishaan Gulrajani, Faruk Ahmed, Martín Arjovsky, Vincent Dumoulin, Aaron C. CourvilleSubject: DCGAN, Generative Model Improved Training of">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/WGAN/Screen_Shot_2021-11-28_at_4.31.59_PM.png">
+<meta property="article:published_time" content="2022-04-21T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-15T08:05:10.371Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Deep&#x2F;Machine Learning Paper Study">
+<meta property="article:tag" content="Image Classification">
+<meta property="article:tag" content="WGAN-GP">
+<meta property="article:tag" content="WGAN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/WGAN/Screen_Shot_2021-11-28_at_4.31.59_PM.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Paper/Generative-Model/">Generative Model</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-WGAN" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Improved Training of Wasserstein GANs
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/22/WGAN/" class="article-date">
+       <time datetime="2022-04-21T15:00:00.000Z" itemprop="datePublished">2022-04-22</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/22/WGAN/" class="article-date">
+     <time datetime="2022-10-15T08:05:10.371Z" itemprop="dateModified">2022-10-15</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Deep-Machine-Learning-Paper-Study/" rel="tag">Deep/Machine Learning Paper Study</a>, <a class="tag-link-link" href="/tags/Image-Classification/" rel="tag">Image Classification</a>, <a class="tag-link-link" href="/tags/WGAN/" rel="tag">WGAN</a>, <a class="tag-link-link" href="/tags/WGAN-GP/" rel="tag">WGAN-GP</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Journal&#x2F;Conference: NIPS<br>Year(published year): 2017<br>Author: Ishaan Gulrajani, Faruk Ahmed, Martín Arjovsky, Vincent Dumoulin, Aaron C. Courville<br>Subject: DCGAN, Generative Model</p>
+<h2 id="Improved-Training-of-Wasserstein-GANs"><a href="#Improved-Training-of-Wasserstein-GANs" class="headerlink" title="Improved Training of Wasserstein GANs"></a>Improved Training of Wasserstein GANs</h2><blockquote>
+<p>Summary</p>
+</blockquote>
+<ul>
+<li>기존의 Wasserstein-GAN 모델의 weight clipping 을 대체할 수 있는 gradient penalty 방법을 제시</li>
+<li>hyperparameter tuning 없이도 안정적인 학습이 가능해졌음을 제시</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>GAN 모델을 안정적으로 학습하기 위한 많은 방법들이 존재해왔습니다.</p>
+<p>특히, 가치함수가 수렴하는 성질을 분석하여 Discriminator(이후 Critic)가 1-Lipschitz function 공간에 있도록 하는 Wasserstein GAN(WGAN) 이 제시된 바 있습니다.</p>
+<p>논문은 WGAN 의 단점을 개선한 WGAN-GP 모델을 제시합니다.</p>
+<ul>
+<li>Toy datasets에 대해 critic의 weight clipping이 undesired behavior를 유발할 수 있음을 증명</li>
+<li>“Gradient penalty”(WGAN-GP) 기법으로 제안</li>
+<li>다양한 GAN 구조에대해 안정적인 학습을 수행할 수 있고, 고품질 이미지 생성을 수행하며, 개별 샘플링이 필필요하지 않는 문자수준 언어 모델을 제시</li>
+</ul>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Generative-adversarial-networks"><a href="#Generative-adversarial-networks" class="headerlink" title="Generative adversarial networks"></a>Generative adversarial networks</h3><p>일반적인 GAN 구조에 대해 다시 한번 개념을 되짚습니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_4.31.59_PM.png"></p>
+<h4 id="Wasserstein-GANs"><a href="#Wasserstein-GANs" class="headerlink" title="Wasserstein GANs"></a>Wasserstein GANs</h4><p>WGAN 은 GAN 의 목적함수인 JSD 가 parameter 에 연속적이지 않에 학습에 문제가 발생함을 지적하였습니다. 이에, Earth-Mover distance 로 모든 구간에서 연속적이고 대부분의 구간에서 미분 가능하게 하여 문제를 해결하였습니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_4.36.10_PM.png"></p>
+<p>이외에도 WGAN 의 특징에 대해 서술하며, 가장 중요한 특징으로 Lipschitz 조건을 만족하기 위해 시행하는 weight clipping 을 언급합니다.</p>
+<h4 id="Properties-of-the-optimal-WGAN-critic"><a href="#Properties-of-the-optimal-WGAN-critic" class="headerlink" title="Properties of the optimal WGAN critic"></a>Properties of the optimal WGAN critic</h4><p>최적의 WGAN critic 을 가정했을 때, ****weight clipping이 WGAN critic에서 문제를 발생시킴을 언급하고 증명한 결과를 제시합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_4.32.53_PM.png"></p>
+<h2 id="Difficulties-with-weight-constraints"><a href="#Difficulties-with-weight-constraints" class="headerlink" title="Difficulties with weight constraints"></a>Difficulties with weight constraints</h2><p>WGAN의 weight clipping이 최적화에 문제를 발생시킬 수 있고, 최적화가 잘 되더라도 critic이 pathological value surface 을 가질 수 있음을 증명하였던 내용을 확인하기 위한 실험을 진행합니다.</p>
+<p>논문은 기존 WGAN 이 제시하였던 hard clipping 방식 이외에도, L2 norm clipping&#x2F;weight normalization&#x2F;L1 and L2 weight decay 등의 weight constraint 를 가정하였을 때 모두 비슷한 문제가 발생하였음을 언급합니다.</p>
+<h3 id="Capacity-underuse-amp-Exploding-and-vanishing-gradients"><a href="#Capacity-underuse-amp-Exploding-and-vanishing-gradients" class="headerlink" title="Capacity underuse &amp; Exploding and vanishing gradients"></a>Capacity underuse &amp; Exploding and vanishing gradients</h3><p>k-Lipshitz 조건을 달성하기 위해 weight clipping 을 수행하였을 때, critic은 더욱 단순한 형태의 함수를 취하게 됩니다. </p>
+<p>논문은 이를 증명하기 위해 Generator 의 분포를 toy distribution + unit-variance 가우시안-노이즈에 고정한뒤, weight clipping 과 함께 WGAN critic 을 학습한 결과를 제시합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_5.41.51_PM.png"></p>
+<p>왼쪽 그림에서 Weight clipping 수행한 경우의 value surface 모양이 단순해졌음을 확인할 수 있습니다. 또한, 우측 그림과 같이, Gradient penalty 를 수행한 경우에 gradient vanishing 이나 exploding 이 발생하지 않았음을 제시합니다.</p>
+<h2 id="Gradient-penalty"><a href="#Gradient-penalty" class="headerlink" title="Gradient penalty"></a>Gradient penalty</h2><p>Weight Clipping 을 사용하지 않고 Lipschitz constraint 를 유지할 수 있는 방법을 설명합니다.</p>
+<p>입력에 대한 Critic 출력 gradient 의 크기를 직접 제약합니다. 이 때, tractability issue 를 피하기 위해 무작위로 추출한 샘플 $\hat{x}$ 의 gradient norm 을 사용해 soft 한 제약을 줍니다.</p>
+<p>이렇게 새롭게 정의되는 목적함수는 아래와 같습니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.14.09_PM.png"></p>
+<h4 id="Sampling-distribution"><a href="#Sampling-distribution" class="headerlink" title="Sampling distribution"></a>Sampling distribution</h4><p>논문은 데이터 분포와 generator 분포에서 샘플링한 점의 쌍을 이은 뒤, 점을 잇는 선분을 따라  $\hat{x}$ 를 샘플링하였고, 실험적으로 좋은 성능을 얻었음을 언급합니다. </p>
+<h4 id="Penalty-coefficient"><a href="#Penalty-coefficient" class="headerlink" title="Penalty coefficient"></a>Penalty coefficient</h4><p>gradient penalty 를 가하는 정도를 경정하는 계수로, 논문에서는 모두 $\lambda&#x3D;10$ 을 사용했음을 언급합니다.</p>
+<h4 id="No-critic-batch-normalization"><a href="#No-critic-batch-normalization" class="headerlink" title="No critic batch normalization"></a>No critic batch normalization</h4><p>기존 GAN 모델은 batch normalization 을 모든 곳에서 사용했지만, 이는 discriminator의 단일 입력을 단일 출력으로 매핑하는 문제에서, 입력의 전체 배치로부터 출력의 배치로 매핑하는 문제로 변화시킵니다. 이 때문에 gradient penalty 를 수행하면 batch normalization 이 유효하지 않은 결과가 발생한다고 합니다. 따라서 논문은 critic 에 batch normalization 을 제거하였고 그럼에도 적절한 성능을 보였음을 언급합니다.</p>
+<h4 id="Two-sided-penalty"><a href="#Two-sided-penalty" class="headerlink" title="Two-sided penalty"></a>Two-sided penalty</h4><p>gradient penalty 는 norm이 1 아래에 머무르지 않고(one-sided penalty), 1로 향하기(two-sided penalty)는 것을 촉진한다는 점을 제시합니다.</p>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><h4 id="Training-random-architectures-within-a-set"><a href="#Training-random-architectures-within-a-set" class="headerlink" title="Training random architectures within a set"></a>Training random architectures within a set</h4><p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.28.54_PM.png"></p>
+<p>일반적인 DCGAN 구조에서 위의 표의 설정을 랜덤하게 설정하여 모델을 구성합니다. 이렇게 무작위로 200개의 모델을 구성한뒤, 32x32 ImageNet 에 대해 WGAN-GP, standard GAN을 합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.34.18_PM.png"></p>
+<p>구성한 모델의 inception_score 가 min_score 보다 큰 경우 성공으로 분류합니다. WGAN-GP 는 많은 구조를 학습하는데 성공했다는 결과를 제시합니다.</p>
+<h3 id="Training-varied-architectures-on-LSUN-bedrooms"><a href="#Training-varied-architectures-on-LSUN-bedrooms" class="headerlink" title="Training varied architectures on LSUN bedrooms"></a>Training varied architectures on LSUN bedrooms</h3><p>아래와 같이 6개의 모델을 기본 모델로 사용합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.36.55_PM.png"></p>
+<p>여기에 DCGAN, LSGAN, WGAN, WGAN-GP 를 각각 적용하였을 때의 성능을 비교합니다. 단, WGAN-GP는 discriminator 에서 Batch normalization 을 사용할 수 없기에 layer normalization 을 사용합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.34.31_PM.png"></p>
+<p>WGAN-GP 를 제외한 모든 모델에서 불안정하거나 mode collapse 에 빠진 모습을 보입니다.</p>
+<h3 id="Improved-performance-over-weight-clipping"><a href="#Improved-performance-over-weight-clipping" class="headerlink" title="Improved performance over weight clipping"></a>Improved performance over weight clipping</h3><p>WGAN-GP 가 weight clipping 에 비해 더 빠른 학습 속도와 샘플 효율을 보인다는 점을 증명하기 위한 실험 결과를 제시합니다. 이를 위해, WGAN 과 WGAN-GP 모델을 CIFAR-10 으로 학습하여 Inception Score 를 계산합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.40.26_PM.png"></p>
+<p>왼쪽은 iteration에 따른 Inception Score이며, 오른쪽은 시간에 따른 Inception Score입니다.</p>
+<p>WGAN-GP는 weight clipping 보다 항상 더 좋은 성능을 보입니다. 이는 같은 optimizer 를 사용했을 때도 마찬가지이며, 비록 DCGAN 보다는 느리지만 수렴에 있어서 안정적인 점수를 보일 수 있음을 제시합니다.</p>
+<h3 id="Sample-quality-on-CIFAR-10-and-LSUN-bedrooms"><a href="#Sample-quality-on-CIFAR-10-and-LSUN-bedrooms" class="headerlink" title="Sample quality on CIFAR-10 and LSUN bedrooms"></a>Sample quality on CIFAR-10 and LSUN bedrooms</h3><p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.44.03_PM.png"></p>
+<p>CIFAR-10으로 학습한 모델의 Inception score 를 계산하여 다양한 구조의 GAN을 비교한 표를 제시합니다. WGAN-GP 는 Supervised 의 경우 SGAN 을 제외했을 때 가장  좋은 성능을 보입니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.46.12_PM.png"></p>
+<p>또한, WGAN-GP 로 deep ResNet 모델을 사용하여 128X128 LSUN 침대 이미지를 생성하여 위와같은 결과를 제시합니다. </p>
+<h3 id="Modeling-discrete-data-with-a-continuous-generator"><a href="#Modeling-discrete-data-with-a-continuous-generator" class="headerlink" title="Modeling discrete data with a continuous generator"></a>Modeling discrete data with a continuous generator</h3><p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.47.28_PM.png"></p>
+<p>Generator 는 연속적인 분포의 함수를 가정합니다. 따라서언어 모델은 비연속적인 분포를 모델링 해야하므로 GAN 으로 학습하기에 부적절할 수 있습니다.</p>
+<p>위는 Google Billion Word 데이터셋을 사용해 문자 수준 언어 모델을 WGAN-GP 로 학습한 결과입니다. 모델이 빈번하게 철자를 틀리지만, 언어의 통계에 대해서는 어느정도 학습을 수행하였음을 볼 수 있습니다.</p>
+<h3 id="Meaningful-loss-curves-and-detecting-overfitting"><a href="#Meaningful-loss-curves-and-detecting-overfitting" class="headerlink" title="Meaningful loss curves and detecting overfitting"></a>Meaningful loss curves and detecting overfitting</h3><p>기존의 weight clipping 은 loss 가 sample quality 와 연관되어 최소값으로 수렴할 수 있다는 점입니다. WGAN-GP 가 해당 특성을 유지하는지 확인하기 위한 테스크를 진행한 결과를 제시합니다.</p>
+<p><img src="/images/WGAN/Screen_Shot_2021-11-28_at_6.50.55_PM.png"></p>
+<p>(a)에서 LSUN 침대 데이터셋을 학습하고 critic 의 negative loss 를 그렸을 때, Gnerator 가 학습됨에 따라 값이 줄어드는 것을 확인할 수 있습니다. 이 경우, WGAN-GP가 critic에서의 과적합을 완화했다고 볼 수 있습니다.</p>
+<p>또한, MNIST 무작위 숫자 1000개로 학습한 결과는, 적은 데이터셋을 사용한 만큼 과적합이 발생하기 쉽습니다.  때문에, critic이 generator보다 더 빨리 과적합되어 training loss를 점차 증가시키고 validation loss를 감소시켰음을 확인할 수 있습니다.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>WGAN에 Gradient penalty를 적용하여 기존의 weight clipping 을 적용함으로 인해 발생하는 문제를 해결할 수 있음을 제시하였습니다.</p>
+<hr>
+<blockquote>
+<p>Summarize</p>
+</blockquote>
+<ul>
+<li>GAN의 가장 큰 문제는 학습환경이 매우 불안정하다는 것이다. 생성자와 구분자 둘 중에 하나가 실력이 월등이 좋아진다면 밸런스가 붕괴되고 모델이 정확히 학습되지 않고 학습이 완료된 후에도 mode dropping 이 생기는데 이는 구분자가 그 역할을 충분히 하지 못해 모델이 최적점까지 학습이 안 된 것이다.</li>
+<li>따라서 이 문제를 해결하기 위해 본 논문에서는 WGAN 방법을 도입했다.</li>
+<li>간단히 설명하면 GAN의 discriminator보다 선생님 역할을 잘 할 수 있는 critic을 사용함으로써 gradient를 잘 전달시키고 critic과 generator를 최적점까지 학습할 수 있다는 것이다. 그렇다면 이를 적용하면 학습시킬 때 생성자와 구분자의 밸런스가 잘 맞는지 주의깊게 보지 않아도 되고 학습한 이후에 발생하는 mode droppin이 해결 가능하다.</li>
+<li>식을 해석해보면 생성자가 Lipschitz 함수 조건을 만족하는가 하지않는가에 대한 기준이 하나 더 생기는것 이다.</li>
+</ul>
+<hr>
+<ul>
+<li>Link: <strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.00028">Improved Training of Wasserstein GANs</a></strong></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2022/04/22/WGAN/" data-id="clgw0znbl005l4du649wuardr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Improved Training of Wasserstein GANs",
+        "image": "https://jmj3047.github.io/images/WGAN/Screen_Shot_2021-11-28_at_4.31.59_PM.png",
+        "keywords": "Deep/Machine Learning Paper Study Image Classification WGAN-GP WGAN",
+        "genre": "Paper Generative Model",
+        "datePublished": "2022-04-22",
+        "dateCreated": "2022-04-22",
+        "dateModified": "2022-10-15",
+        "url": "https://jmj3047.github.io/2022/04/22/WGAN/",
+        "description": "Journal&#x2F;Conference: NIPSYear(published year): 2017Author: Ishaan Gulrajani, Faruk Ahmed, Martín Arjovsky, Vincent Dumoulin, Aaron C. CourvilleSubject: DCGAN, Generative Model
+Improved Training of",
+        "wordCount": 1088
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/04/22/BeautifulSoup_QuickStart/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            BeautifulSoup Quick Start
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/04/22/Web_Crawling_Basic/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Basic Web Crawling</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

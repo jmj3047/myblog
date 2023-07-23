@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Multi-Task Learning for Voice Trigger Detection | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="English,Multi-Task Learning,Voice Trigger Detection" />
+    
+    <meta name="description" content="Journal&#x2F;Conference : ICASSP IEEEYear(published year): 2020Author: Siddharth Sigtia, Pascal Clark, Rob Haynes, Hywel Richards, John BridleSubject: Multi-Task Learning Multi-Task Learning for Voice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multi-Task Learning for Voice Trigger Detection">
+<meta property="og:url" content="https://jmj3047.github.io/2022/11/02/MTL_for_VTD/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="Journal&#x2F;Conference : ICASSP IEEEYear(published year): 2020Author: Siddharth Sigtia, Pascal Clark, Rob Haynes, Hywel Richards, John BridleSubject: Multi-Task Learning Multi-Task Learning for Voice">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/MTL_for_VTD/Untitled.png">
+<meta property="article:published_time" content="2022-11-01T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-10T15:18:26.813Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="English">
+<meta property="article:tag" content="Multi-Task Learning">
+<meta property="article:tag" content="Voice Trigger Detection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/MTL_for_VTD/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-MTL_for_VTD" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Multi-Task Learning for Voice Trigger Detection
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/11/02/MTL_for_VTD/" class="article-date">
+       <time datetime="2022-11-01T15:00:00.000Z" itemprop="datePublished">2022-11-02</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/11/02/MTL_for_VTD/" class="article-date">
+     <time datetime="2022-11-10T15:18:26.813Z" itemprop="dateModified">2022-11-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/English/" rel="tag">English</a>, <a class="tag-link-link" href="/tags/Multi-Task-Learning/" rel="tag">Multi-Task Learning</a>, <a class="tag-link-link" href="/tags/Voice-Trigger-Detection/" rel="tag">Voice Trigger Detection</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Journal&#x2F;Conference : ICASSP IEEE<br>Year(published year): 2020<br>Author: Siddharth Sigtia, Pascal Clark, Rob Haynes, Hywel Richards, John Bridle<br>Subject: Multi-Task Learning</p>
+<h1 id="Multi-Task-Learning-for-Voice-Trigger-Detection"><a href="#Multi-Task-Learning-for-Voice-Trigger-Detection" class="headerlink" title="Multi-Task Learning for Voice Trigger Detection"></a>Multi-Task Learning for Voice Trigger Detection</h1><blockquote>
+<p>Summary</p>
+</blockquote>
+<ul>
+<li>We start by training a general acoustic model that produces phonetic transcriptions given a large labelled training dataset.<ul>
+<li>우리는 레이블이 지정된 대규모 훈련 데이터 세트가 주어지면 phonetic transcriptions를 생성하는 일반적인 음향 모델을 훈련하는 것으로 시작한다.</li>
+</ul>
+</li>
+<li>Next, we collect a much smaller dataset of examples that are challenging for the baseline system.<ul>
+<li>다음으로, 우리는 기준 시스템에 도전하는 훨씬 더 작은 예제의 데이터 세트를 수집한다.</li>
+</ul>
+</li>
+<li>We then use multi-task learning to train a model to simultaneously produce accurate phonetic transcriptions on the larger dataset and discriminate between true and easily confusable examples using the smaller dataset.<ul>
+<li>그런 다음 다중 작업 학습을 사용하여 모델을 훈련시켜 더 큰 데이터 세트에서 정확한  phonetic transcriptions를 생성하고 더 작은 데이터 세트를 사용하여 실제 예제와 쉽게 혼동할 수 있는 예제를 구별한다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Significant challenge is that unlike automatic speech recognition (ASR) systems, collecting training examples for a specific keyword or phrase in a variety of conditions is a difficult problem.<br>  중요한 과제는 자동 음성 인식(ASR) 시스템과 달리 다양한 조건에서 특정 키워드 또는 구문에 대한 훈련 예제를 수집하는 것은 어려운 문제라는 것이다.</p>
+<p><img src="/images/MTL_for_VTD/Untitled.png"></p>
+<p>In the literature, the problem of detecting a speech trigger phrase is interchangeably referred to as voice trigger detection [3], keyword spotting [4], wake-up word detection [5] or hotword detection [6]. In the rest of this paper, we refer to this problem as voice trigger detection.<br>  문헌에서 음성 트리거 구문을 검출하는 문제는 voice trigger detection [3], keyword spotting [4], wake-up word detection [5] 또는  hotword detection [6]으로 상호 교환적으로 언급된다.<br>  이 논문의 나머지 부분에서는 이 문제를 voice trigger detection라고 합니다.</p>
+<p>In the multi-stage approach (Figure 1), the first stage comprises a low-power DNN-HMM system that is always on [3].<br>  그림1에 보면, 첫 번째 단계는 항상 [3]에 있는 저전력 DNN-HMM 시스템을 포함한다.</p>
+<p>In this design, it is the second stage that determines the final accuracy of the system and the models used in this stage are the subject of this paper.<br>  이 설계에서 시스템의 최종 정확도를 결정하는 것은 두 번째 단계이며, 이 단계에서 사용되는 모델이 이 논문의 주제이다.</p>
+<p>Our main contribution is to propose a multi-task learning strategy where a single model is trained to optimise 2 objectives  simultaneously.<br>  우리의 주요 기여는 단일 모델이 두 가지 목표를 동시에 최적화하도록 훈련되는 다중 작업 학습 전략을 제안하는 것이다.</p>
+<p>The first objective is to assign the highest score to the correct sequence of phonetic labels given a speech recording.<br>  첫 번째 목표는 주어진 음성 녹음의 음성 레이블이 올바른 순서로 되어 있다면 가장 높은 점수를 할당하는 것이다.</p>
+<p>This objective is optimised on a large labelled training dataset which is also used for training the main speech recogniser and is therefore easy to obtain.<br>  이 목표는 주요 음성 인식기를 훈련시키는 데 사용되므로 쉽게 얻을 수 있는 대규모 레이블링된 훈련 데이터 세트에 최적화된다.</p>
+<p>The second objective is to discriminate between utterances that contain the trigger phrase and those that are phonetically similar and easily confusable.<br>  두 번째 목표는 trigger phrase를 포함하는 발화와 음성학적으로 유사하고 쉽게 혼동되는 발화를 구별하는 것이다.</p>
+<h2 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h2><p>The baseline model architecture comprises an acoustic model (AM) with four bidirectional LSTM layers with 256 units each, followed by an output affine transformation + softmax layer over context independent (CI) phonemes, word and sentence boundaries, resulting in 53 output symbols (Figure 2).</p>
+<p><img src="/images/MTL_for_VTD/Untitled%201.png"></p>
+<p>Firstly, the fact that the second-pass model is used for re-scoring and not in a continuous streaming setting allows us to use bidirectional LSTM layers.<br>  첫째, 2차 통과 모델이 연속 스트리밍 설정이 아닌 재 득점에 사용된다는 사실은 양방향 LSTM 레이어를 사용할 수 있게 합니다.</p>
+<p>Secondly, using context-independent phones as targets allows us to share training data with the main ASR.<br>  둘째, context-independent phones 를 target으로 사용하면 주요 ASR과 training 데이터를 공유할수 있습니다.</p>
+<p>This is particularly important since in many cases it is not possible to obtain a large number of training utterances with the trigger phrase, for example when developing a trigger detector for a new language.<br>  이는 특히 중요하다. 많은 경우에 가령 새로운 언어로 트리거 감지를 개발할때 training 발화를 trigger phrase로 다량의 데이터를 얻는것이 불가능하기 때문이다. </p>
+<p>Furthermore, having CI phones as targets results in a flexible model that can be used for detecting any keyword.<br>  더 나아가서 유연한 모델에서 CI 음소들을 타겟 결과로 갖는 것은 어느 키워드를 감지하는데 사용될수 있다.</p>
+<p>Given an audio segment x from the first pass, we are interested in calculating the probability of the phone sequence in the trigger phrase, $P(TriggerPhrasePhoneSeq|x)$.<br>  segment x 음성이 1차에서 주어졌을때, 우리는 trigger phrase의 음성 시퀀스, $P(TriggerPhrasePhoneSeq|x)$,의 확률을 계산하는 것에 관심이 있다.</p>
+<h2 id="Multi-Task-Learning"><a href="#Multi-Task-Learning" class="headerlink" title="Multi-Task Learning"></a>Multi-Task Learning</h2><p>The question we really want to answer is, “given an audio segment from the first pass, does it contain the trigger phrase or not?”<br>  우리가 실제로 답하고 싶은 질문은 “1차에서 통과된 주어진 음성 segment가 trigger phrase를 포함하고 있는가 아닌가?” 이다.</p>
+<p>We would like the second-pass model to be a binary classifier which determines the presence or absence of the trigger phrase.<br>  우리는 2차 모델이 trigger phrase를 포함하는지 하지 않는지를 결정하는 이진 분류기였으면 한다.</p>
+<p>However the issue with this design is that collecting a large number of training examples that result in false detections by the baseline system is a difficult problem (c.f. Section 4).<br>  그러나, 이 디자인의 이슈는 baseline 시스템에 의해 다량의 training 예시를 수집하는 것이 어려운 문제라는 것이다.</p>
+<p>Furthermore, the second pass models have millions of parameters, so they can easily overfit a small training set resulting in poor generalisation.<br>  더 나아가 2차 모델은 수백만개의 파라미터가 있다. 그래서 그들은 작은 training set에도 쉽게 과적합 되며 안좋은 일반화를 결과로 낸다. </p>
+<p>Therefore, we are faced with the choice between a more general phonetic AM that can be trained on a large, readily available dataset but is optimised for the wrong criterion or a trigger phrase specific detector that is trained on the correct criterion but with a significantly smaller training dataset.<br>  따라서, 우리는 크고 손쉽게 사용 가능한 데이터셋으로 train된 하지만 잘못된 기준으로 최적화된 일반화된 음성 AM과 올바른 기준으로 train됐지만 매우 적은 training 데이터로 학습된 특정 trigger phrase 감지기, 둘 중 하나를 선택해야 했다. </p>
+<p>One solution to this problem is to use multi-task learning (MTL) [19]<br>  우리의 해결책은 multi-task learning을 사용하는 것이었다.</p>
+<p>Note that predicting the sequence of phonetic labels in an utterance and deciding whether an utterance contains a specific trigger phrase or not, are related tasks.<br>  발화 속에서 phonetic label의 시퀀스를 예측하는 것 그리고 발화가 trigger phrase를 포함하고 있는지 아닌지 결정하는 것은 서로 연관성이 있는 일이다.</p>
+<p>We train a single network with a stack of shared&#x2F;tied biLSTM layers with two seperate output layers (one for each task) and train the network jointly on both sets of training data (Figure 2).<br>  우리는 두개의 출력 레이어(각각 하나의 task씩)를 갖고 있고 공유하는&#x2F;묶인 biLSTM 레이어들의 묶음으로 이루어진 하나의 네트워크를 훈련했고 두 세트의 training data(Figure 2)에 합동으로 엮인 네트워크를 훈련했다. </p>
+<p>We hypothesise that the joint network is able to learn useful features from both tasks: a) the network can be trained to predict phone labels on a large labelled dataset of general speech which covers a wide distribution of complex acoustic conditions, b) the same network can also learn to discriminate between examples of true triggers and confusable examples on a relatively smaller dataset.<br>  우리는 합동 네트워크가 두 task의 유용한 feature들을 학습이 가능하다고 가정했다: a) 네트워크는 복잡한 음향 조건의 광범위한 분포를 다루는 일반적인 음성의 큰 labelled된 데이터 셋을 기반으로 phone label들을 예측하게끔 훈련될수 있다. b) 같은 네트워크는 또한 상대적으로 적은 데이터 양으로 실제의 trigger phrase와 헷갈리는 예시들을 구분하는 법을 배울수 있다.</p>
+<p>An alternative view of this process is that the phonetic transcription task with a significantly larger training set acts as a regulariser for the trigger phrase discrimination task with a much smaller dataset.<br>  이 process에 대한 다른 시각은 엄청나게 많은 training set를 사용하는 phonetic transcription task가 regulariser로 훨씬 적은 데이터를 가지고 trigger pharse를 구분할때 사용된다.</p>
+<p>The objective function for the phrase specific&#x2F;discriminative output layer is defined as follows: the softmax output layer contains two output units, one for the trigger phrase and the other one for the blank symbol used by the CTC loss function [8, 16]<br>  phrase를 특정화&#x2F;차별화 하는 output layer의 목적함수는 다음과 같이 정의된다: softmax output layer은 두개의 output unit을 포함하는데 하나는 trigger phrase를 위함이고 또 다른 하나는 CTC loss function에서 사용되는 blanck symbol을 위함이다.</p>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>There were 100 subjects, approximately balanced between male and female adults. Distances from the device were controlled, ranging from 8 to 15 feet away.<br>  대략적으로 반반의 성비로 100명의 참가자들이 참여했다. 기기와의 거리도 8-15피트 정도로 통제되었다. </p>
+<p>There are over 13K utterances overall, evenly divided between four acoustic conditions: (a) quiet room, (b) external noise from a TV or kitchen appliance in the room, (c) music playback from the recording device at medium volume, and (d) music playback from the recording device at loud volume.<br>  전반적으로 만 3천개의 발화들이 있는데 네가지 컨디션으로 동일하게 나누어졌다: (a) 조용한 방, (b) 방의 TV 또는 주방기기의 외부 소음. (c) 중간 볼륨의 녹음 장치에서 음악 재생, (d) 큰 볼륨의 녹음 장치에서 음악 재생</p>
+<p>These examples are used to measure the proportion of false rejections (FRs).<br>  이 예시들은 FR 비율을 측정하기 위해 사용되었다. </p>
+<p>In addition to these recordings, this test set also consists of almost 2,000 hours of continuous audio recordings from TV, radio, and podcasts. This allows the measurement of the false-alarm (FA) rate in terms of FAs per hour of active external audio.<br>  그 녹음들에 관해 덧붙이자면, 이 test set 또한 TV, 라디오, 팟캐스트로부터 2천 시간의 연속적인 음성 녹음을 포함하고 있다. 이를 통해 active한 외부 음성의 시간당 FA, FA비율을 측정할 수 있다. </p>
+<p>The second test set is an unstructured data collection at home by our employees, designed to be more representative of realistic, spontaneous usage of the smart speaker.<br>  두번째 test set은 사원들의 집에서 나는 정제되지 않은 데이터 모음이다. 이는 조금더 현실적이고 즉흥적인 스마트폰 스피커의 사용을 대표한다. </p>
+<p>With this data, it is possible to measure nearly unbiased false-reject and false-alarm rates for realistic in-home scenarios similar to customer usage.<br>  이 데이터로 현실적인 집 내부의 시나리오들(소비자의 사용과 비슷한)을 위한 편향되지 않은 FA와 FA 비율 측정이 가능하다.</p>
+<p><img src="/images/MTL_for_VTD/Untitled%202.png"></p>
+<p>We use detection error trade-off (DET) curves to compare the accuracy between models. Each curve displays the FA rate and the proportion of FRs associated with sweeping the trigger threshold for a<br>particular model.<br>  우리는 DET 곡선을 두 모델의 정확성을 비교하기 위해 사용한다. 각 곡선은 특정 모델에 대한 트리거 임계값을 스윕하는 것과 연관된 FA 비율 및 FR 비율을 표시한다.</p>
+<p>In practice, we compare the shapes of the DET curves for different models in the vicinity of viable operating points.<br>  실제로 우리는 실행가능한 작동지점 근처에서 서로 다른 모델들의 DET 곡선의 모양을 비교했다. </p>
+<p>We compare five models: the baseline phonetic CTC model trained on the ASR dataset (blue), the baseline phrase specific model trained on the much smaller training set with randomly initialised weights (red), the same phrase specific model but with weights initialised with the learned weights from the baseline phonetic CTC model (yellow), the phonetic (purple) and phrase specific (green) branches of the proposed MTL model.<br>  우리는 다섯개의 모델을 비교했다</p>
+<ul>
+<li>파랑: ASR 데이터로 훈련한 baseline phonetic CTC 모델</li>
+<li>빨강: 무작위로 초기화된 가중치를 갖는 훨씬 더 작은 training 세트 상에서 훈련된 baseline phrase 특정 모델</li>
+<li>노랑: 동일한 phrase의 특정 모델이지만 기본 음성 CTC 모델의 학습된 가중치를 초기화된 가중치를 갖는 모델</li>
+<li>보라: 제안된 MTL모델 중 phonetic branches</li>
+<li>초록: 제안된 MTL 모델 중 phrase specific 모델</li>
+</ul>
+<p>Note that the phrase specific model  with weight initialisation from the baseline phonetic model (yellow) is effectively trained using both datasets.<br>  baseline phonetic model의 초기화된 가중치를 가지는 phrase specific 모델은 효과적으로 두 dataset을 사용하면서 훈련되었다. </p>
+<p>In both test sets, the MTL phonetic (purple) and phrase-specific (green) models outperform the baseline phonetic CTC (blue), reducing the FR rate by almost half at many points along the curve.<br>  양쪽 test set에서 보라색 그리고 초록색 모델을은 파란색보다 FR비율을 다른 곡선에 비해 반절이나 감소시키면서 결과가 좋았다. </p>
+<p>The non-MTL phrase specific models (red and yellow) yield significantly worse accuracies in comparison, which is unsurprising given that the training dataset is two orders of magnitude smaller compared to the phonetic baseline (blue).<br>  MTL을 사용하지 않은 specific 모델(빨강, 노랑) 부분은 심각하게 안좋은 정확성을 상대적으로 보였으며 이것은 training dataset이 phonetic baseline(파랑)에 비해 두자릿수 더 작다는 점을 감안했을때 당연하다. </p>
+<p>Comparing the structured data evaluation (left) and the take-home data evaluation (right), it is also striking how the error rates are generally much higher for the latter.<br>  구조화된 데이터 evaluation(왼쪽)과 take-home data evaluation(오른쪽)을 비교해보면 일반적으로 후자의 경우 오류율이 더 높은것도 눈에 띈다.</p>
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><p>We trained the model to simultaneously produce phonetic transcriptions on a large ASR dataset and to discriminate between difficult examples on a much smaller trigger phrase specific training set.<br>  우리는 큰 ASR dataset에서 phonetic transcription을 제공하고 동시에 훨씬 더 작은 trigger phrase training set에서 어려운 샘플들을 구별하는 모델을 훈련했다.</p>
+<p>We evaluate the proposed model on two challenging test sets and find the proposed method is able to almost halve errors and does not require any extra model parameters.<br>  우리는 제안된 모델의 두 test set을 평가했고 제안된 방법이 오류를 반감하기 위해 더 많은 파라미터를 필요로 하지 않은다는 것을 발견했다.</p>
+<hr>
+<ul>
+<li>Link: <strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2001.09519">Multi-Task Learning for Voice Trigger Detection</a></strong></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2022/11/02/MTL_for_VTD/" data-id="clgw0znbf003k4du61m4jgcq8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Multi-Task Learning for Voice Trigger Detection",
+        "image": "https://jmj3047.github.io/images/MTL_for_VTD/Untitled.png",
+        "keywords": "English Multi-Task Learning Voice Trigger Detection",
+        "genre": "Paper Multi-Task Learning",
+        "datePublished": "2022-11-02",
+        "dateCreated": "2022-11-02",
+        "dateModified": "2022-11-11",
+        "url": "https://jmj3047.github.io/2022/11/02/MTL_for_VTD/",
+        "description": "Journal&#x2F;Conference : ICASSP IEEEYear(published year): 2020Author: Siddharth Sigtia, Pascal Clark, Rob Haynes, Hywel Richards, John BridleSubject: Multi-Task Learning
+Multi-Task Learning for Voice",
+        "wordCount": 2182
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/11/05/SpeakerGAN/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            SpeakerGAN, Speaker identification with conditional generative adversarial network
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/10/31/MTL_for_SV&VTD/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Multi-Task Learning for Speaker Verification and Voice Trigger Detection</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

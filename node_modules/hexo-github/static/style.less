@@ -1,0 +1,296 @@
+@header-bg: #4CAF50;
+@info-bg: #2E7D32;
+@info-icon-bg: #424242;
+@commits-bg: #212121;
+@text-color-active: white;
+@text-color-inactive: #E0E0E0;
+@timeline-width: 2px;
+@timeline-color: #E0E0E0;
+
+@header-height: 64px;
+// Note: icon size is determined by octicon classes
+@header-icon-size: 32px;
+@info-height: 32px;
+@info-icon-size: 16px;
+@info-circle-size: @info-icon-size + 8px;
+@commit-item-height: 16px;
+@commit-icon-size: 16px;
+@commit-circle-size: @commit-icon-size + 6px;
+@commit-active-circle-bg: #4CAF50;
+@active-padding: 8px;
+
+.keyframes(@name; @arguments) {
+	@-moz-keyframes @name { @arguments(); }
+	@-webkit-keyframes @name { @arguments(); }
+	@keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+	-webkit-animation: @arguments;
+	-moz-animation: @arguments;
+	animation: @arguments;
+}
+
+.hexo-github {
+	* {
+  	box-sizing: border-box;
+	}
+	padding: 8px 0px; 
+}
+
+.spinner {
+  .keyframes(spin, {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    });
+  .animation(spin 1.4s infinite linear);
+}
+
+.github-badge {
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  color: @text-color-active;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: 'Open Sans',Arial,sans-serif;
+  .header {
+    background: @header-bg;
+    min-height: @header-height;
+    overflow-y: hidden;
+    padding-right: (@header-height - @header-icon-size) / 2;
+    .number {
+      float: right;
+      height: @header-height;
+      padding-right: 8px;
+      position: relative;
+      opacity: 0.3;
+      right: 0px;
+      // bottom: 0px;
+      font-size: 72px;
+    }
+    .star {
+      position: absolute;
+      right: 0px;
+      padding: 16px;
+
+    }
+    .avatar {
+      pointer-events: none;
+      position: relative;
+      width: 32px;
+      height: 32px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-top: -32px;
+      img {
+        width: 32px;
+        height: 32px;
+      }
+      // visibility: hidden;
+      opacity: 0;
+      transform: scale(10);
+      transition: all 0.5s ease-in-out;
+      &.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .icon {
+      pointer-events: none;
+      float: left;
+      width: @header-height;
+      padding: (@header-height - @header-icon-size) / 2;
+      text-align: center;
+      span {
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.5s ease-in-out;
+        &.back {
+          opacity: 0;
+          transform: scale(10);
+        }
+      }
+    }
+    .content {
+      float: left;
+      padding: (@header-height - @header-icon-size) / 2 0px;
+      height: 100%;
+      line-height: @header-icon-size;
+
+      h3 {
+        font-size: @header-icon-size / 2;
+        font-weight: 500;
+        line-height: @header-icon-size / 2;
+        height: @header-icon-size / 2;
+        margin: 0px;
+      }
+    }
+  }
+
+  .info {
+    background: @info-bg;
+    min-height: @info-height;
+    cursor: pointer;
+    padding-right: (@header-height - @header-icon-size) / 2;
+
+    .icon {
+      // box-sizing: padding-box;
+      line-height: @info-icon-size;
+      float: left;
+      height: @info-height;
+      width: @header-height;
+      // margin: 6px 22px;
+      padding: (@info-height - @info-icon-size) / 2 0px;
+      text-align: center;
+      // opacity: 0.7;
+      z-index: 1;
+      .circle {
+      	opacity: 0.7;
+        position: absolute;
+        background: fade(@info-icon-bg, 50%);
+        border-radius: 50%;
+        background-clip: border-box;
+        left: @header-height / 2 - @info-circle-size / 2;
+        margin-top: (@info-icon-size - @info-circle-size) / 2;
+        width: @info-circle-size;
+        height: @info-circle-size;
+        z-index: 0;
+      }
+			.octicon {
+				position: absolute;
+				padding: 0px 1px;
+      	opacity: 0.7;
+				// Note: IE sets left to 0px by default while Chrome and Firefox do not.
+				// This normalizes cross browser behaviours
+				left: 0px;
+				margin-left: @header-height / 2 - @info-icon-size / 2;
+			}
+    }
+    .status {
+      line-height: @info-icon-size;
+      padding: (@info-height - @info-icon-size) / 2 0px;
+      opacity: 0.7;
+    }
+  }
+
+
+  .commits {
+    padding-right: (@header-height - @header-icon-size) / 2;
+    &.fold {
+      // display: none;
+      max-height: 0px;
+      .entry {
+        opacity: 0;
+        .item {
+          .icon {
+            transform: translateY(@commit-circle-size / 2) scale(0);
+          }
+          .text {
+            transform: translateX(100%);
+          }
+        }
+      }
+    }
+    overflow: hidden;
+    background: @commits-bg;
+    height: auto;
+    max-height: @info-height * 8;
+    color: @text-color-inactive;
+    transition: all 0.5s ease-in-out;
+
+    .line {
+      position: absolute;
+      width: @timeline-width;
+      left: @header-height / 2 - @timeline-width / 2;
+
+      height: 100%;
+      background: @timeline-color;
+      opacity: 0.3;
+    }
+
+    .entry {
+      transition: all 0.5s ease-in-out;
+      opacity: 1;
+      padding: 8px 0px;
+      .item {
+        line-height: @commit-item-height;
+        padding: 8px 0px;
+        min-height: @commit-item-height;
+
+        .icon {
+          transition: all 0.5s ease-in-out;
+          transform: scale(1);
+          float: left;
+          width: @header-height;
+          padding: 0px @header-height / 2 - @commit-icon-size / 2;
+          .octicon {
+            padding: 0px 1px;
+            position: absolute;
+          }
+          .circle {
+            position: absolute;
+            background: fade(@info-icon-bg, 90%);
+            border-radius: 50%;
+            background-clip: border-box;
+            left: @header-height / 2 - @commit-circle-size / 2;
+            margin-top: (@commit-icon-size - @commit-circle-size) / 2;
+            width: @commit-circle-size;
+            height: @commit-circle-size;
+            &.active {
+
+              background: fade(@commit-active-circle-bg, 90%);
+              &:before {
+                .keyframes(breath, {
+                    0% {
+                      transform: scale(1);
+                    }
+                    50% {
+                      transform: scale(1.2);
+                    }
+                    0% {
+                      transform: scale(1);
+                    }
+                  });
+                .animation(breath 1.4s infinite ease-in-out);
+                content: "";
+                position: absolute;
+                background: fade(@commit-active-circle-bg, 30%);
+                border-radius: 50%;
+                background-clip: border-box;
+                left: -@active-padding / 2;//@header-height / 2 - (@commit-circle-size + @active-padding) / 2;
+                margin-top: -@active-padding / 2;//(@commit-icon-size - @commit-circle-size - @active-padding) / 2;
+                width: @commit-circle-size + @active-padding;
+                height: @commit-circle-size + @active-padding;
+              }
+            }
+          }
+        }
+        .text {
+          transition: all 0.5s ease-in-out;
+          transform: translateX(0%);
+          opacity: 0.5;
+          margin-left: @header-height;
+          padding: 0px;
+          &.active {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+
+  }
+}

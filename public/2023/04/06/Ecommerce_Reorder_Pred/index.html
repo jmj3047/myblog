@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Ecommerce Reorder Prediction | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ML Analysis,Kaggle" />
+    
+    <meta name="description" content="개요 유저들의 재주문 여부 예측하기 instacart kaggle: https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;instacart-market-basket-analysis&#x2F;leaderboard 2위 한 모델 github: https:&#x2F;&#x2F;github.com&#x2F;KazukiOnodera&#x2F;Instacart  필요 메모리 약 300GB RAM이 필">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ecommerce Reorder Prediction">
+<meta property="og:url" content="https://jmj3047.github.io/2023/04/06/Ecommerce_Reorder_Pred/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="개요 유저들의 재주문 여부 예측하기 instacart kaggle: https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;instacart-market-basket-analysis&#x2F;leaderboard 2위 한 모델 github: https:&#x2F;&#x2F;github.com&#x2F;KazukiOnodera&#x2F;Instacart  필요 메모리 약 300GB RAM이 필">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/Ecommerce_Reorder_Pred/Untitled.png">
+<meta property="article:published_time" content="2023-04-05T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-06T09:04:17.102Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="ML Analysis">
+<meta property="article:tag" content="Kaggle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/Ecommerce_Reorder_Pred/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Platform-Base/GCP/">GCP</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Ecommerce_Reorder_Pred" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Ecommerce Reorder Prediction
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/04/06/Ecommerce_Reorder_Pred/" class="article-date">
+       <time datetime="2023-04-05T15:00:00.000Z" itemprop="datePublished">2023-04-06</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/04/06/Ecommerce_Reorder_Pred/" class="article-date">
+     <time datetime="2023-04-06T09:04:17.102Z" itemprop="dateModified">2023-04-06</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Kaggle/" rel="tag">Kaggle</a>, <a class="tag-link-link" href="/tags/ML-Analysis/" rel="tag">ML Analysis</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><ul>
+<li>유저들의 재주문 여부 예측하기</li>
+<li>instacart kaggle: <a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/instacart-market-basket-analysis/leaderboard">https://www.kaggle.com/competitions/instacart-market-basket-analysis/leaderboard</a></li>
+<li>2위 한 모델 github: <a target="_blank" rel="noopener" href="https://github.com/KazukiOnodera/Instacart">https://github.com/KazukiOnodera/Instacart</a></li>
+</ul>
+<h2 id="필요-메모리"><a href="#필요-메모리" class="headerlink" title="필요 메모리"></a>필요 메모리</h2><ul>
+<li>약 300GB RAM이 필요.</li>
+<li>개인용 LB에서는 약 60GB RAM만으로도 0.4073을 얻을 수 있음을 확인.</li>
+<li>또한 메모리가 충분하지 않고 높은 점수를 얻고 싶다면 xgb.train의 xgb_model을 사용하여 연속 훈련을 시도.</li>
+</ul>
+<h2 id="데이터-구조"><a href="#데이터-구조" class="headerlink" title="데이터 구조"></a>데이터 구조</h2><p><img src="/images/Ecommerce_Reorder_Pred/Untitled.png" alt=" "></p>
+<h2 id="주요-approach"><a href="#주요-approach" class="headerlink" title="주요 approach"></a>주요 approach</h2><ul>
+<li><p>두 가지 모델: 재주문 예측 및 재주문 없음 예측</p>
+</li>
+<li><p>재주문 모델의 키는 user_id와 product_id</p>
+</li>
+<li><p>없음 모델의 키는 user_id</p>
+</li>
+<li><p>더 나은 예측을 위해 더 많은 훈련 데이터를 사용해야 한다고 생각했습니다.</p>
+</li>
+<li><p>prior 데이터를 훈련 데이터로로 사용하기로 결정</p>
+</li>
+<li><p>튜닝 결과, 최적의 윈도우 수는 3개</p>
+</li>
+<li><p>재주문 예측</p>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%201.png" alt=" "></p>
+</li>
+<li><p>재주문 없음 예측</p>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%202.png" alt=" "></p>
+<h2 id="모델-구조"><a href="#모델-구조" class="headerlink" title="모델 구조"></a>모델 구조</h2><p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%203.png" alt=" "></p>
+</li>
+</ul>
+<h2 id="Feature-Engineering"><a href="#Feature-Engineering" class="headerlink" title="Feature Engineering"></a>Feature Engineering</h2><ol>
+<li>User: what this user like</li>
+<li>Item: what this item like</li>
+<li>User x Item: How do user feel about the item</li>
+<li>Datetime: What this day and hour like</li>
+</ol>
+<p>*For None model, I can’t user above features except user and datetime, so I convert those to stats(min, mean, max, sum, std…)</p>
+<h2 id="Feature-Importance-for-reorder"><a href="#Feature-Importance-for-reorder" class="headerlink" title="Feature Importance for reorder"></a>Feature Importance for reorder</h2><p><img src="/images/Ecommerce_Reorder_Pred/Untitled%204.png" alt=" "></p>
+<h2 id="Feature-Importance-for-None"><a href="#Feature-Importance-for-None" class="headerlink" title="Feature Importance for None"></a>Feature Importance for None</h2><p><img src="/images/Ecommerce_Reorder_Pred/Untitled%205.png" alt=" "></p>
+<h2 id="Importance-Findings-for-reorder"><a href="#Importance-Findings-for-reorder" class="headerlink" title="Importance Findings for reorder"></a>Importance Findings for reorder</h2><ol>
+<li>상식적으로 과거에 여러 번 구매한 품목은 재주문될 확률이 높다는 것을 알 수 있습니다. <ul>
+<li><p>하지만 재주문되지 않는 품목에 대한 패턴이 있을 수 있습니다 → 이 패턴을 파악하여 사용자가 언제 상품을 재주문하지 않는지 파악할 수 있습니다.</p>
+</li>
+<li><p>user_id : 54035</p>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%206.png" alt=" "></p>
+</li>
+<li><p>이 유저는 콜라를 항상 재주문하였다.</p>
+</li>
+<li><p>그러나 8번 주문을 보면 유저는 재주문 하지 않았다 그 이유는 fridge-pack-cola를 대신 샀기 때문.</p>
+</li>
+<li><p>이러한 행동 유형을 잡기 위해서 피처를 만들었다.</p>
+</li>
+</ul>
+</li>
+<li>days_last_order_max는 days_since_last_order_this_item과 useritem_order_days_max를 뺀 것. <ul>
+<li><p>days_since_last_order_this_item는 유저와 아이템 사이의 피처이다. → 이는 마지막 오더에서 얼마나 많은 일수가 지나갔는지에 대한 것</p>
+</li>
+<li><p>useritem_order_days_max 는 유저와 아이템 사이의 피처이다 → 이는 주문의 최대 주문 기간(일)을 의미한다.</p>
+</li>
+<li><p>index 0을 보면, 이는 유저가 주문을 14일 전에 샀고 주문 최대 기간이 30일인걸 알수 있다.</p>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%207.png" alt=" "></p>
+</li>
+<li><p>이 피처는 유저가 그 아이템을 사는것에 싫증을 느끼는지 아닌지에 대한 것</p>
+</li>
+</ul>
+</li>
+<li>이미 우리는 야채보다 과일의 재주문율이 더 많은걸 알고 있다. <ul>
+<li><p>얼마나 더 자주인지 알아보자</p>
+</li>
+<li><p>item_10to1_ratio 피처를 만듦: 주문된 경우와 주문되지 않은 경우의 재주문 비율로 정의</p>
+</li>
+<li><p>유저 A가 item A를 order_number 1과 4를 샀다. 유저B는 item_A를 order_number 1과 3을 샀다.</p>
+<ul>
+<li>item_10to1_ratio는 0.5 : 유저 a가 먼저 1,4를 사고 유저 b가 1,3을 샀는데 산 1,3 중에 재주문 된 order_number가 1이어서 2개 중에 재주문율 1개 그래서 ratio는 0.5</li>
+</ul>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%208.png" alt=" "></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Importance-Findings-for-reorder-1"><a href="#Importance-Findings-for-reorder-1" class="headerlink" title="Importance Findings for reorder"></a>Importance Findings for reorder</h2><ol>
+<li>useritem_sum_pos_cart(사용자 A, 아이템 B)는 사용자 A의 카트에서 아이템 B가 속하는 평균 위치입니다.<ul>
+<li>useritem_sum_pos_cart-mean(사용자 A)은 모든 항목에 대한 위 기능의 평균입니다.</li>
+<li>따라서 이 feature는 기본적으로 사용자의 카트에서 아이템의 평균 위치를 캡처하며, <strong>한 번에 많은 아이템을 구매하지 않는 사용자는 ‘재주문이 아님’일 가능성이 더 높다는 것</strong>을 알 수 있습니다.</li>
+</ul>
+</li>
+<li>total_buy는 total order의 숫자<ul>
+<li>만약 유저a가 item A를 과거에 3번 샀다면, total_buy는 3이 됨</li>
+<li>그래서 total_buy_max는 유저당 주문의 최대값</li>
+<li>우리는 이를 통해 유저가 재주문할지 안할지를 예측</li>
+</ul>
+</li>
+<li>t-1_is_None(User A)는 binary feature: 유저의 전 주문이 재주문인지 아닌지를 알려줌<ul>
+<li>만약 이 전주문이 ‘재주문하지 않음’이라면, 다음 주문은 재주문하지 않을 가능성이 30%가 있는것. &#x2F;</li>
+</ul>
+</li>
+</ol>
+<h2 id="F1-maximization"><a href="#F1-maximization" class="headerlink" title="F1 maximization"></a>F1 maximization</h2><ul>
+<li><p>F1 최대화에 관해서는 Faron이 커널을 발표하기 전까지는 그 논문을 읽지 않았습니다. 하지만 저는 F1 최대화 덕분에 높은 점수를 받았습니다. 설명해드리겠습니다. F1을 최대화하기 위해 저는 예측된 확률에 따라 y_true를 생성합니다. 그리고 더 높은 확률에서 F1을 확인합니다. 예를 들어 {A: 0.3, B: 0.5, C: 0.4}와 같이 항목과 확률이 정렬되어 있다고 가정해 보겠습니다. 그런 다음 y_true를 여러 번 생성합니다. 제 경우에는 9999번 생성했습니다. 이제 [[A,B],[B],[B,C],[C],[B],[None]…..]와 같이 많은 y_true가 생겼습니다. 위에서 언급했듯이 다음으로 할 일은 [B], [B,C], [B,C,A]에서 F1을 확인하는 것입니다. 그런 다음 F1 피크 아웃을 추정하고 계산을 중지하고 다음 순서로 넘어갈 수 있습니다. 이 방법에서는 [A],[A,B],[A,B,C],[B]…와 같은 모든 패턴을 확인할 필요가 없다는 것을 알 수 있습니다. “더 멀리 가기 위한 팁”이라는 제 코멘트에서 이 방법을 알아낸 분도 있을 것 같습니다. 그러나 이 방법은 시간이 많이 걸리고 시드에 따라 달라집니다. 그래서 저는 결국 Faron의 커널을 사용했습니다. 다행히도 Faron의 커널을 사용해서 거의 동일한 결과를 얻었습니다. py_model&#x2F;pyx_get_best_items.pyx를 참고하세요.</p>
+</li>
+<li><p>모델 평가 지표인 F1 score: 단일 메트릭에서 정확도와 리콜을 모두 캡처하는 방법</p>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%209.png" alt=" "></p>
+</li>
+<li><p>그래서 우리는 재주문 확률을 이진 형태로 바꿔야 함.</p>
+</li>
+<li><p>하지만 이 변환을 수행하려면 임계값을 알아야 함. 처음에는 그리드 검색을 사용하여 0.2라는 보편적인 임계값을 찾았지만 Kaggle 토론 게시판에서 주문에 따라 임계값이 달라야 한다는 의견을 봄</p>
+</li>
+<li><p>왜그래야 하는지에 대해서 밑의 예시를 살펴 보자</p>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%2010.png" alt=" "></p>
+<ul>
+<li>첫 번째 예에서 임계값은 0.9에서 0.3 사이입니다.</li>
+<li>두 번째 예에서는 임계값이 0.2보다 낮습니다.</li>
+<li>앞서 설명했듯이 각 주문에는 각각의 임계값이 있어야 합니다.</li>
+<li>하지만 위의 계산을 사용하면 모든 확률 패턴을 먼저 준비해야 합니다.</li>
+<li>따라서 다른 계산을 생각해 내야했습니다.</li>
+<li>모델에서 품목 A가 0.9의 확률로 재주문되고 품목 B가 0.3의 확률로 재주문될 것으로 예측한다고 가정해 보겠습니다.</li>
+<li>그런 다음 이 확률을 사용하여 9,999개의 대상 레이블(A와 B가 재주문될지 여부)을 시뮬레이션합니다.</li>
+<li>예를 들어 시뮬레이션된 레이블은 다음과 같이 보일 수 있습니다. 그런 다음 확률이 가장 높은 항목부터 시작하여 F1 점수가 정점에 달했다가 감소할 때까지 항목(예: [A], [A, B], [A, B, C] 등)을 추가하여 각 레이블 세트에 대한 예상 F1 점수를 계산합니다.</li>
+<li>A, B, AB…와 같은 모든 패턴을 계산할 필요는 없습니다.</li>
+<li>항목B를 선택해야 한다면 항목A도 선택해야 하기 때문입니다.</li>
+</ul>
+<p>  <img src="/images/Ecommerce_Reorder_Pred/Untitled%2011.png" alt=" "></p>
+</li>
+</ul>
+<p><img src="/images/Ecommerce_Reorder_Pred/Untitled%2012.png" alt=" "></p>
+<ul>
+<li>‘재주문 없음’(None)에 대해 생각하는 한 가지 방법은 (1 - 항목 A) * (1 - 항목 B) * …의 확률로 생각하는 것입니다.</li>
+<li>하지만 또 다른 방법은 None을 특수한 경우로 예측하는 것입니다.</li>
+<li>None 모델을 사용하고 None을 다른 항목으로 취급하면 F1 점수를 0.400에서 0.407로 높일 수 있습니다.</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2023/04/06/Ecommerce_Reorder_Pred/" data-id="clgw0znb700114du61v6gfr9p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Ecommerce Reorder Prediction",
+        "image": "https://jmj3047.github.io/images/Ecommerce_Reorder_Pred/Untitled.png",
+        "keywords": "ML Analysis Kaggle",
+        "genre": "Data Platform/Base GCP",
+        "datePublished": "2023-04-06",
+        "dateCreated": "2023-04-06",
+        "dateModified": "2023-04-06",
+        "url": "https://jmj3047.github.io/2023/04/06/Ecommerce_Reorder_Pred/",
+        "description": "개요
+유저들의 재주문 여부 예측하기
+instacart kaggle: https://www.kaggle.com/competitions/instacart-market-basket-analysis/leaderboard
+2위 한 모델 github: https://github.com/KazukiOnodera/Instacart
+
+필요 메모리
+약 300GB RAM이 필",
+        "wordCount": 853
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/04/17/SER_Hi_KIA/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Hi,KIA A Speech Emotion Recognition Dataset for Wake-Up Words
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/04/04/ML_Part3/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Unsupervised Learning, Recommenders, Reinforcement Learning</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

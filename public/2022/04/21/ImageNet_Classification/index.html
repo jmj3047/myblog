@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>ImageNet Classification with Deep Convolutional Neural Networks | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Deep/Machine Learning Paper Study,Convolutional Neural Networks,Image Classification" />
+    
+    <meta name="description" content="Journal&#x2F;Conference: NIPSYear(published year): 2012Author: Alex Krizhevsky, Ilya Sutskever, Geoffrey E. HintonSubject: AlexNet, Computer Vision ImageNet Classification with Deep Convolutional Neur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ImageNet Classification with Deep Convolutional Neural Networks">
+<meta property="og:url" content="https://jmj3047.github.io/2022/04/21/ImageNet_Classification/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="Journal&#x2F;Conference: NIPSYear(published year): 2012Author: Alex Krizhevsky, Ilya Sutskever, Geoffrey E. HintonSubject: AlexNet, Computer Vision ImageNet Classification with Deep Convolutional Neur">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_4.35.26_PM.png">
+<meta property="article:published_time" content="2022-04-20T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-15T08:04:25.032Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Deep&#x2F;Machine Learning Paper Study">
+<meta property="article:tag" content="Convolutional Neural Networks">
+<meta property="article:tag" content="Image Classification">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_4.35.26_PM.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-ImageNet_Classification" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ImageNet Classification with Deep Convolutional Neural Networks
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/04/21/ImageNet_Classification/" class="article-date">
+       <time datetime="2022-04-20T15:00:00.000Z" itemprop="datePublished">2022-04-21</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/04/21/ImageNet_Classification/" class="article-date">
+     <time datetime="2022-10-15T08:04:25.032Z" itemprop="dateModified">2022-10-15</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Convolutional-Neural-Networks/" rel="tag">Convolutional Neural Networks</a>, <a class="tag-link-link" href="/tags/Deep-Machine-Learning-Paper-Study/" rel="tag">Deep/Machine Learning Paper Study</a>, <a class="tag-link-link" href="/tags/Image-Classification/" rel="tag">Image Classification</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>Journal&#x2F;Conference: NIPS<br>Year(published year): 2012<br>Author: Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton<br>Subject: AlexNet, Computer Vision</p>
+<h1 id="ImageNet-Classification-with-Deep-Convolutional-Neural-Networks"><a href="#ImageNet-Classification-with-Deep-Convolutional-Neural-Networks" class="headerlink" title="ImageNet Classification with Deep Convolutional Neural Networks"></a>ImageNet Classification with Deep Convolutional Neural Networks</h1><blockquote>
+<p>Summary</p>
+</blockquote>
+<ul>
+<li>기존 머신러닝 모델을 제치고 딥러닝 모델이 더 우수한 성능을 보일 수 있음을 증명한 최초의 모델</li>
+<li>ReLU 활성화 함수와 Dropout 의 유용함, Data Augmentation 기법을 제시</li>
+<li>2012년 ImageNet 대회 ILSVRC 에서 우승을 차지한 모델</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>AlexNet 이전의 객체 인식 모델은 대부분 고전적인 ML 모델로, 수만개 정도의 작은 데이터셋(NORB, Caltech-101&#x2F;256, CIFAR-10&#x2F;100)을 사용합니다.</p>
+<p>그러나 이후, 수십만 개의 완전 분할 된 이미지로 구성된 LabelMe 와 1500 만 개 이상의 고해상도 이미지로 구성된 ImageNet 이 등장합니다.</p>
+<p>이런 데이터셋을 처리하기 위해서는 높은 학습 역량을 가진 모델이 필요합니다. 또한, 학습과정에 사용되지 않은 수많은 데이터에 대해서도 추론을 할 수 있는 방대한 사전 지식을 담아내야합니다.</p>
+<p>이에 논문은 컨볼루션 신경망(CNN) 모델을 기반으로 하는 AlexNet 을 제시합니다.</p>
+<p>CNN 은 FFNN(feed-forward NN)에 비해 더 적은 매개 변수를 가지므로 훈련이 용이합니다. 이를 통해 ILSVRC-2010, ILSVRC-2012 대회에 사용된 ImageNet subset에서 최고의 성능을 달성했습니다.</p>
+<p>또한, 네트워크 성능 향상과 훈련시간 감소를 위한 여러가지 방법을 제시합니다.</p>
+<p>ALexNet 은 2개의 GTX 580 3GB GPU에서 5-6 일동안 훈련을 수행하였습니다.</p>
+<h2 id="The-Dataset"><a href="#The-Dataset" class="headerlink" title="The Dataset"></a>The Dataset</h2><p>지금은 대부분의 딥러닝 모델에서 기본적으로 사용하는 ImageNet 에 대한 소개입니다. </p>
+<ul>
+<li>22,000 개 범주로 구분되는 1,500 만개 고해상도 이미지</li>
+<li>웹에서 수집한 이미지를 Amazon 의 Mechanical Turk 크라우드 소싱 도구로 라벨링</li>
+</ul>
+<p>2010 년부터 Pascal Visual Object Challenge의 일환으로 ImageNet 대규모 시각 인식 도전 (ILSVRC)이라는 연례 대회가 열렸습니다.</p>
+<p>ILSVRC는 1000 개의 카테고리 각각에 약 1000 개의 이미지가있는 ImageNet의 하위 집합을 사용합니다. 이는 약 120 만 개의 훈련 이미지, 50,000 개의 검증 이미지, 150,000 개의 테스트 이미지로 구성됩니다.</p>
+<p>대부분의 실험 결과는 테스트 이미지가 공개된 ILSVRC-2010 를 사용합니다. 별도로, AlexNet 이 참가했던 ILSVRC-2012 실험 결과 또한 제시합니다.</p>
+<p>ImageNet 데이터셋 성능 지표로는 Top-1&#x2F;Top-5 Accuracy 를 사용합니다.</p>
+<p>가변 해상도로 구성된 ImageNet 을 처리하기 위해 256 × 256의 고정 해상도로 다운 샘플링을 수행합니다. 직사각형 이미지는 scaling 후 중앙 256x256 패치를 잘라냅니다. 이외의 전처리는 수행하지 않습니다.</p>
+<h2 id="The-Architecture"><a href="#The-Architecture" class="headerlink" title="The Architecture"></a>The Architecture</h2><h3 id="ReLU-Nonlinearity"><a href="#ReLU-Nonlinearity" class="headerlink" title="ReLU Nonlinearity"></a>ReLU Nonlinearity</h3><p>논문 발표 당시 일반적으로 사용된 perceptron 의 activation 함수는 tanh 혹은 sigmoid 입니다. 이들은 출력값이 무한대로 발산하지 않고 특정한 영역으로 제한되는 saturating 함수입니다. 반면 ReLU(Recitified Linear Unit) activation 은 출력값이 0 에서 무한대까지 발산할 수 있는 non-saturating 함수입니다.</p>
+<p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_4.35.26_PM.png"></p>
+<p>논문은 4 layer CNN 으로 CIFAR-10 데이터셋을 사용하여 학습하였을 때, ReLU 가 6배 빠른 학습 속도를 보여주었음을 제시합니다. 이를 통해, non-saturating 한 함수가 gradient 를 더 빠르게 update 할 수 있음을 제시합니다.</p>
+<h3 id="Training-on-Multiple-GPUs"><a href="#Training-on-Multiple-GPUs" class="headerlink" title="Training on Multiple GPUs"></a>Training on Multiple GPUs</h3><p>GPU 메모리 제한과 느린 학습 속도를 개선할 수 있는 병렬학습 방법을 제시합니다.</p>
+<p>기본 골자는 네트워크를 분할(커널, 뉴런 등)하여 서로 다른 GPU 에서 병렬적으로 연산을 수행하는 것입니다. 이 때, 메모리의 한계 및 병목 현상을 고려하여, 특정한 레이어에서만 연산 결과를 교환합니다.</p>
+<p>논문은 이를 통해 half-size kernel 을 사용한 단일 GPU 모델보다 Top-1&#x2F;Top-5 accuracy 를 1.7% &#x2F; 1.2% 감소시켰음을 제시합니다.</p>
+<h3 id="Local-Response-Normalization"><a href="#Local-Response-Normalization" class="headerlink" title="Local Response Normalization"></a>Local Response Normalization</h3><p>ReLU 활성 함수는 입력을 normalization 하지 않아도 saturation 이 발생하지 않습니다. 그러나 positive value 를 그대로 출력하는 ReLU 함수의 특성으로 인해 CNN 의 일부 구역에서 강한 신호가 생성될 수 있습니다. 이에 논문은 아래와 같은 local response normalization 방법을 제시합니다.</p>
+<p><img src="https://blog.kakaocdn.net/dn/bLcO2Z/btqJDGwDxiv/4exuD72xpZKpemqmpqULP0/img.png"></p>
+<p>요약하면, CNN 에서 인접한 필터를 사용하여 normalization 을 진행한 것으로, 논문에서는 Top-1&#x2F;Top-5 Accuracy 를 1.4%, 1.2% 개선할 수 있었음을 제시합니다. 또한, CIFAR-10 으로 학습을 수행하였을 때도 2% 의 오차율 감소를 보였음을 제시합니다.<br>(논문 당시에는 Batch Normalization 이 소개되지 않았습니다.)</p>
+<h3 id="Overlapping-Pooling"><a href="#Overlapping-Pooling" class="headerlink" title="Overlapping Pooling"></a>Overlapping Pooling</h3><p>CNN의 풀링 레이어는 같은 채널에 존재하는 인접한 뉴런의 출력을 요약해줍니다. 논문 이전에는 pooling 을 수행하는 영역이 겹치지 않도록 구성하여 사용하는 것이 일반적이었습니다.</p>
+<p>논문은 풀링을 수행하는 영역이 이동하는 거리를 조절하여 풀링 영역이 겹치도록 한 결과,  Top-1&#x2F;Top-5 Accuracy 를 0.4 %&#x2F;0.3 % 감소했다고 합니다. 또한 이를 통해 모델의 과적합 가능성을 줄일 수 있었다고 합니다.</p>
+<h3 id="Overall-Architecture"><a href="#Overall-Architecture" class="headerlink" title="Overall Architecture"></a>Overall Architecture</h3><p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_5.04.26_PM.png"></p>
+<p><img src="/images/ImageNet_Classification/Untitled.png"></p>
+<p>AlexNet 의 전체 구조도 입니다. 2GPU 로 병렬학습을 수행하기 위해 두 갈래로 나뉘어 표현되어 있습니다. 총 5개의 convolution layer 와 3개의 max pooling layer, 3개의 dense layer 로 구성되어 있으며, 필요한 경우에만 GPU 연산 결과를 공유합니다. 또한 convolution&#x2F;dense layer 의 활성함수는 ReLU 를 사용합니다.</p>
+<ul>
+<li>Input : 224 x 224 x 3 &#x3D; 150,528</li>
+<li>Convolution 1 : 11x11 kernel, 4 stride : 54x54x96</li>
+<li>Max pooling 1 : 3x3 kernel, 2 stride : 26x26x96</li>
+<li>Convolution 2 : 5x5 kernel, 2 padding : 26x26x256</li>
+<li>Max pooling 2 : 3x3 kernel, 2 stride : 12x12x256</li>
+<li>Convolution 3 : 3x3 kernel, 1 padding : 12x12x384</li>
+<li>Convolution 4 : 3x3 kernel, 1 padding : 12x12x384</li>
+<li>Convolution 5 : 3x3 kernel, 1 padding : 12x12x384</li>
+<li>Max pooling 3 : 3x3 kernel, 2 stride : 5x5x256</li>
+<li>Dense 1 : 4096</li>
+<li>Dense 2 : 4096</li>
+<li>Dense 3 : 1000</li>
+</ul>
+<h2 id="Reducing-Overfitting"><a href="#Reducing-Overfitting" class="headerlink" title="Reducing Overfitting"></a>Reducing Overfitting</h2><p>6천만개의 파라미터로 구성된 모델의 과적합을 막기 위해 사용한 방법을 소개합니다.</p>
+<h3 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h3><p>학습 데이터를 인위적으로 변환하여 훈련 데이터를 증가시키는 방법입니다. 변환된 이미지를 저장하지 않고 GPU 학습시에 CPU에서 계산하도록 하여, 추가적인 계산 비용을 소모하지 않았다고 합니다. 주요 방법은 두가지로 요약됩니다.</p>
+<ul>
+<li>256 × 256 이미지에서 224 × 224 패치를 추출하고, 수평 방향으로 뒤짚기<ul>
+<li>기존 데이터 셋의 2048 배 확장 가능</li>
+<li>실제 : 5 개의 224 × 224 패치 (4 개의 코너 패치 및 중앙 패치)와 수평 반사를 수행한 10개의 패치 사용</li>
+</ul>
+</li>
+<li>RGB 채널 강도 조정<ul>
+<li>학습 데이터셋의 픽셀값으로 PCA 를 수행</li>
+<li>PCA eigenvector 에 N(0,0.1) 인 정규분포에 추출한 랜덤값을 곱해 색상을 조정</li>
+<li>Top-1 오차율을 1% 감소할 수 있었음</li>
+</ul>
+</li>
+</ul>
+<h3 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h3><p>Dense Layer 의 Output 에 Dropout rate 0.5 를 사용한 Dropout layer 를 추가합니다. 학습에 필요한 Epoch 를 2배 정도 늘렸으나, 과적합을 성공적으로 방지했음을 제시합니다.</p>
+<h2 id="Details-of-learning"><a href="#Details-of-learning" class="headerlink" title="Details of learning"></a>Details of learning</h2><p>모델 학습의 세부내용입니다.</p>
+<ul>
+<li>Batch size : 128</li>
+<li>SGD (momentum 0.9, weight decay 0.0005)</li>
+</ul>
+<p>weight decay 가 모델을 정규화 할 뿐만 아니라 직접적으로 모델의 학습 오차를 줄였음을 제시합니다. 가중치 업데이트 과정은 아래와 같습니다.</p>
+<p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_5.31.53_PM.png"></p>
+<p>가중치는 평균이 0, 표준 편차가 0.01인 정규 분포를 따르도록 초기화합니다. 2&#x2F;4&#x2F;5 번째 convolution 과 dense layer의 bias 는 1로 초기화하여, 학습을 가속할 수 있었음을 제시합니다.</p>
+<p>학습률은 모든 layer 에 대해서 동일하되, 훈련을 수행하면서 메뉴얼하게 조정합니다. 학습률 0.01 에서 시작하여, 학습이 개선되지 않을 때 학습률을 10으로 나누는 방식으로 수행합니다.</p>
+<h2 id="RESULT"><a href="#RESULT" class="headerlink" title="RESULT"></a>RESULT</h2><p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_5.36.13_PM.png"></p>
+<p>ILSVRC-2010 데이터에 대해서 기존 모델의 결과를 압도적으로 상회하는 결과를 제시하였습니다.</p>
+<p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_5.36.22_PM.png"></p>
+<p>AlexNet 이 직접 참가했던 ILSVRC-2012 에서도 다른 최고 성능의 모델에 비해 압도적인 결과를 보였음을 확인할 수 있습니다. 또한, CNN Layer 갯수를 추가할 때마다 성능이 상승함을 제시합니다.</p>
+<h2 id="Qualitative-Evaluations"><a href="#Qualitative-Evaluations" class="headerlink" title="Qualitative Evaluations"></a>Qualitative Evaluations</h2><p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_5.38.33_PM.png"></p>
+<p>CNN kernel 을 시각화한 그림을 제시하면서, 각 커널이 이미지의 다양한 Feature 를 효과적으로 추출해냈음을 제시합니다.</p>
+<p><img src="/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_5.38.17_PM.png"></p>
+<p>AlexNet 은 중앙을 벗어나는 데이터도 효과적으로 분류해냈습니다. 또한, Top-5 예측이 대부분 유사한 범주인 것으로 보아 합리적인 예측을 수행하고 있음을 제시합니다.</p>
+<p>또한, 자세가 서로 다른 코끼리의 사례와 같이, Pixel 차원에서 완전히 다른 데이터임에도 유사한 범주로 분류할 수 있는 결과를 보여줍니다.</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>“깊은” CNN 이 효과적으로 작동하였음을 제시합니다. Convolution layer 를 제거할 때마다 Top-1 Accuracy 가 2%씩 감소하는 점에 미루어, “깊이”의 중요성을 다시 한번 제시합니다.</p>
+<hr>
+<ul>
+<li>Link: <strong><a target="_blank" rel="noopener" href="https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html">ImageNet Classification with Deep Convolutional Neural Networks</a></strong></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2022/04/21/ImageNet_Classification/" data-id="clgw0znbc002f4du6g2re5l2m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "ImageNet Classification with Deep Convolutional Neural Networks",
+        "image": "https://jmj3047.github.io/images/ImageNet_Classification/Screen_Shot_2021-11-27_at_4.35.26_PM.png",
+        "keywords": "Deep/Machine Learning Paper Study Convolutional Neural Networks Image Classification",
+        "genre": "Paper Computer Vision",
+        "datePublished": "2022-04-21",
+        "dateCreated": "2022-04-21",
+        "dateModified": "2022-10-15",
+        "url": "https://jmj3047.github.io/2022/04/21/ImageNet_Classification/",
+        "description": "Journal&#x2F;Conference: NIPSYear(published year): 2012Author: Alex Krizhevsky, Ilya Sutskever, Geoffrey E. HintonSubject: AlexNet, Computer Vision
+ImageNet Classification with Deep Convolutional Neur",
+        "wordCount": 963
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/04/21/Hexo_Hueman_tutorial/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Hexo Hueman Tutorial
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/04/21/KNN/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">K-Nearest Neighbor</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

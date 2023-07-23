@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>로지스틱 회귀 모델 평가시 나오는 용어들 정리 | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Big Query,ML Analysis" />
+    
+    <meta name="description" content="개요 이전 포스트의 5단계에서 ML 모델을 평가할때 나왔던 지표들에 대한 소개 바이너리 로지스틱 회귀 모델을 사용했을 때 모델의 성능을 평가하는 지표들을 소개  알아야 할 개념True&#x2F;False &amp; Positive&#x2F;Negative   임계값(Threshold) 로지스틱 회귀 값을 이진 카테고리에 매핑하려면 분류 임계값(결정 임계값)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="로지스틱 회귀 모델 평가시 나오는 용어들 정리">
+<meta property="og:url" content="https://jmj3047.github.io/2023/03/06/Logisitic_Eval_words/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="개요 이전 포스트의 5단계에서 ML 모델을 평가할때 나왔던 지표들에 대한 소개 바이너리 로지스틱 회귀 모델을 사용했을 때 모델의 성능을 평가하는 지표들을 소개  알아야 할 개념True&#x2F;False &amp; Positive&#x2F;Negative   임계값(Threshold) 로지스틱 회귀 값을 이진 카테고리에 매핑하려면 분류 임계값(결정 임계값)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/Logisitic_Eval_words/Untitled.png">
+<meta property="article:published_time" content="2023-03-05T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-19T07:03:43.987Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Big Query">
+<meta property="article:tag" content="ML Analysis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/Logisitic_Eval_words/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Platform-Base/GCP/">GCP</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Logisitic_Eval_words" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        로지스틱 회귀 모델 평가시 나오는 용어들 정리
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/03/06/Logisitic_Eval_words/" class="article-date">
+       <time datetime="2023-03-05T15:00:00.000Z" itemprop="datePublished">2023-03-06</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/03/06/Logisitic_Eval_words/" class="article-date">
+     <time datetime="2023-03-19T07:03:43.987Z" itemprop="dateModified">2023-03-19</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Big-Query/" rel="tag">Big Query</a>, <a class="tag-link-link" href="/tags/ML-Analysis/" rel="tag">ML Analysis</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><ul>
+<li><a href="https://jmj3047.github.io/2023/02/28/BQML_Pred/">이전 포스트</a>의 5단계에서 ML 모델을 평가할때 나왔던 지표들에 대한 소개</li>
+<li>바이너리 로지스틱 회귀 모델을 사용했을 때 모델의 성능을 평가하는 지표들을 소개</li>
+</ul>
+<h3 id="알아야-할-개념"><a href="#알아야-할-개념" class="headerlink" title="알아야 할 개념"></a>알아야 할 개념</h3><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>True&#x2F;False &amp; Positive&#x2F;Negative</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p>
+<p><img src="/images/Logisitic_Eval_words/Untitled.png" alt=" "></p>
+<ul>
+<li><strong>임계값(Threshold)</strong><ul>
+<li>로지스틱 회귀 값을 이진 카테고리에 매핑하려면 분류 임계값(결정 임계값)을 정의 해야 함</li>
+<li>일반적으로 0.5로 잡지만, 데이터나 상황에 따라서 달라질수 있으므로 조정해야 하는 값.</li>
+</ul>
+</li>
+<li><strong>정밀도(Precision)</strong> &#x3D; $\frac{TP}{TP+FP}$<ul>
+<li>거짓 양성(FP)이 생성되지 않는 모델의 정밀도는 1.0</li>
+</ul>
+</li>
+<li><strong>재현율(Recall)</strong> &#x3D; $\frac{TP}{TP+FN}$<ul>
+<li>거짓 음성(FN)을 생성하지 않는 모델의 재현율은 1.0</li>
+<li>실제 양성 중 정확히 양성이라고 식별된 사례의 비율</li>
+</ul>
+</li>
+<li><strong>정확도(Accuracy)</strong> &#x3D; $\frac{올바른 예측값}{전체 예측 값}$<ul>
+<li>이진분류에서 정확도 &#x3D; $\frac{TP+TN}{TP+TN+FP+FN}$</li>
+<li>비 공식적으로 모델이 올바르게 예측한 비율</li>
+<li>클래스간 데이터 차이가 있다면 정확하지 않을 가능성이 높음</li>
+</ul>
+</li>
+<li><strong>ROC curve</strong><ul>
+<li>모든 분류 임계값에서 분류 모델의 성능을 보여주는 그래프</li>
+<li>참 양성률(TPR)과 거짓양성률(FPR)을 매개변수로 표시한다.</li>
+<li>분류 임계값을 낮추면 더 많은 항목이 양수로 분류 되므로 거짓양성과 참 양성이 모두 증가한다.</li>
+<li>ROC 곡선의 포인트를 계사나기 위해 분류 입곗값이 다른 여러차례의 로지스틱 회귀모델을 평가했지만 이는 비효율적 → 이러한 정보제공을 할수 있는 효율적인 정렬기반 알고리즘인 AUC를 사용하는 이유</li>
+</ul>
+</li>
+<li><strong>AUC</strong>: ROC 곡선 아래의 영역<ul>
+<li>ROC 곡선의 적분값</li>
+<li>0부터 1사의 값</li>
+<li>절댓값이 아닌 예측의 순위를 측정하므로 <strong>규모 불변</strong></li>
+<li>선택한 분유 임곗값과 관계 없이 모델의 예측 품질을 측정하기에 <strong>분류 기준 불변</strong></li>
+<li>주의 사항<ul>
+<li>확장 불변이 항상 바람직한것은 아님 → 잘 보정된 확률 출력이 필요한 경우가 있는데 AUC는 이를 알려주지 않음</li>
+<li>분류 임계값 불변이 항상 바람직한 것은 아님 → 거짓음성 대비 거짓양성의 비용이 큰 경우 한 자기 유형의 분류 오류를 최소화 하는 것이 중요함. 예를 들어 스팸 감지를 실행할때 거짓 양성을 최소화하는 것이 중요할 수 있음.(이렇게 하면 거짓 음성이 크게 증가하더라도 상관 없음) AUC는 이 유형의 최적화에 유용한 측정항목이 아님.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="GCP-공식-설명"><a href="#GCP-공식-설명" class="headerlink" title="GCP 공식 설명"></a>GCP 공식 설명</h2><p><img src="/images/Logisitic_Eval_words/Untitled%201.png" alt=" "></p>
+<h3 id="Aggregate-Metrics"><a href="#Aggregate-Metrics" class="headerlink" title="Aggregate Metrics"></a><strong><strong>Aggregate Metrics</strong></strong></h3><ul>
+<li>For binary classification models, all metrics reflect the values computed when threshold is set to 0.5.<ul>
+<li>이진 분류 모델의 경우 모든 지표는 임계값을 0.5로 설정했을 때 계산된 값을 반영합니다.</li>
+</ul>
+</li>
+<li><strong>Threshold :</strong> For binary classification models, this is the positive class threshold.<ul>
+<li>이진 분류 모델의 경우 이는 양성 클래스의 임계값을 뜻합니다.</li>
+</ul>
+</li>
+<li><strong>Precision :</strong> Fraction of predicted positives that were actual positives.<ul>
+<li>예측된 양성 반응 중 실제 양성 반응으로 판명된 비율입니다. → 학습 모델이 판단한 양성 비율</li>
+</ul>
+</li>
+<li><strong>Recall :</strong> Fraction of actual positives that were predicted positives.<ul>
+<li>예측된 양성 반응 중 실제 양성 반응의 비율입니다. → 실제 양성이라고 나온 비율</li>
+</ul>
+</li>
+<li><strong>Accuracy :</strong> Fraction of predictions given the correct label.<ul>
+<li>올바른 레이블이 주어진 예측의 비율입니다. → precision과 recall 을 비교했을 때 학습 모델이 맞춘 비율</li>
+</ul>
+</li>
+<li><strong>F1 score :</strong> Harmonic mean of precision and recall.<ul>
+<li>정확도 및 회수율의 조화 평균입니다.</li>
+<li>Precision 과 Recall은 서로 Trade-off 관계를 가지면서 접근하는 방식도 Precision은 모델의 예측, Recall은 정답 데이터 기준이므로 서로 상이 합니다. </li>
+<li>하지만 두 지표 모두 모델의 성능을 확인하는 데 중요하므로 둘 다 사용되어야 합니다. 따라서 두 지표를 평균값으로 통해 하나의 값으로 나타내는 방법으로 F1 score를 사용합니다. </li>
+<li>극단적으로 Precision과 Recall 중에 한쪽이 1에 가깝고 한쪽이 0에 가까운 경우 산술 평균과 같이 0.5가 아니라 0에 가깝도록 만들어 줍니다. 따라서 <strong>F1 score를 높이려면 Precision, Recall이 균일한 값이 필요</strong> 하기 때문에 두 지표 성능을 모두 높일 수 있도록 해야 합니다. </li>
+<li>$F_1 &#x3D; 2*\frac{precision X recall}{precision + recall}$</li>
+</ul>
+</li>
+<li><strong>Log loss :</strong> A measure for model performance between 0 (perfect) and 1. The greater the log-loss, the greater the predicted probability diverges from the actual label.<ul>
+<li>0(완벽)에서 1 사이의 모델 성능 측정값입니다. 로그 손실이 클수록 예측 확률이 실제 레이블과 차이가 커집니다.</li>
+</ul>
+</li>
+<li><strong>ROC AUC :</strong> Area under the receiver operating characteristic curve.</li>
+</ul>
+<h3 id="Score-threshold"><a href="#Score-threshold" class="headerlink" title="Score threshold"></a><strong>Score threshold</strong></h3><ul>
+<li><strong>Positive class threshold:</strong> Predictions above the threshold are classified as positive.<ul>
+<li>임계값을 초과하는 예측은 양수로 분류됩니다.</li>
+</ul>
+</li>
+<li><strong>Positive class</strong> &gt;50K</li>
+<li><strong>Negative class</strong> &lt;&#x3D;50K</li>
+<li><strong>Precision :</strong> Fraction of predicted positives that were actual positives.<ul>
+<li>예측된 양성 반응 중 실제 양성 반응으로 판명된 비율입니다.</li>
+</ul>
+</li>
+<li><strong>Recall:</strong> Fraction of actual positives that were predicted positives.<ul>
+<li>예측된 양성 반응 중 실제 양성 반응의 비율입니다.</li>
+</ul>
+</li>
+<li><strong>Accuracy :</strong> Fraction of actual positives that were predicted positives.<ul>
+<li>올바른 레이블이 주어진 예측의 비율입니다.</li>
+</ul>
+</li>
+<li><strong>F1 score :</strong> Harmonic mean of precision and recall.<ul>
+<li>정밀도 및 회수율의 조화 평균입니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/Logisitic_Eval_words/Untitled%202.png" alt=" "></p>
+<p><strong><strong>Precision-recall by threshold:</strong></strong> Shows how your model performs on the top-scored label along the full range of confidence threshold values. A higher confidence threshold produces fewer false positives, which increases precision. A lower confidence threshold produces fewer false negatives, which increases recall.</p>
+<ul>
+<li>전체 신뢰도 임계값 범위에서 가장 높은 점수를 받은 레이블에 대한 모델의 성능을 표시합니다.</li>
+<li>신뢰도 임계값이 높을수록 false positive 값이 줄어들어 정밀도가 높아집니다.</li>
+<li>신뢰도 임계값이 낮을수록 false negative 값이 줄어들어 회수율이 높아집니다.</li>
+</ul>
+<p><strong><strong>Precision-recall curve:</strong></strong> Shows the trade-off between precision and recall at different confidence thresholds. A lower threshold results in higher recall but typically lower precision, while a higher threshold results in lower recall but typically with higher precision.</p>
+<ul>
+<li>서로 다른 신뢰 임계값에서 정밀도와 리콜 간의 균형을 표시합니다.</li>
+<li>임계값이 낮을수록 회수율은 높지만 일반적으로 정밀도는 낮으며</li>
+<li>임계값이 높을수록 회수율은 낮아지지만 일반적으로 정밀도가 높습니다.</li>
+</ul>
+<p><strong><strong>ROC curve:</strong></strong> The receiver operating characteristic (ROC) curve shows the trade-off between true positive rate and false positive rate. A lower threshold results in a higher true positive rate (and a higher false positive rate), while a higher threshold results in a lower true positive rate (and a lower false positive rate)</p>
+<ul>
+<li>receiver operating characteristic(ROC) 곡선은 true positive의 비율과 false positive의 비율 사이의 균형을 보여줍니다.</li>
+<li>임계값이 낮을수록 true positive의 비율(및 false positive의 비율)이 높아지고, 임계값이 높을수록 true positive의 비율(및 false positive의 비율)이 낮아집니다</li>
+</ul>
+<p><strong>Confusion matrix</strong></p>
+<p>This table shows how often the model classified each label correctly (in blue), and which labels were most often confused for that label (in gray).</p>
+<ul>
+<li>이 표는 모델이 각 레이블을 올바르게 분류한 빈도(파란색)와 해당 레이블과 가장 자주 혼동되는 레이블(회색)을 보여줍니다.</li>
+</ul>
+<hr>
+<ul>
+<li>Reference<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall?hl=ko">https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall?hl=ko</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/machine-learning/crash-course/classification/true-false-positive-negative?hl=ko">https://developers.google.com/machine-learning/crash-course/classification/true-false-positive-negative?hl=ko</a></li>
+<li><a target="_blank" rel="noopener" href="https://gaussian37.github.io/ml-concept-ml-evaluation/#f1-score-1">https://gaussian37.github.io/ml-concept-ml-evaluation/#f1-score-1</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2023/03/06/Logisitic_Eval_words/" data-id="clgw0znbe00314du69vou07z5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "로지스틱 회귀 모델 평가시 나오는 용어들 정리",
+        "image": "https://jmj3047.github.io/images/Logisitic_Eval_words/Untitled.png",
+        "keywords": "Big Query ML Analysis",
+        "genre": "Data Platform/Base GCP",
+        "datePublished": "2023-03-06",
+        "dateCreated": "2023-03-06",
+        "dateModified": "2023-03-19",
+        "url": "https://jmj3047.github.io/2023/03/06/Logisitic_Eval_words/",
+        "description": "개요
+이전 포스트의 5단계에서 ML 모델을 평가할때 나왔던 지표들에 대한 소개
+바이너리 로지스틱 회귀 모델을 사용했을 때 모델의 성능을 평가하는 지표들을 소개
+
+알아야 할 개념True&#x2F;False &amp; Positive&#x2F;Negative
+
+
+임계값(Threshold)
+로지스틱 회귀 값을 이진 카테고리에 매핑하려면 분류 임계값(결정 임계값)",
+        "wordCount": 843
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/03/08/Game_Modeling/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            BQML을 이용한 게임유저 경향 모델링
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/03/03/Kaggle_GCP/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Python으로 kaggle 데이터 GCP에 적재</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

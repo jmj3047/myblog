@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Light Gradient Boosting Machine | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Deep/Machine Learning Paper Study" />
+    
+    <meta name="description" content="1. DefinitionEnsemble→ 여러 예측기를 수집해서 단일 예측기 보다 더 좋은 예측기를 만드는 것.   일반적으로 앙상블 기법을 사용하면 , 예측기 하나로 훈련하였을때 보다 , 편향은 비슷하지만 분산이 줄어든다고 알려져 있다.   배깅(bagging) 원데이터 집합으로부터 크기가 같은 표본을 여러 번 단순임의 복원추출하여 각 표본(붓스트랩 표본">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Light Gradient Boosting Machine">
+<meta property="og:url" content="https://jmj3047.github.io/2022/05/10/LGBM/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="1. DefinitionEnsemble→ 여러 예측기를 수집해서 단일 예측기 보다 더 좋은 예측기를 만드는 것.   일반적으로 앙상블 기법을 사용하면 , 예측기 하나로 훈련하였을때 보다 , 편향은 비슷하지만 분산이 줄어든다고 알려져 있다.   배깅(bagging) 원데이터 집합으로부터 크기가 같은 표본을 여러 번 단순임의 복원추출하여 각 표본(붓스트랩 표본">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/LGBM/Untitled.png">
+<meta property="article:published_time" content="2022-05-09T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-23T01:34:43.368Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Deep&#x2F;Machine Learning Paper Study">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/LGBM/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Analysis/Model/">Model</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-LGBM" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Light Gradient Boosting Machine
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/05/10/LGBM/" class="article-date">
+       <time datetime="2022-05-09T15:00:00.000Z" itemprop="datePublished">2022-05-10</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/05/10/LGBM/" class="article-date">
+     <time datetime="2023-02-23T01:34:43.368Z" itemprop="dateModified">2023-02-23</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Deep-Machine-Learning-Paper-Study/" rel="tag">Deep/Machine Learning Paper Study</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h1 id="1-Definition"><a href="#1-Definition" class="headerlink" title="1. Definition"></a>1. Definition</h1><h2 id="Ensemble"><a href="#Ensemble" class="headerlink" title="Ensemble"></a>Ensemble</h2><p>→ 여러 예측기를 수집해서 단일 예측기 보다 더 좋은 예측기를 만드는 것. </p>
+<ul>
+<li>일반적으로 앙상블 기법을 사용하면 , 예측기 하나로 훈련하였을때 보다 , 편향은 비슷하지만 분산이 줄어든다고 알려져 있다.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled.png"></p>
+<h2 id="배깅-bagging"><a href="#배깅-bagging" class="headerlink" title="배깅(bagging)"></a>배깅(bagging)</h2><ul>
+<li>원데이터 집합으로부터 크기가 같은 표본을 여러 번 단순임의 복원추출하여 각 표본(붓스트랩 표본) 에 대해 분류기를 생성한 후 그 결과를 앙상블하는 방법</li>
+<li>반복추출 방법을 사용하기 때문에 같은 데이터가 한 표본에 여러 번 추출될 수도 있고, 어떤 데이터는 추출되지 않을수도 있다.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%201.png"></p>
+<h2 id="부스팅-boosting"><a href="#부스팅-boosting" class="headerlink" title="부스팅(boosting)"></a>부스팅(boosting)</h2><ul>
+<li>배깅의 과정과 유사하나 붓스트랩 표본을 구성하는 sampling 과정에서 각 자료에 동일한 확율을 부여하는 것이 아니라, 분류가 잘못된 데이터에- 더 큰 가중을 주어 표본을 추출한다.</li>
+</ul>
+<h2 id="Bagging-과-Boosting-의-차이"><a href="#Bagging-과-Boosting-의-차이" class="headerlink" title="Bagging 과 Boosting 의 차이"></a>Bagging 과 Boosting 의 차이</h2><ul>
+<li>Bagging 은 독립된 예측기를 통해 더 나은 예측기를 얻는다</li>
+<li>Boosting 은 앞의 예측기를 보완해 나가면서 더 나은 예측기를 얻는다</li>
+</ul>
+<h2 id="랜덤포레스트-random-forest"><a href="#랜덤포레스트-random-forest" class="headerlink" title="랜덤포레스트(random forest)"></a>랜덤포레스트(random forest)</h2><ul>
+<li>배깅에 랜덤 과정을 추가한 방법이다. 각 노드마다 모든 예측변수 안에서 최적의 분할을 선택하는 방법 대신 예측변수들을 임의로 추출하고, 추출된 변수 내에서 최적의 분할을 만들어 나가는 방법을 사용한다.</li>
+</ul>
+<h2 id="부트스트랩-Bootstrap"><a href="#부트스트랩-Bootstrap" class="headerlink" title="부트스트랩(Bootstrap)"></a>부트스트랩(Bootstrap)</h2><ul>
+<li>부트스트랩은 평가를 반복한다는 측면에서 교차검증과 유사하나, 훈련용 자료를 반복 재선정한다는 점에서 차이가 있다.</li>
+<li>즉 부트스트랩은 관측치를 한번 이상 훈련용 자료로 사용하는 복원추출법에 기반한다.</li>
+<li>부트스트랩은 전체 데이터의 양이 크지않은 경우의 모형평가에 가장 적합하다.</li>
+</ul>
+<h1 id="2-GBM"><a href="#2-GBM" class="headerlink" title="2. GBM"></a>2. GBM</h1><ul>
+<li>Gradient Boosting Machine(GBM)은 Ensemble Learning의 일환</li>
+<li>Gradient Boosting&#x3D;Gradient Descent+Boosting</li>
+<li>Gradient Descent<ul>
+<li>첫번째 데이터에서 잘 못 맞춘 데이터들에 가중치를 주어, 두번째 모델 에서는 더 많은양을 만들어 준다.</li>
+<li>또, 두번째 모델에서 잘못 매칭한 데이터들 에게 가중치를 주어서, 세번째 모델을 만들어주는 그러한 방식으로 모델을 반복한다.</li>
+</ul>
+</li>
+<li>Fit an addictive model(ensemble) in a foward stage-wise manner<ul>
+<li>bagging 처럼 한번에 딱 학습을 시키는게 아니고 위에 언급한 것 처럼 하나씩 하나씩 더해가면서 모델을 학습 시켜나가는 모델</li>
+</ul>
+</li>
+</ul>
+<h2 id="Adaptive-boosting"><a href="#Adaptive-boosting" class="headerlink" title="Adaptive boosting"></a>Adaptive boosting</h2><ul>
+<li>모델을 거듭할수록, weak leaner가 만들어 지면서 이전에 가졌던 오류에 대해 해결할 수 있는 능력을 만듦</li>
+<li>이러한 weak learner 를 만들기 위해 , 앞서 보였던 모델의 shortcoming 을 더 많이 샘플링 하라는 뜻</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%202.png"></p>
+<h2 id="Gradient-Boosting"><a href="#Gradient-Boosting" class="headerlink" title="Gradient Boosting"></a>Gradient Boosting</h2><ul>
+<li>그라디언트 부스팅은, Regression,Classification,Ranking 을 다 할 수 있다. 이 셋의 다르기는 loss function 에서 차이가 날 뿐, concept 은 동일</li>
+</ul>
+<aside>
+💡 Regression 으로 설명하기가 가장 직관적이기 때문에, Regression 모델로써 concept 을 설명하겠다.
+
+</aside>
+
+<ul>
+<li>얘는 adaptive boosting 과는 달리, 샘플링을 따로 시행하지는 않는다.</li>
+<li>잔차를 목푯값 (y) 으로 놓고  계속해서 반복하면서 잔차에 대한 식을 만들어 낸다.</li>
+<li>잔차를 목표값으로 잡아두면, 앞선 모델이 맞추지 못한 만큼만 맞추려고 노력을 하기때문에,  앞선 모델의 결과물과 뒷 모델의 결과물을 더하면 정답이 나온다.</li>
+<li>경사도를 통해서 Weak learner 를 boosting 시킴</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%203.png"></p>
+<ul>
+<li>손실함수의 gradient(경사도) 가 0 에 가까울때 까지 미분을 해준다.</li>
+<li>Gradient 가 0이 아니라면 weight 를 gradinet 의 반대방향으로 움직이되 얼마만큼 움직이냐에 따라서 달라지니 조금씩 움직인다.</li>
+<li>처음, decision tree 로 split point 를 잡아, regression 해준 부분의 잔차를 보면 높은것을 알 수 있다. GBM에서는 이 잔차를 기준으로 또 Split point 를 잡아주면서(이러한 과정에서 손실함수가 들어가며 손실함수의 gradient 를 줄여나가는 과정에서 gradient descent 개념이 들어가는 것)  점점 잔차를 줄여 나가는 것을 볼 수 있다.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%204.png"></p>
+<aside>
+💡 처음에는 회귀식이 안좋게 나오는데 iteration 이 반복 될수록 회귀식이 좋아지는것으로 볼 수 있다.
+
+</aside>
+
+<p><img src="/images/LGBM/Untitled%205.png"></p>
+<p><img src="/images/LGBM/Untitled%206.png"></p>
+<h2 id="Overfitting-problem-in-GBM"><a href="#Overfitting-problem-in-GBM" class="headerlink" title="Overfitting problem in GBM"></a>Overfitting problem in GBM</h2><ul>
+<li>GBM 의 가장큰 문제점은 오차를 기반으로 모델을 형성 하기때문에(애초에 모델 자체가 반복을 거듭 할수록, 전 모델의 오차를 줄여나가는 모델이기 때문에 오버피팅 문제는 필연적) 우리가 어찌 할수 없는 오차까지도 모델에 학습시키어서 오버피팅 문제를 불러 일으킨다</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%207.png"></p>
+<h3 id="과적합-해결법"><a href="#과적합-해결법" class="headerlink" title="과적합 해결법"></a>과적합 해결법</h3><ul>
+<li>Subsampling→각각의 모델을 만들때 샘플링을 랜덤으로 80% 만해서 모델을 만들어준다</li>
+<li>Shrinkage- original 알고리즘들은 전에 만들어진 모델들과 뒤로 갈수록 만들어지는 모델들에, 영향력이 동등했는데 , shrinkage 를 쓰면 , 뒤에 만들어지는 모델들에 대해서 , 가중치를 적게 두어 만들어준다.</li>
+<li>Early Stopping- validation error 가 증가 할 것 같으면 미리 중지를 시키는것</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%208.png"></p>
+<ul>
+<li>Information Gain:Split point를 통해서 얼마나 혼잡도,불순도가 낮아지는가.</li>
+<li>Information Gain 을 통해 그 변수의 영향도를 체크 할 수 있다.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%209.png"></p>
+<h1 id="3-LightGBM"><a href="#3-LightGBM" class="headerlink" title="3. LightGBM"></a>3. LightGBM</h1><h2 id="GOSS"><a href="#GOSS" class="headerlink" title="GOSS"></a>GOSS</h2><ul>
+<li>모든 피쳐들을 검사하면 시간이 많이 걸리기 때문에 이를 막기위해서, Gradient-based One-side Sampling (GOSS) 를 사용→ Large gradient 는 keep 하고 small gradient 는 드랍 하는 방식으로, 1000개 데이터를 모두 탐색하는 것이 아니라 gradient 가 큰 것 위주로 탐색하는 방식 → 탐색횟수를 줄이는 것</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2010.png"></p>
+<h2 id="EFB-Exclusive-Feature-Bundleing"><a href="#EFB-Exclusive-Feature-Bundleing" class="headerlink" title="EFB (Exclusive Feature Bundleing)"></a>EFB (Exclusive Feature Bundleing)</h2><ul>
+<li>모든피쳐를 탐색할 필요를 없애는 것</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2011.png"></p>
+<ul>
+<li>Bundle 을 찾는 방법<ul>
+<li>Graph coloring problem 으로 해결가능</li>
+<li>각각의 노드는 피쳐이고, edge 는 피쳐들간의 conflict → conflict 가 많은 애들은 중복이 많이 들어가서 bundling 이 되면 안됨</li>
+<li>conflict  가 없는 애들 끼리는 bundling 을 해도 됨</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2012.png"></p>
+<h3 id="Greed-bundling-계산법"><a href="#Greed-bundling-계산법" class="headerlink" title="Greed bundling 계산법"></a>Greed bundling 계산법</h3><ul>
+<li>edge 의 강도: 두 변수의 conflict 강도</li>
+<li>edge: 동시에 0이아닌 객체의 수.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2013.png"></p>
+<ul>
+<li>Degree</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2014.png"></p>
+<ul>
+<li>시작점을 degree의 내림차순으로 정리 해준 다음, degree가 높은것 부터 시작한다.</li>
+<li>cutoff 는 hyperparameter 인데,  cut-off가 0.2라는 말은, N&#x3D;10 이기 때문에 2회 이상 Nonzero value 가 겹치게 되면, bundleing이 안되는 것.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2015.png"></p>
+<ul>
+<li>cut-off 기준에 맞지 않기 때문에 x5는 고립이 된다.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2016.png"></p>
+<ul>
+<li>feature merge 를 쉽게 해주기 위해 feature의 위치를 살짝 조정 하여준다.</li>
+<li>feature 를 merge 하는방법. Add. offset</li>
+<li>add offset→bundling 을 하기위한 대상이 되는 변수에다가 기준이 되는 변수가 가질 수 있는 최대 값을 더해준다.</li>
+<li>conflict 가 일어난 부분은 그대로 기준 변수가 가지는 값을 더해준다.</li>
+</ul>
+<p><img src="/images/LGBM/Untitled%2017.png"></p>
+<p><img src="/images/LGBM/Untitled%2018.png"></p>
+<hr>
+<ul>
+<li>Reference: 고려대학교 산업경영공학부 DSBA 연구실</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2022/05/10/LGBM/" data-id="clgw0znbe00344du62ruefkgg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Light Gradient Boosting Machine",
+        "image": "https://jmj3047.github.io/images/LGBM/Untitled.png",
+        "keywords": "Deep/Machine Learning Paper Study",
+        "genre": "Data Analysis Model",
+        "datePublished": "2022-05-10",
+        "dateCreated": "2022-05-10",
+        "dateModified": "2023-02-23",
+        "url": "https://jmj3047.github.io/2022/05/10/LGBM/",
+        "description": "1. DefinitionEnsemble→ 여러 예측기를 수집해서 단일 예측기 보다 더 좋은 예측기를 만드는 것. 
+
+일반적으로 앙상블 기법을 사용하면 , 예측기 하나로 훈련하였을때 보다 , 편향은 비슷하지만 분산이 줄어든다고 알려져 있다.
+
+
+배깅(bagging)
+원데이터 집합으로부터 크기가 같은 표본을 여러 번 단순임의 복원추출하여 각 표본(붓스트랩 표본",
+        "wordCount": 794
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/05/10/Attention_is_all_you_need/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Attention is all you need
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/05/06/Making_Chatbot_with_doc2vec_tutorial(1)/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Making Chatbot with doc2vec tutorial(1)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

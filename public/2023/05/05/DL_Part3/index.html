@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Structuring Machine Learning Projects | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ML Analysis,English,Coursera,AI Studies" />
+    
+    <meta name="description" content="Course Lecture 3 in Deep Learning  Why ML Strategy  F1 score     Classifier A is 90% recall: That of all of the images in, say, your dev sets that really are cats, classifier A accurately pulled out 9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Structuring Machine Learning Projects">
+<meta property="og:url" content="https://jmj3047.github.io/2023/05/05/DL_Part3/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="Course Lecture 3 in Deep Learning  Why ML Strategy  F1 score     Classifier A is 90% recall: That of all of the images in, say, your dev sets that really are cats, classifier A accurately pulled out 9">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jmj3047.github.io/images/DL_Part3/Untitled.png">
+<meta property="article:published_time" content="2023-05-04T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-19T12:49:03.236Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="ML Analysis">
+<meta property="article:tag" content="English">
+<meta property="article:tag" content="Coursera">
+<meta property="article:tag" content="AI Studies">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jmj3047.github.io/images/DL_Part3/Untitled.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Data-Analysis/Basic/">Basic</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-DL_Part3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Structuring Machine Learning Projects
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/05/05/DL_Part3/" class="article-date">
+       <time datetime="2023-05-04T15:00:00.000Z" itemprop="datePublished">2023-05-05</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/05/05/DL_Part3/" class="article-date">
+     <time datetime="2023-06-19T12:49:03.236Z" itemprop="dateModified">2023-06-19</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/AI-Studies/" rel="tag">AI Studies</a>, <a class="tag-link-link" href="/tags/Coursera/" rel="tag">Coursera</a>, <a class="tag-link-link" href="/tags/English/" rel="tag">English</a>, <a class="tag-link-link" href="/tags/ML-Analysis/" rel="tag">ML Analysis</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h2 id="Course"><a href="#Course" class="headerlink" title="Course"></a>Course</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.coursera.org/learn/machine-learning-projects?specialization=deep-learning#syllabus">Lecture 3</a> in <a target="_blank" rel="noopener" href="https://www.coursera.org/specializations/deep-learning">Deep Learning</a></li>
+</ul>
+<h2 id="Why-ML-Strategy"><a href="#Why-ML-Strategy" class="headerlink" title="Why ML Strategy"></a>Why ML Strategy</h2><p><img src="/images/DL_Part3/Untitled.png" alt=" "></p>
+<ul>
+<li><p>F1 score</p>
+<p>  <img src="/images/DL_Part3/Untitled%201.png" alt=" "></p>
+<ul>
+<li>Classifier A is 90% recall: That of all of the images in, say, your dev sets that really are cats, classifier A accurately pulled out 90% of them.</li>
+<li>It turns out that there’s often a tradeoff between precision and recall, and you care about both. → When the classifier says something is a cat, there’s a high chance it really is a cat. But of all the images that are cats, you also want it to pull a large fraction of them as cats. (분류기가 고양이라고 말하면 그게 실제로 고양이일 확률이 높기를 원합니다. 그러나 고양이 이미지 중에서도 많은 이미지를 고양이로 분류할 수 있기를 원합니다.)</li>
+<li>So it might be reasonable to try to evaluate the classifiers in terms of its precision and its recall. The problem with using precision recall as your evaluation metric is that if classifier A does better on recall, which it does here, the classifier B does better on precision, then you’re not sure which classifier is better.</li>
+<li>F1 score: In the machine learning literature, the standard way to combine precision and recall.<ul>
+<li>The details of F1 score aren’t too important, but informally, you can think of this as the average of precision, P, and recall, R. Formally, the F1 score is defined by this formula, it’s 2&#x2F; 1&#x2F;P + 1&#x2F;R.</li>
+<li>In mathematics, this function is called the harmonic mean of precision P and recall R. But less formally, you can think of this as some way that averages precision and recall.</li>
+</ul>
+</li>
+<li>To summarize, if there are multiple things you care about by say there’s one as the optimizing metric that you want to do as well as possible on and one or more as satisficing metrics were you’ll be satisfice. So long as it does better than some threshold you can now have an almost automatic way of quickly looking at multiple core size and picking the, quote, best one.</li>
+</ul>
+</li>
+<li><p>Avoidale bias</p>
+<ul>
+<li>In machine learning, avoidable bias is the difference between the training error and the Bayes error. The Bayes error is the theoretical minimum error rate that is possible for a given machine learning model. Avoidable bias is the error that is due to the machine learning model, rather than the data that it is trained on.</li>
+<li>There are a number of factors that can contribute to avoidable bias, including:<ul>
+<li>The choice of machine learning algorithm</li>
+<li>The size and quality of the training data</li>
+<li>The way that the model is trained</li>
+</ul>
+</li>
+<li>There are a number of things that can be done to reduce avoidable bias, including:<ul>
+<li>Choosing a machine learning algorithm that is appropriate for the task at hand</li>
+<li>Using a large and high-quality training dataset</li>
+<li>Using a variety of techniques to train the model, such as cross-validation and regularization</li>
+</ul>
+</li>
+<li>It is important to note that it is not always possible to eliminate avoidable bias entirely. However, by taking steps to reduce avoidable bias, it is possible to improve the accuracy and fairness of machine learning models.</li>
+<li>Here are some examples of avoidable bias in machine learning:<ul>
+<li>A model that is trained on a dataset that is biased towards men may be more likely to predict that a job applicant is a man, even if the applicant’s qualifications are equal to those of a woman.</li>
+<li>A model that is trained on a dataset that is biased towards white people may be more likely to predict that a criminal is white, even if the crime rate is equal for all races.</li>
+<li>A model that is trained on a dataset that is biased towards wealthy people may be more likely to predict that a person is wealthy, even if the person’s income is equal to that of a person from a lower socioeconomic status.</li>
+</ul>
+</li>
+<li>Avoidable bias can have a significant impact on the fairness and accuracy of machine learning models. It is important to be aware of the potential for avoidable bias and to take steps to reduce it.</li>
+</ul>
+<p>  <img src="/images/DL_Part3/Untitled%202.png" alt=" "></p>
+<ul>
+<li>what you want is to maybe keep improving your training performance until you get down to Bayes error but you don’t actually want to do better than Bayes error.</li>
+<li>You can’t actually do better than Bayes error unless you’re overfitting. And this, the difference between your training area and the dev error, there’s a measure still of the variance problem of your algorithm.</li>
+<li>The term avoidable bias acknowledges that there’s some bias or some minimum level of error that you just cannot get below which is that if Bayes error is 7.5%, you don’t actually want to get below that level of error. So rather than saying that if you’re training error is 8%, then the 8% is a measure of bias in this example, you’re saying that the avoidable bias is maybe 0.5% or 0.5% is a measure of the avoidable bias whereas 2% is a measure of the variance and so there’s much more room in reducing this 2% than in reducing this 0.5%.</li>
+</ul>
+</li>
+<li><p>Relationship between human level performance, bayes error and variance</p>
+<p>  <img src="/images/DL_Part3/Untitled%203.png" alt=" "></p>
+<ul>
+<li>If you’re trying to understand bias and variance where you have an estimate of human-level error for a task that humans can do quite well, you can use human-level error as a proxy or as a approximation for Bayes error.</li>
+<li>so the difference between your estimate of Bayes error tells you how much avoidable bias is a problem, how much avoidable bias there is. And the difference between training error and dev error, that tells you how much variance is a problem, whether your algorithm’s able to generalize from the training set to the dev set. And the big difference between our discussion here and what we saw in an earlier course was that instead of comparing training error to 0%.</li>
+<li>And just calling that the estimate of the bias. In contrast, in this video we have a more nuanced analysis in which there is no particular expectation that you should get 0% error. Because sometimes Bayes error is non zero and sometimes it’s just not possible for anything to do better than a certain threshold of error.</li>
+<li>Human-level performance is a measure of how well humans can perform a task. Bayes error is the lowest possible error that a machine learning model can achieve on a task, given the amount of data that is available. Variance is a measure of how much the model’s performance varies on different datasets</li>
+<li>The relationship between human-level performance, Bayes error, and variance can be understood in the following way:<ul>
+<li><strong>Human-level performance is a lower bound on Bayes error.</strong> This is because humans have access to all of the information that is available to the machine learning model, and they are able to use their knowledge and experience to make better decisions.</li>
+<li><strong>Variance is a measure of how much the model’s performance is affected by noise in the data.</strong> The more noise there is in the data, the higher the variance will be.</li>
+<li><strong>As the model’s variance increases, the gap between its performance and human-level performance will also increase.</strong> This is because the model will be more likely to make mistakes on data that is not representative of the training data.</li>
+</ul>
+</li>
+<li>In general, the goal of machine learning is to develop models that have low bias and low variance. Low bias means that the model is not making systematic errors, and low variance means that the model’s performance is not affected by noise in the data.</li>
+<li>There are a number of techniques that can be used to reduce bias and variance in machine learning models. These techniques include:<ul>
+<li><strong>Data augmentation:</strong> This involves creating new data points by modifying existing data points. This can help to reduce the amount of noise in the data.</li>
+<li><strong>Regularization:</strong> This involves adding a penalty to the loss function that is being minimized. This can help to reduce the model’s complexity and make it more robust to noise in the data.</li>
+<li><strong>Ensembling:</strong> This involves combining the predictions of multiple models. This can help to reduce the variance of the model’s predictions.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Structured data in ML</p>
+<p>  <img src="/images/DL_Part3/Untitled%204.png" alt=" "></p>
+<ul>
+<li>All four of these examples are actually learning from structured data, where you might have a database of what ads users have clicked on, database of products you’ve bought before, databases of how long it takes to get from A to B, database of previous loan applications and their outcomes.</li>
+<li>These are not natural perception problems, so these are not computer vision, or speech recognition, or natural language processing tasks.</li>
+<li>Humans tend to be very good in natural perception task. So it is possible, but it’s just a bit harder for computers to surpass human-level performance on natural perception tasks.</li>
+<li>Finally, all of these are problems where there are teams that have access to huge amounts of data. So for example, the best systems for all four of these applications have probably looked at far more data of that application than any human could possibly look at. And so, that’s also made it relatively easy for a computer to surpass human-level performance.</li>
+</ul>
+</li>
+<li><p>Reducing bias and variance</p>
+<p>  <img src="/images/DL_Part3/Untitled%205.png" alt=" "></p>
+<ul>
+<li>The process we’ve seen in the last several videos, if you want to improve the performance of your machine learning system, I would recommend looking at the difference between your training error and your proxy for Bayes error and just gives you a sense of the avoidable bias. In other words, just how much better do you think you should be trying to do on your training set.</li>
+<li>Then look at the difference between your dev error and your training error as an estimate of how much of a variance problem you have. In other words, how much harder you should be working to make your performance generalized from the training set to the dev set that it wasn’t trained on explicitly.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="How-to-build-ML-Strategy"><a href="#How-to-build-ML-Strategy" class="headerlink" title="How to build ML Strategy"></a>How to build ML Strategy</h2><ul>
+<li>Carrying Out Error Analysis: you should find a set of mislabeled examples, either in your dev set, or in your development set. And look at the mislabeled examples for false positives and false negatives. And just count up the number of errors that fall into various different categories.</li>
+</ul>
+<p><img src="/images/DL_Part3/Untitled%206.png" alt=" "></p>
+<ul>
+<li><p>what I would recommend you do, if you’re starting on building a brand new machine learning application, is to build your first system quickly and then iterate. What I mean by that is I recommend that you first quickly set up a dev&#x2F;test set and metric. So this is really deciding where to place your target. And if you get it wrong, you can always move it later, but just set up a target somewhere.</p>
+</li>
+<li><p>Then I recommend you build an initial machine learning system quickly. Find the training set, train it and see. Start to see and understand how well you’re doing against your dev&#x2F;test set and your valuation metric. When you build your initial system, you will then be able to use bias&#x2F;variance analysis which we talked about earlier as well as error analysis which we talked about just in the last several videos, to prioritize the next steps.</p>
+</li>
+<li><p>Transfer Learning</p>
+<ul>
+<li>If you retrain all the parameters in the neural network, then this initial phase of training on image recognition is sometimes called pre-training, because you’re using image recognitions data to pre-initialize or really pre-train the weights of the neural network. And then if you are updating all the weights afterwards, then training on the radiology data sometimes that’s called fine tuning.</li>
+</ul>
+<p>  <img src="/images/DL_Part3/Untitled%207.png" alt=" "></p>
+<ul>
+<li>speech recognition model to wake word&#x2F;trigger word detection model<ul>
+<li>you’ve trained a speech recognition system to output your transcripts. And let’s say that you now want to build a “wake words” or a “trigger words” detection system. So, recall that a wake word or the trigger word are the words we say in order to wake up speech control devices in our houses such as saying “Alexa” to wake up an Amazon Echo or “OK Google” to wake up a Google device or “hey Siri” to wake up an Apple device or saying “Ni hao baidu” to wake up a baidu device.</li>
+<li>In order to do this, you might take out the last layer of the neural network again and create a new output node. But sometimes another thing you could do is actually create not just a single new output, but actually create several new layers to your neural network to try to predict the labels Y for your wake word detection problem. Then again, depending on how much data you have, you might just retrain the new layers of the network or maybe you could retrain even more layers of this neural network.</li>
+</ul>
+</li>
+<li>When does transfer learning make sense?<ul>
+<li>Transfer learning makes sense when you have a lot of data for the problem you’re transferring from and usually relatively less data for the problem you’re transferring to.</li>
+</ul>
+</li>
+<li>For speech recognition, maybe you’ve trained the speech recognition system on 10000 hours of data. So, you’ve learned a lot about what human voices sounds like from that 10000 hours of data, which really is a lot. But for your trigger word detection, maybe you have only one hour of data. So, that’s not a lot of data to fit a lot of parameters. So in this case, a lot of what you learn about what human voices sound like, what are components of human speech and so on, that can be really helpful for building a good wake word detector, even though you have a relatively small dataset or at least a much smaller dataset for the wake word detection task. So in both of these cases, you’re transferring from a problem with a lot of data to a problem with relatively little data.</li>
+</ul>
+<p>  <img src="/images/DL_Part3/Untitled%208.png" alt=" "></p>
+<ul>
+<li>Transfer learning has been most useful if you’re trying to do well on some Task B, usually a problem where you have relatively little data. So for example, in radiology, you know it’s difficult to get that many x-ray scans to build a good radiology diagnosis system. In that case, you might find a related but different task, such as image recognition, where you can get maybe a million images and learn a lot of load-over features from that, so that you can then try to do well on Task B on your radiology task despite not having that much data for it.</li>
+</ul>
+</li>
+<li><p>Multi task Learning</p>
+<ul>
+<li>In multi-task learning, you start off simultaneously, trying to have one neural network do several things at the same time. And then each of these task helps hopefully all of the other task.</li>
+<li>when does multi-task learning make sense?<ul>
+<li><p>One is if your training on a set of tasks that could benefit from having shared low-level features. So for the autonomous driving example, it makes sense that recognizing traffic lights and cars and pedestrians, those should have similar features that could also help you recognize stop signs, because these are all features of roads.</p>
+</li>
+<li><p>Second, this is less of a hard and fast rule, so this isn’t always true. But what I see from a lot of successful multi-task learning settings is that the amount of data you have for each task is quite similar.</p>
+</li>
+<li><p>When you recall from transfer learning, you learn from some task A and transfer it to some task B. So if you have a million examples for task A then and 1,000 examples for task B, then all the knowledge you learned from that million examples could really help augment the much smaller data set you have for task B.</p>
+<p>  <img src="/images/DL_Part3/Untitled%209.png" alt=" "></p>
+</li>
+<li><p>In multi-task learning you usually have a lot more tasks than just two. So maybe you have, previously we had 4 tasks but let’s say you have 100 tasks. And you’re going to do multi-task learning to try to recognize 100 different types of objects at the same time. So what you may find is that you may have 1,000 examples per task and so if you focus on the performance of just one task, let’s focus on the performance on the 100th task, you can call A100. If you are trying to do this final task in isolation, you would have had just a thousand examples to train this one task, this one of the 100 tasks that by training on these 99 other tasks. These in aggregate have 99,000 training examples which could be a big boost, could give a lot of knowledge to argument this otherwise, relatively small 1,000 example training set that you have for task A100. And symmetrically every one of the other 99 tasks can provide some data or provide some knowledge that help every one of the other tasks in this list of 100 tasks.</p>
+</li>
+<li><p>So the second bullet isn’t a hard and fast rule but what I tend to look at is if you focus on any one task, for that to get a big boost for multi-task learning, the other tasks in aggregate need to have quite a lot more data than for that one task. And so one way to satisfy that is if a lot of tasks like we have in this example on the right, and if the amount of data you have in each task is quite similar. But the key really is that if you already have 1,000 examples for 1 task, then for all of the other tasks you better have a lot more than 1,000 examples if those other other task are meant to help you do better on this final task. And finally multi-task learning tends to make more sense when you can train a big enough neural network to do well on all the tasks.</p>
+</li>
+</ul>
+</li>
+<li>The alternative to multi-task learning would be to train a separate neural network for each task. Rather than training one neural network for pedestrian, car, stop sign, and traffic light detection, you could have trained one neural network for pedestrian detection, one neural network for car detection, one neural network for stop sign detection, and one neural network for traffic light detection.</li>
+<li>So what a researcher, Rich Carona, found many years ago was that the only times multi-task learning hurts performance compared to training separate neural networks is if your neural network isn’t big enough. But if you can train a big enough neural network, then multi-task learning certainly should not or should very rarely hurt performance. And hopefully it will actually help performance compared to if you were training neural networks to do these different tasks in isolation.</li>
+</ul>
+</li>
+<li><p>End to end deep learning</p>
+<ul>
+<li>Briefly, there have been some data processing systems, or learning systems that require multiple stages of processing. And what end-to-end deep learning does, is it can take all those multiple stages, and replace it usually with just a single neural network.</li>
+</ul>
+<p>  <img src="/images/DL_Part3/Untitled%2010.png" alt=" "></p>
+<ul>
+<li>One of the challenges of end-to-end deep learning is that you might need a lot of data before it works well. For example, if you’re training on 3,000 hours of data to build a speech recognition system, then the traditional pipeline, the full traditional pipeline works really well. It’s only when you have a very large data set, you know one could say 10,000 hours of data, anything going up to maybe 100,000 hours of data that the end-to end-approach then suddenly starts to work really well.</li>
+<li>When you have a smaller data set, the more traditional pipeline approach actually works just as well. Often works even better. And you need a large data set before the end-to-end approach really shines. And if you have a medium amount of data, then there are also intermediate approaches where maybe you input audio and bypass the features and just learn to output the phonemes of the neural network, and then at some other stages as well.</li>
+</ul>
+<p>  <img src="/images/DL_Part3/Untitled%2011.png" alt=" "></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Reference<ul>
+<li><a target="_blank" rel="noopener" href="https://hyoeun-log.tistory.com/entry/WEEK5-avoidable-bias-variance-%EB%B9%84%EA%B5%90%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%A0%84%EB%9E%B5-%EC%84%B8%EC%9A%B0%EA%B8%B0">avoidable bias, variance, human level performance</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2023/05/05/DL_Part3/" data-id="clhd5oklk00002mu6cs7xcbj6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Structuring Machine Learning Projects",
+        "image": "https://jmj3047.github.io/images/DL_Part3/Untitled.png",
+        "keywords": "ML Analysis English Coursera AI Studies",
+        "genre": "Data Analysis Basic",
+        "datePublished": "2023-05-05",
+        "dateCreated": "2023-05-05",
+        "dateModified": "2023-06-19",
+        "url": "https://jmj3047.github.io/2023/05/05/DL_Part3/",
+        "description": "Course
+Lecture 3 in Deep Learning
+
+Why ML Strategy
+
+F1 score
+  
+
+Classifier A is 90% recall: That of all of the images in, say, your dev sets that really are cats, classifier A accurately pulled out 9",
+        "wordCount": 3273
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/05/07/DL3_Quiz/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Structuring Machine Learning Projects_Quiz
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2023/04/26/SER_Review/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">An ongoing review of speech emotion recognition</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

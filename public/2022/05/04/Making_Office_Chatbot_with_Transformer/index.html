@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="naver-site-verification" content="760dcf2c928601f50f3941df3b6b4629fd244c7c" />
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2182912223281192"
+    crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VXCLXLJT"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90VXCLXLJT');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-245679127-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-245679127-1');
+    </script>
+
+    
+
+    
+    <title>Making Office Chatbot with Transformer | Jang Minjee</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Transformer,Chatbot,NLP" />
+    
+    <meta name="description" content="일상 대화와 오피스 대화 데이터를 Transformer 모델로 학습시켜, 질문에 대한 적절한 답변을 하는 챗봇  Data: 한국어대화데이터셋(오피스데이터) 사용 (AIHUB에 ‘개방데이터-인식기술 언어지능-한국어대화데이터셋’에서 로그인 후 다운로드) GPU 사용 그 외 환경  123batch size &#x3D; 64buffer size &#x3D; 20000epochs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Making Office Chatbot with Transformer">
+<meta property="og:url" content="https://jmj3047.github.io/2022/05/04/Making_Office_Chatbot_with_Transformer/index.html">
+<meta property="og:site_name" content="Jang Minjee">
+<meta property="og:description" content="일상 대화와 오피스 대화 데이터를 Transformer 모델로 학습시켜, 질문에 대한 적절한 답변을 하는 챗봇  Data: 한국어대화데이터셋(오피스데이터) 사용 (AIHUB에 ‘개방데이터-인식기술 언어지능-한국어대화데이터셋’에서 로그인 후 다운로드) GPU 사용 그 외 환경  123batch size &#x3D; 64buffer size &#x3D; 20000epochs">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-03T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-15T08:08:18.515Z">
+<meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="Transformer">
+<meta property="article:tag" content="Chatbot">
+<meta property="article:tag" content="NLP">
+<meta name="twitter:card" content="summary">
+    
+
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '[object Object]');
+</script>
+<!-- End Google Analytics -->
+
+    
+    
+    
+
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_portfolio">About Me</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/">Data Analysis</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Basic/">Basic</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Analysis/Model/">Model</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/">Paper</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/NLP/">NLP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/">Python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Django/">Django</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/HTML/">HTML</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Pyspark/">Pyspark</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Python/Python/">Python</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Setting/">Setting</a></li></ul>
+                                
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Python/">Python</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Python/Python/">Python</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Making_Office_Chatbot_with_Transformer" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Making Office Chatbot with Transformer
+        </h1>
+    
+
+                
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/05/04/Making_Office_Chatbot_with_Transformer/" class="article-date">
+       <time datetime="2022-05-03T15:00:00.000Z" itemprop="datePublished">2022-05-04</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/05/04/Making_Office_Chatbot_with_Transformer/" class="article-date">
+     <time datetime="2022-10-15T08:08:18.515Z" itemprop="dateModified">2022-10-15</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Chatbot/" rel="tag">Chatbot</a>, <a class="tag-link-link" href="/tags/NLP/" rel="tag">NLP</a>, <a class="tag-link-link" href="/tags/Transformer/" rel="tag">Transformer</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <ul>
+<li><p>일상 대화와 오피스 대화 데이터를 Transformer 모델로 학습시켜, 질문에 대한 적절한 답변을 하는 챗봇</p>
+<ul>
+<li>Data: 한국어대화데이터셋(오피스데이터) 사용 (AIHUB에 ‘개방데이터-인식기술 언어지능-한국어대화데이터셋’에서 로그인 후 다운로드)</li>
+<li>GPU 사용</li>
+<li>그 외 환경  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">batch size = 64</span><br><span class="line">buffer size = 20000</span><br><span class="line">epochs = 50</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Environments"><a href="#1-Environments" class="headerlink" title="1. Environments"></a>1. Environments</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!pip install tensorflow_datasets</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> tensorflow_datasets <span class="keyword">as</span> tfds</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&quot;CUDA_VISIBLE_DEVICES&quot;</span>] = <span class="string">&quot;3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.device(<span class="string">&#x27;/device:GPU:3&#x27;</span>):</span><br><span class="line">    <span class="comment"># 텐서 생성</span></span><br><span class="line">    a = tf.constant([[<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>], [<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]])</span><br><span class="line">    b = tf.constant([[<span class="number">1.0</span>, <span class="number">2.0</span>], [<span class="number">3.0</span>, <span class="number">4.0</span>], [<span class="number">5.0</span>, <span class="number">6.0</span>]])</span><br><span class="line">    c = tf.matmul(a, b)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+
+<pre><code>tf.Tensor(
+[[22. 28.]
+ [49. 64.]], shape=(2, 2), dtype=float32)
+</code></pre>
+<h3 id="2-데이터-전처리"><a href="#2-데이터-전처리" class="headerlink" title="2. 데이터 전처리"></a>2. 데이터 전처리</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;./ChatbotData.csv&#x27;</span>)</span><br><span class="line">data = data[<span class="number">0</span>:<span class="number">5290</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[:<span class="number">10</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">r&#x27;./conversation_office.txt&#x27;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">lines = f.readlines()</span><br><span class="line">Q = []</span><br><span class="line">A = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lines)) :</span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span> :</span><br><span class="line">        Q.append(lines[i][<span class="number">2</span>:-<span class="number">1</span>])</span><br><span class="line">        A.append(lines[i+<span class="number">1</span>][<span class="number">2</span>:-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame()</span><br><span class="line"></span><br><span class="line">df[<span class="string">&#x27;Q&#x27;</span>] = Q</span><br><span class="line">df[<span class="string">&#x27;A&#x27;</span>] = A</span><br><span class="line">df[<span class="string">&#x27;label&#x27;</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[:<span class="number">10</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#두 데이터를 concat() 함수를 이용하여 합쳐 하나의 데이터프레임으로 나타내주도록 함</span></span><br><span class="line">train_data = pd.concat([data, df],ignore_index=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">train_data = train_data.sample(frac=<span class="number">1</span>).reset_index(drop=<span class="literal">True</span>) <span class="comment">#데이터를 랜덤으로 섞어주는 코드</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-단어-집합-생성"><a href="#3-단어-집합-생성" class="headerlink" title="3. 단어 집합 생성"></a>3. 단어 집합 생성</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 문장 그대로 학습 모델에 넣으면 모델이 인식을 할 수 없기 때문에 단어 집합을 만들어 줘야 함.</span></span><br><span class="line"><span class="comment"># 정수 인코딩과 패딩을 해주는 작업을 해주어야 함</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#특수기호 띄어쓰기</span></span><br><span class="line">questions = []</span><br><span class="line"><span class="keyword">for</span> sentence <span class="keyword">in</span> train_data[<span class="string">&#x27;Q&#x27;</span>]:</span><br><span class="line">    sentence = re.sub(<span class="string">r&quot;([?.!,])&quot;</span>, <span class="string">r&quot; \1 &quot;</span>, sentence)</span><br><span class="line">    sentence = sentence.strip()</span><br><span class="line">    questions.append(sentence)</span><br><span class="line">    </span><br><span class="line">    answers = []</span><br><span class="line"><span class="keyword">for</span> sentence <span class="keyword">in</span> train_data[<span class="string">&#x27;A&#x27;</span>]:</span><br><span class="line">    sentence = re.sub(<span class="string">r&quot;([?.!,])&quot;</span>, <span class="string">r&quot; \1 &quot;</span>, sentence)</span><br><span class="line">    sentence = sentence.strip()</span><br><span class="line">    answers.append(sentence)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 서브워드텍스트인코더를 사용하여 질문, 답변 데이터로부터 단어 집합(Vocabulary) 생성</span></span><br><span class="line">tokenizer = tfds.deprecated.text.SubwordTextEncoder.build_from_corpus(</span><br><span class="line">    questions + answers, target_vocab_size=<span class="number">2</span>**<span class="number">13</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 시작 토큰과 종료 토큰에 대한 정수 부여</span></span><br><span class="line">START_TOKEN, END_TOKEN = [tokenizer.vocab_size], [tokenizer.vocab_size + <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 시작 토큰과 종료 토큰을 고려하여 단어 집합의 크기를 + 2</span></span><br><span class="line">VOCAB_SIZE = tokenizer.vocab_size + <span class="number">2</span>    </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#정수 인코딩과 패딩</span></span><br><span class="line"><span class="comment"># 서브워드텍스트인코더 토크나이저의 .encode()를 사용하여 텍스트 시퀀스를 정수 시퀀스로 변환.</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;임의의 질문 샘플을 정수 인코딩 : &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(tokenizer.encode(questions[<span class="number">20</span>])))</span><br><span class="line"><span class="comment">#출력 : 임의의 질문 샘플을 정수 인코딩 : [8656, 331]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 최대 길이를 40으로 정의</span></span><br><span class="line">MAX_LENGTH = <span class="number">40</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 토큰화 / 정수 인코딩 / 시작 토큰과 종료 토큰 추가 / 패딩</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tokenize_and_filter</span>(<span class="params">inputs, outputs</span>):</span><br><span class="line">  tokenized_inputs, tokenized_outputs = [], []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (sentence1, sentence2) <span class="keyword">in</span> <span class="built_in">zip</span>(inputs, outputs):</span><br><span class="line">    <span class="comment"># encode(토큰화 + 정수 인코딩), 시작 토큰과 종료 토큰 추가</span></span><br><span class="line">    sentence1 = START_TOKEN + tokenizer.encode(sentence1) + END_TOKEN</span><br><span class="line">    sentence2 = START_TOKEN + tokenizer.encode(sentence2) + END_TOKEN</span><br><span class="line"></span><br><span class="line">    tokenized_inputs.append(sentence1)</span><br><span class="line">    tokenized_outputs.append(sentence2)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 패딩</span></span><br><span class="line">  tokenized_inputs = tf.keras.preprocessing.sequence.pad_sequences(</span><br><span class="line">      tokenized_inputs, maxlen=MAX_LENGTH, padding=<span class="string">&#x27;post&#x27;</span>)</span><br><span class="line">  tokenized_outputs = tf.keras.preprocessing.sequence.pad_sequences(</span><br><span class="line">      tokenized_outputs, maxlen=MAX_LENGTH, padding=<span class="string">&#x27;post&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tokenized_inputs, tokenized_outputs</span><br></pre></td></tr></table></figure>
+
+<pre><code>임의의 질문 샘플을 정수 인코딩 : [2704, 1081, 13, 542]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">questions, answers = tokenize_and_filter(questions, answers)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sample</span></span><br><span class="line"><span class="comment"># 정수 인코딩과 패딩이 된 결과가 출력</span></span><br><span class="line"><span class="built_in">print</span>(questions[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(answers[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>[10023    31   121  4282 10024     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0]
+[10023  3607   213    13    21     1 10024     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.python.client <span class="keyword">import</span> device_lib</span><br><span class="line">device_lib.list_local_devices()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#인코더와 디코더의 입력 데이터가 되도록 배치 크기로 데이터를 묶어줌 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.device(<span class="string">&#x27;/device:GPU:3&#x27;</span>):</span><br><span class="line">    BATCH_SIZE = <span class="number">64</span></span><br><span class="line">    BUFFER_SIZE = <span class="number">20000</span></span><br><span class="line"></span><br><span class="line">    dataset = tf.data.Dataset.from_tensor_slices((</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&#x27;inputs&#x27;</span>: questions,</span><br><span class="line">            <span class="string">&#x27;dec_inputs&#x27;</span>: answers[:, :-<span class="number">1</span>] <span class="comment"># 디코더의 입력 / 마지막 패딩 토큰 제거</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&#x27;outputs&#x27;</span>: answers[:, <span class="number">1</span>:]  <span class="comment"># 맨 처음 토큰이 제거 = 시작 토큰 제거</span></span><br><span class="line">        &#125;,</span><br><span class="line">    ))</span><br><span class="line"></span><br><span class="line">    dataset = dataset.cache()</span><br><span class="line">    dataset = dataset.shuffle(BUFFER_SIZE)</span><br><span class="line">    dataset = dataset.batch(BATCH_SIZE)</span><br><span class="line">    dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-트랜스포머-모델-만들기"><a href="#4-트랜스포머-모델-만들기" class="headerlink" title="4. 트랜스포머 모델 만들기"></a>4. 트랜스포머 모델 만들기</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">transformer</span>(<span class="params">vocab_size, num_layers, dff,</span></span><br><span class="line"><span class="params">                d_model, num_heads, dropout,</span></span><br><span class="line"><span class="params">                name=<span class="string">&quot;transformer&quot;</span></span>):</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 인코더의 입력</span></span><br><span class="line">  inputs = tf.keras.Input(shape=(<span class="literal">None</span>,), name=<span class="string">&quot;inputs&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더의 입력</span></span><br><span class="line">  dec_inputs = tf.keras.Input(shape=(<span class="literal">None</span>,), name=<span class="string">&quot;dec_inputs&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 인코더의 패딩 마스크</span></span><br><span class="line">  enc_padding_mask = tf.keras.layers.Lambda(</span><br><span class="line">      create_padding_mask, output_shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="literal">None</span>),</span><br><span class="line">      name=<span class="string">&#x27;enc_padding_mask&#x27;</span>)(inputs)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더의 룩어헤드 마스크(첫번째 서브층)</span></span><br><span class="line">  look_ahead_mask = tf.keras.layers.Lambda(</span><br><span class="line">      create_look_ahead_mask, output_shape=(<span class="number">1</span>, <span class="literal">None</span>, <span class="literal">None</span>),</span><br><span class="line">      name=<span class="string">&#x27;look_ahead_mask&#x27;</span>)(dec_inputs)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더의 패딩 마스크(두번째 서브층)</span></span><br><span class="line">  dec_padding_mask = tf.keras.layers.Lambda(</span><br><span class="line">      create_padding_mask, output_shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="literal">None</span>),</span><br><span class="line">      name=<span class="string">&#x27;dec_padding_mask&#x27;</span>)(inputs)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 인코더의 출력은 enc_outputs. 디코더로 전달된다.</span></span><br><span class="line">  enc_outputs = encoder(vocab_size=vocab_size, num_layers=num_layers, dff=dff,</span><br><span class="line">      d_model=d_model, num_heads=num_heads, dropout=dropout,</span><br><span class="line">  )(inputs=[inputs, enc_padding_mask]) <span class="comment"># 인코더의 입력은 입력 문장과 패딩 마스크</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더의 출력은 dec_outputs. 출력층으로 전달된다.</span></span><br><span class="line">  dec_outputs = decoder(vocab_size=vocab_size, num_layers=num_layers, dff=dff,</span><br><span class="line">      d_model=d_model, num_heads=num_heads, dropout=dropout,</span><br><span class="line">  )(inputs=[dec_inputs, enc_outputs, look_ahead_mask, dec_padding_mask])</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 다음 단어 예측을 위한 출력층</span></span><br><span class="line">  outputs = tf.keras.layers.Dense(units=vocab_size, name=<span class="string">&quot;outputs&quot;</span>)(dec_outputs)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.keras.Model(inputs=[inputs, dec_inputs], outputs=outputs, name=name)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PositionalEncoding</span>(tf.keras.layers.Layer):</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, position, d_model</span>):</span><br><span class="line">    <span class="built_in">super</span>(PositionalEncoding, self).__init__()</span><br><span class="line">    self.pos_encoding = self.positional_encoding(position, d_model)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">get_angles</span>(<span class="params">self, position, i, d_model</span>):</span><br><span class="line">    angles = <span class="number">1</span> / tf.<span class="built_in">pow</span>(<span class="number">10000</span>, (<span class="number">2</span> * (i // <span class="number">2</span>)) / tf.cast(d_model, tf.float32))</span><br><span class="line">    <span class="keyword">return</span> position * angles</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">positional_encoding</span>(<span class="params">self, position, d_model</span>):</span><br><span class="line">    angle_rads = self.get_angles(</span><br><span class="line">        position=tf.<span class="built_in">range</span>(position, dtype=tf.float32)[:, tf.newaxis],</span><br><span class="line">        i=tf.<span class="built_in">range</span>(d_model, dtype=tf.float32)[tf.newaxis, :],</span><br><span class="line">        d_model=d_model)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 배열의 짝수 인덱스(2i)에는 사인 함수 적용</span></span><br><span class="line">    sines = tf.math.sin(angle_rads[:, <span class="number">0</span>::<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 배열의 홀수 인덱스(2i+1)에는 코사인 함수 적용</span></span><br><span class="line">    cosines = tf.math.cos(angle_rads[:, <span class="number">1</span>::<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    angle_rads = np.zeros(angle_rads.shape)</span><br><span class="line">    angle_rads[:, <span class="number">0</span>::<span class="number">2</span>] = sines</span><br><span class="line">    angle_rads[:, <span class="number">1</span>::<span class="number">2</span>] = cosines</span><br><span class="line">    pos_encoding = tf.constant(angle_rads)</span><br><span class="line">    pos_encoding = pos_encoding[tf.newaxis, ...]</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(pos_encoding.shape)</span><br><span class="line">    <span class="keyword">return</span> tf.cast(pos_encoding, tf.float32)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, inputs</span>):</span><br><span class="line">    <span class="keyword">return</span> inputs + self.pos_encoding[:, :tf.shape(inputs)[<span class="number">1</span>], :]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_padding_mask</span>(<span class="params">x</span>):</span><br><span class="line">  mask = tf.cast(tf.math.equal(x, <span class="number">0</span>), tf.float32)</span><br><span class="line">  <span class="comment"># (batch_size, 1, 1, key의 문장 길이)</span></span><br><span class="line">  <span class="keyword">return</span> mask[:, tf.newaxis, tf.newaxis, :]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 디코더의 첫번째 서브층(sublayer)에서 미래 토큰을 Mask하는 함수</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_look_ahead_mask</span>(<span class="params">x</span>):</span><br><span class="line">  seq_len = tf.shape(x)[<span class="number">1</span>]</span><br><span class="line">  look_ahead_mask = <span class="number">1</span> - tf.linalg.band_part(tf.ones((seq_len, seq_len)), -<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">  padding_mask = create_padding_mask(x) <span class="comment"># 패딩 마스크도 포함</span></span><br><span class="line">  <span class="keyword">return</span> tf.maximum(look_ahead_mask, padding_mask)</span><br><span class="line"></span><br><span class="line"><span class="comment">#encoder</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encoder</span>(<span class="params">vocab_size, num_layers, dff,</span></span><br><span class="line"><span class="params">            d_model, num_heads, dropout,</span></span><br><span class="line"><span class="params">            name=<span class="string">&quot;encoder&quot;</span></span>):</span><br><span class="line">  inputs = tf.keras.Input(shape=(<span class="literal">None</span>,), name=<span class="string">&quot;inputs&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 인코더는 패딩 마스크 사용</span></span><br><span class="line">  padding_mask = tf.keras.Input(shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="literal">None</span>), name=<span class="string">&quot;padding_mask&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 포지셔널 인코딩 + 드롭아웃</span></span><br><span class="line">  embeddings = tf.keras.layers.Embedding(vocab_size, d_model)(inputs)</span><br><span class="line">  embeddings *= tf.math.sqrt(tf.cast(d_model, tf.float32))</span><br><span class="line">  embeddings = PositionalEncoding(vocab_size, d_model)(embeddings)</span><br><span class="line">  outputs = tf.keras.layers.Dropout(rate=dropout)(embeddings)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 인코더를 num_layers개 쌓기</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_layers):</span><br><span class="line">    outputs = encoder_layer(dff=dff, d_model=d_model, num_heads=num_heads,</span><br><span class="line">        dropout=dropout, name=<span class="string">&quot;encoder_layer_&#123;&#125;&quot;</span>.<span class="built_in">format</span>(i),</span><br><span class="line">    )([outputs, padding_mask])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.keras.Model(</span><br><span class="line">      inputs=[inputs, padding_mask], outputs=outputs, name=name)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">encoder_layer</span>(<span class="params">dff, d_model, num_heads, dropout, name=<span class="string">&quot;encoder_layer&quot;</span></span>):</span><br><span class="line">  inputs = tf.keras.Input(shape=(<span class="literal">None</span>, d_model), name=<span class="string">&quot;inputs&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 인코더는 패딩 마스크 사용</span></span><br><span class="line">  padding_mask = tf.keras.Input(shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="literal">None</span>), name=<span class="string">&quot;padding_mask&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 멀티-헤드 어텐션 (첫번째 서브층 / 셀프 어텐션)</span></span><br><span class="line">  attention = MultiHeadAttention(</span><br><span class="line">      d_model, num_heads, name=<span class="string">&quot;attention&quot;</span>)(&#123;</span><br><span class="line">          <span class="string">&#x27;query&#x27;</span>: inputs, <span class="string">&#x27;key&#x27;</span>: inputs, <span class="string">&#x27;value&#x27;</span>: inputs, <span class="comment"># Q = K = V</span></span><br><span class="line">          <span class="string">&#x27;mask&#x27;</span>: padding_mask <span class="comment"># 패딩 마스크 사용</span></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 드롭아웃 + 잔차 연결과 층 정규화</span></span><br><span class="line">  attention = tf.keras.layers.Dropout(rate=dropout)(attention)</span><br><span class="line">  attention = tf.keras.layers.LayerNormalization(</span><br><span class="line">      epsilon=<span class="number">1e-6</span>)(inputs + attention)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 포지션 와이즈 피드 포워드 신경망 (두번째 서브층)</span></span><br><span class="line">  outputs = tf.keras.layers.Dense(units=dff, activation=<span class="string">&#x27;relu&#x27;</span>)(attention)</span><br><span class="line">  outputs = tf.keras.layers.Dense(units=d_model)(outputs)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 드롭아웃 + 잔차 연결과 층 정규화</span></span><br><span class="line">  outputs = tf.keras.layers.Dropout(rate=dropout)(outputs)</span><br><span class="line">  outputs = tf.keras.layers.LayerNormalization(</span><br><span class="line">      epsilon=<span class="number">1e-6</span>)(attention + outputs)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.keras.Model(</span><br><span class="line">      inputs=[inputs, padding_mask], outputs=outputs, name=name)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MultiHeadAttention</span>(tf.keras.layers.Layer):</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model, num_heads, name=<span class="string">&quot;multi_head_attention&quot;</span></span>):</span><br><span class="line">    <span class="built_in">super</span>(MultiHeadAttention, self).__init__(name=name)</span><br><span class="line">    self.num_heads = num_heads</span><br><span class="line">    self.d_model = d_model</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> d_model % self.num_heads == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># d_model을 num_heads로 나눈 값.</span></span><br><span class="line">    <span class="comment"># 논문 기준 : 64</span></span><br><span class="line">    self.depth = d_model // self.num_heads</span><br><span class="line"></span><br><span class="line">    <span class="comment"># WQ, WK, WV에 해당하는 밀집층 정의</span></span><br><span class="line">    self.query_dense = tf.keras.layers.Dense(units=d_model)</span><br><span class="line">    self.key_dense = tf.keras.layers.Dense(units=d_model)</span><br><span class="line">    self.value_dense = tf.keras.layers.Dense(units=d_model)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># WO에 해당하는 밀집층 정의</span></span><br><span class="line">    self.dense = tf.keras.layers.Dense(units=d_model)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># num_heads 개수만큼 q, k, v를 split하는 함수</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">split_heads</span>(<span class="params">self, inputs, batch_size</span>):</span><br><span class="line">    inputs = tf.reshape(</span><br><span class="line">        inputs, shape=(batch_size, -<span class="number">1</span>, self.num_heads, self.depth))</span><br><span class="line">    <span class="keyword">return</span> tf.transpose(inputs, perm=[<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self, inputs</span>):</span><br><span class="line">    query, key, value, mask = inputs[<span class="string">&#x27;query&#x27;</span>], inputs[<span class="string">&#x27;key&#x27;</span>], inputs[</span><br><span class="line">        <span class="string">&#x27;value&#x27;</span>], inputs[<span class="string">&#x27;mask&#x27;</span>]</span><br><span class="line">    batch_size = tf.shape(query)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    query = self.query_dense(query)</span><br><span class="line">    key = self.key_dense(key)</span><br><span class="line">    value = self.value_dense(value)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2. 헤드 나누기</span></span><br><span class="line">    <span class="comment"># q : (batch_size, num_heads, query의 문장 길이, d_model/num_heads)</span></span><br><span class="line">    <span class="comment"># k : (batch_size, num_heads, key의 문장 길이, d_model/num_heads)</span></span><br><span class="line">    <span class="comment"># v : (batch_size, num_heads, value의 문장 길이, d_model/num_heads)</span></span><br><span class="line">    query = self.split_heads(query, batch_size)</span><br><span class="line">    key = self.split_heads(key, batch_size)</span><br><span class="line">    value = self.split_heads(value, batch_size)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. 스케일드 닷 프로덕트 어텐션. 앞서 구현한 함수 사용.</span></span><br><span class="line">    <span class="comment"># (batch_size, num_heads, query의 문장 길이, d_model/num_heads)</span></span><br><span class="line">    scaled_attention, _ = scaled_dot_product_attention(query, key, value, mask)</span><br><span class="line">    <span class="comment"># (batch_size, query의 문장 길이, num_heads, d_model/num_heads)</span></span><br><span class="line">    scaled_attention = tf.transpose(scaled_attention, perm=[<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4. 헤드 연결(concatenate)하기</span></span><br><span class="line">    <span class="comment"># (batch_size, query의 문장 길이, d_model)</span></span><br><span class="line">    concat_attention = tf.reshape(scaled_attention,</span><br><span class="line">                                  (batch_size, -<span class="number">1</span>, self.d_model))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 5. WO에 해당하는 밀집층 지나기</span></span><br><span class="line">    <span class="comment"># (batch_size, query의 문장 길이, d_model)</span></span><br><span class="line">    outputs = self.dense(concat_attention)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> outputs</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">scaled_dot_product_attention</span>(<span class="params">query, key, value, mask</span>):</span><br><span class="line">  <span class="comment"># query 크기 : (batch_size, num_heads, query의 문장 길이, d_model/num_heads)</span></span><br><span class="line">  <span class="comment"># key 크기 : (batch_size, num_heads, key의 문장 길이, d_model/num_heads)</span></span><br><span class="line">  <span class="comment"># value 크기 : (batch_size, num_heads, value의 문장 길이, d_model/num_heads)</span></span><br><span class="line">  <span class="comment"># padding_mask : (batch_size, 1, 1, key의 문장 길이)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Q와 K의 곱. 어텐션 스코어 행렬.</span></span><br><span class="line">  matmul_qk = tf.matmul(query, key, transpose_b=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 스케일링</span></span><br><span class="line">  <span class="comment"># dk의 루트값으로 나눠준다.</span></span><br><span class="line">  depth = tf.cast(tf.shape(key)[-<span class="number">1</span>], tf.float32)</span><br><span class="line">  logits = matmul_qk / tf.math.sqrt(depth)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 마스킹. 어텐션 스코어 행렬의 마스킹 할 위치에 매우 작은 음수값을 넣는다.</span></span><br><span class="line">  <span class="comment"># 매우 작은 값이므로 소프트맥스 함수를 지나면 행렬의 해당 위치의 값은 0이 된다.</span></span><br><span class="line">  <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    logits += (mask * -<span class="number">1e9</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 소프트맥스 함수는 마지막 차원인 key의 문장 길이 방향으로 수행된다.</span></span><br><span class="line">  <span class="comment"># attention weight : (batch_size, num_heads, query의 문장 길이, key의 문장 길이)</span></span><br><span class="line">  attention_weights = tf.nn.softmax(logits, axis=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># output : (batch_size, num_heads, query의 문장 길이, d_model/num_heads)</span></span><br><span class="line">  output = tf.matmul(attention_weights, value)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> output, attention_weights</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">decoder</span>(<span class="params">vocab_size, num_layers, dff,</span></span><br><span class="line"><span class="params">            d_model, num_heads, dropout,</span></span><br><span class="line"><span class="params">            name=<span class="string">&#x27;decoder&#x27;</span></span>):</span><br><span class="line">  inputs = tf.keras.Input(shape=(<span class="literal">None</span>,), name=<span class="string">&#x27;inputs&#x27;</span>)</span><br><span class="line">  enc_outputs = tf.keras.Input(shape=(<span class="literal">None</span>, d_model), name=<span class="string">&#x27;encoder_outputs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더는 룩어헤드 마스크(첫번째 서브층)와 패딩 마스크(두번째 서브층) 둘 다 사용.</span></span><br><span class="line">  look_ahead_mask = tf.keras.Input(</span><br><span class="line">      shape=(<span class="number">1</span>, <span class="literal">None</span>, <span class="literal">None</span>), name=<span class="string">&#x27;look_ahead_mask&#x27;</span>)</span><br><span class="line">  padding_mask = tf.keras.Input(shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="literal">None</span>), name=<span class="string">&#x27;padding_mask&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 포지셔널 인코딩 + 드롭아웃</span></span><br><span class="line">  embeddings = tf.keras.layers.Embedding(vocab_size, d_model)(inputs)</span><br><span class="line">  embeddings *= tf.math.sqrt(tf.cast(d_model, tf.float32))</span><br><span class="line">  embeddings = PositionalEncoding(vocab_size, d_model)(embeddings)</span><br><span class="line">  outputs = tf.keras.layers.Dropout(rate=dropout)(embeddings)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더를 num_layers개 쌓기</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_layers):</span><br><span class="line">    outputs = decoder_layer(dff=dff, d_model=d_model, num_heads=num_heads,</span><br><span class="line">        dropout=dropout, name=<span class="string">&#x27;decoder_layer_&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(i),</span><br><span class="line">    )(inputs=[outputs, enc_outputs, look_ahead_mask, padding_mask])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.keras.Model(</span><br><span class="line">      inputs=[inputs, enc_outputs, look_ahead_mask, padding_mask],</span><br><span class="line">      outputs=outputs,</span><br><span class="line">      name=name)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">decoder_layer</span>(<span class="params">dff, d_model, num_heads, dropout, name=<span class="string">&quot;decoder_layer&quot;</span></span>):</span><br><span class="line">  inputs = tf.keras.Input(shape=(<span class="literal">None</span>, d_model), name=<span class="string">&quot;inputs&quot;</span>)</span><br><span class="line">  enc_outputs = tf.keras.Input(shape=(<span class="literal">None</span>, d_model), name=<span class="string">&quot;encoder_outputs&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 룩어헤드 마스크(첫번째 서브층)</span></span><br><span class="line">  look_ahead_mask = tf.keras.Input(</span><br><span class="line">      shape=(<span class="number">1</span>, <span class="literal">None</span>, <span class="literal">None</span>), name=<span class="string">&quot;look_ahead_mask&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 패딩 마스크(두번째 서브층)</span></span><br><span class="line">  padding_mask = tf.keras.Input(shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="literal">None</span>), name=<span class="string">&#x27;padding_mask&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 멀티-헤드 어텐션 (첫번째 서브층 / 마스크드 셀프 어텐션)</span></span><br><span class="line">  attention1 = MultiHeadAttention(</span><br><span class="line">      d_model, num_heads, name=<span class="string">&quot;attention_1&quot;</span>)(inputs=&#123;</span><br><span class="line">          <span class="string">&#x27;query&#x27;</span>: inputs, <span class="string">&#x27;key&#x27;</span>: inputs, <span class="string">&#x27;value&#x27;</span>: inputs, <span class="comment"># Q = K = V</span></span><br><span class="line">          <span class="string">&#x27;mask&#x27;</span>: look_ahead_mask <span class="comment"># 룩어헤드 마스크</span></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 잔차 연결과 층 정규화</span></span><br><span class="line">  attention1 = tf.keras.layers.LayerNormalization(</span><br><span class="line">      epsilon=<span class="number">1e-6</span>)(attention1 + inputs)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 멀티-헤드 어텐션 (두번째 서브층 / 디코더-인코더 어텐션)</span></span><br><span class="line">  attention2 = MultiHeadAttention(</span><br><span class="line">      d_model, num_heads, name=<span class="string">&quot;attention_2&quot;</span>)(inputs=&#123;</span><br><span class="line">          <span class="string">&#x27;query&#x27;</span>: attention1, <span class="string">&#x27;key&#x27;</span>: enc_outputs, <span class="string">&#x27;value&#x27;</span>: enc_outputs, <span class="comment"># Q != K = V</span></span><br><span class="line">          <span class="string">&#x27;mask&#x27;</span>: padding_mask <span class="comment"># 패딩 마스크</span></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 드롭아웃 + 잔차 연결과 층 정규화</span></span><br><span class="line">  attention2 = tf.keras.layers.Dropout(rate=dropout)(attention2)</span><br><span class="line">  attention2 = tf.keras.layers.LayerNormalization(</span><br><span class="line">      epsilon=<span class="number">1e-6</span>)(attention2 + attention1)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 포지션 와이즈 피드 포워드 신경망 (세번째 서브층)</span></span><br><span class="line">  outputs = tf.keras.layers.Dense(units=dff, activation=<span class="string">&#x27;relu&#x27;</span>)(attention2)</span><br><span class="line">  outputs = tf.keras.layers.Dense(units=d_model)(outputs)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 드롭아웃 + 잔차 연결과 층 정규화</span></span><br><span class="line">  outputs = tf.keras.layers.Dropout(rate=dropout)(outputs)</span><br><span class="line">  outputs = tf.keras.layers.LayerNormalization(</span><br><span class="line">      epsilon=<span class="number">1e-6</span>)(outputs + attention2)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.keras.Model(</span><br><span class="line">      inputs=[inputs, enc_outputs, look_ahead_mask, padding_mask],</span><br><span class="line">      outputs=outputs,</span><br><span class="line">      name=name)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.backend.clear_session()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hyper-parameters</span></span><br><span class="line">D_MODEL = <span class="number">256</span></span><br><span class="line">NUM_LAYERS = <span class="number">2</span></span><br><span class="line">NUM_HEADS = <span class="number">8</span></span><br><span class="line">DFF = <span class="number">512</span></span><br><span class="line">DROPOUT = <span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">model = transformer(</span><br><span class="line">    vocab_size=VOCAB_SIZE,</span><br><span class="line">    num_layers=NUM_LAYERS,</span><br><span class="line">    dff=DFF,</span><br><span class="line">    d_model=D_MODEL,</span><br><span class="line">    num_heads=NUM_HEADS,</span><br><span class="line">    dropout=DROPOUT)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>(1, 10025, 256)
+(1, 10025, 256)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomSchedule</span>(tf.keras.optimizers.schedules.LearningRateSchedule):</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, d_model, warmup_steps=<span class="number">4000</span></span>):</span><br><span class="line">    <span class="built_in">super</span>(CustomSchedule, self).__init__()</span><br><span class="line">    self.d_model = d_model</span><br><span class="line">    self.d_model = tf.cast(self.d_model, tf.float32)</span><br><span class="line">    self.warmup_steps = warmup_steps</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, step</span>):</span><br><span class="line">    arg1 = tf.math.rsqrt(step)</span><br><span class="line">    arg2 = step * (self.warmup_steps**-<span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tf.math.rsqrt(self.d_model) * tf.math.minimum(arg1, arg2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loss_function</span>(<span class="params">y_true, y_pred</span>):</span><br><span class="line">  y_true = tf.reshape(y_true, shape=(-<span class="number">1</span>, MAX_LENGTH - <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">  loss = tf.keras.losses.SparseCategoricalCrossentropy(</span><br><span class="line">      from_logits=<span class="literal">True</span>, reduction=<span class="string">&#x27;none&#x27;</span>)(y_true, y_pred)</span><br><span class="line"></span><br><span class="line">  mask = tf.cast(tf.not_equal(y_true, <span class="number">0</span>), tf.float32)</span><br><span class="line">  loss = tf.multiply(loss, mask)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.reduce_mean(loss)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = CustomSchedule(D_MODEL)</span><br><span class="line"></span><br><span class="line">optimizer = tf.keras.optimizers.Adam(</span><br><span class="line">    learning_rate, beta_1=<span class="number">0.9</span>, beta_2=<span class="number">0.98</span>, epsilon=<span class="number">1e-9</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">accuracy</span>(<span class="params">y_true, y_pred</span>):</span><br><span class="line">  <span class="comment"># 레이블의 크기는 (batch_size, MAX_LENGTH - 1)</span></span><br><span class="line">  y_true = tf.reshape(y_true, shape=(-<span class="number">1</span>, MAX_LENGTH - <span class="number">1</span>))</span><br><span class="line">  <span class="keyword">return</span> tf.keras.metrics.sparse_categorical_accuracy(y_true, y_pred)</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=optimizer, loss=loss_function, metrics=[accuracy])</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 모델 학습</span></span><br><span class="line">EPOCHS = <span class="number">50</span></span><br><span class="line">model.fit(dataset, epochs=EPOCHS)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Epoch 1/50
+104/104 [==============================] - 12s 54ms/step - loss: 1.2164 - accuracy: 0.0149
+Epoch 2/50
+104/104 [==============================] - 6s 54ms/step - loss: 1.0725 - accuracy: 0.0285
+Epoch 3/50
+104/104 [==============================] - 6s 54ms/step - loss: 0.9082 - accuracy: 0.0472
+Epoch 4/50
+104/104 [==============================] - 6s 54ms/step - loss: 0.7714 - accuracy: 0.0482
+...
+104/104 [==============================] - 6s 54ms/step - loss: 0.0160 - accuracy: 0.1321
+Epoch 46/50
+104/104 [==============================] - 6s 56ms/step - loss: 0.0158 - accuracy: 0.1320
+Epoch 47/50
+104/104 [==============================] - 6s 55ms/step - loss: 0.0152 - accuracy: 0.1320
+Epoch 48/50
+104/104 [==============================] - 6s 54ms/step - loss: 0.0151 - accuracy: 0.1322
+Epoch 49/50
+104/104 [==============================] - 6s 55ms/step - loss: 0.0149 - accuracy: 0.1321
+Epoch 50/50
+104/104 [==============================] - 6s 53ms/step - loss: 0.0148 - accuracy: 0.1321
+&lt;keras.callbacks.History at 0x7f794c0f0880&gt;
+</code></pre>
+<h3 id="5-챗봇-평가하기"><a href="#5-챗봇-평가하기" class="headerlink" title="5. 챗봇 평가하기"></a>5. 챗봇 평가하기</h3><ul>
+<li>학습시킨 챗봇에 새로운 문장을 넣어서 평가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 새로운 문장도 인코더 입력 형식으로 변형하는 코드</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">preprocess_sentence</span>(<span class="params">sentence</span>):</span><br><span class="line">  <span class="comment"># 단어와 구두점 사이에 공백 추가.</span></span><br><span class="line">  <span class="comment"># ex) 12시 땡! -&gt; 12시 땡 !</span></span><br><span class="line">  sentence = re.sub(<span class="string">r&quot;([?.!,])&quot;</span>, <span class="string">r&quot; \1 &quot;</span>, sentence)</span><br><span class="line">  sentence = sentence.strip()</span><br><span class="line">  <span class="keyword">return</span> sentence</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">evaluate</span>(<span class="params">sentence</span>):</span><br><span class="line">  sentence = preprocess_sentence(sentence)</span><br><span class="line"></span><br><span class="line">  sentence = tf.expand_dims(</span><br><span class="line">      START_TOKEN + tokenizer.encode(sentence) + END_TOKEN, axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  output = tf.expand_dims(START_TOKEN, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 디코더의 예측 시작</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(MAX_LENGTH):</span><br><span class="line">    predictions = model(inputs=[sentence, output], training=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 현재(마지막) 시점의 예측 단어를 받아온다.</span></span><br><span class="line">    predictions = predictions[:, -<span class="number">1</span>:, :]</span><br><span class="line">    predicted_id = tf.cast(tf.argmax(predictions, axis=-<span class="number">1</span>), tf.int32)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 만약 마지막 시점의 예측 단어가 종료 토큰이라면 예측을 중단</span></span><br><span class="line">    <span class="keyword">if</span> tf.equal(predicted_id, END_TOKEN[<span class="number">0</span>]):</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 마지막 시점의 예측 단어를 출력에 연결한다.</span></span><br><span class="line">    <span class="comment"># 이는 for문을 통해서 디코더의 입력으로 사용될 예정이다.</span></span><br><span class="line">    output = tf.concat([output, predicted_id], axis=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.squeeze(output, axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">sentence</span>):</span><br><span class="line">  prediction = evaluate(sentence)</span><br><span class="line"></span><br><span class="line">  predicted_sentence = tokenizer.decode(</span><br><span class="line">      [i <span class="keyword">for</span> i <span class="keyword">in</span> prediction <span class="keyword">if</span> i &lt; tokenizer.vocab_size])</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Master: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(sentence))</span><br><span class="line">  <span class="comment"># print(&#x27;Output: &#123;&#125;&#x27;.format(predicted_sentence))</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Chatbot: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(predicted_sentence))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> predicted_sentence</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#predict() 함수에 문장을 입력하면 해당 문장에 대한 결과가 출력됨</span></span><br><span class="line">output = predict(<span class="string">&quot;굿모닝&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Input: 굿모닝
+Output: 좋은 아침이에요 .
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output = predict(<span class="string">&quot;오늘 날씨&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Input: 오늘 날씨
+Output: 충분히 아름다워요 .
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output = predict(<span class="string">&quot;오늘 날씨 어때?&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Input: 오늘 날씨 어때?
+Output: 오전엔 화창하지만 오후에는 비가 올 것입니다 .
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output = predict(<span class="string">&quot;집중력&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Input: 집중력
+Output: 병원 가보세요 .
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output = predict(<span class="string">&quot;퇴근&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Input: 퇴근
+Output: 인생은 채워나가는거죠 .
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output = predict(<span class="string">&quot;야근 싫어&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Input: 야근 싫어
+Output: 얼른 집에 가서 쉬시길 바랄게요 .
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">output = <span class="built_in">str</span>(<span class="built_in">input</span>(<span class="string">&quot;오피스 챗봇입니다. 무엇을 도와드릴까요?:&quot;</span>))</span><br><span class="line">output = predict(output)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>Master: 일하기 싫어 
+Chatbot: 저도요 !  !
+</code></pre>
+<hr>
+<ul>
+<li>Reference<ul>
+<li><a target="_blank" rel="noopener" href="https://velog.io/@seolini43/%ED%8C%8C%EC%9D%B4%EC%8D%ACTransformer%EB%A1%9C-%EC%98%A4%ED%94%BC%EC%8A%A4-%EC%B1%97%EB%B4%87-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%BD%94%EB%93%9C">https:&#x2F;&#x2F;velog.io&#x2F;@seolini43&#x2F;파이썬Transformer로-오피스-챗봇-만들기-코드</a></li>
+</ul>
+</li>
+</ul>
+<p>**code: <a target="_blank" rel="noopener" href="https://github.com/jmj3047/mj_chatbot_prac/blob/c5bec233b833b24345deeffe7391621415dc1dcb/chatbot_backend.py">https://github.com/jmj3047/mj_chatbot_prac&#x2F;blob&#x2F;c5bec233b833b24345deeffe7391621415dc1dcb&#x2F;chatbot_backend.py</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://jmj3047.github.io/2022/05/04/Making_Office_Chatbot_with_Transformer/" data-id="clgw0znbi004q4du616c22rng" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jang Minjee"
+        },
+        "headline": "Making Office Chatbot with Transformer",
+        "image": "https://jmj3047.github.io",
+        "keywords": "Transformer Chatbot NLP",
+        "genre": "Python Python",
+        "datePublished": "2022-05-04",
+        "dateCreated": "2022-05-04",
+        "dateModified": "2022-10-15",
+        "url": "https://jmj3047.github.io/2022/05/04/Making_Office_Chatbot_with_Transformer/",
+        "description": "
+일상 대화와 오피스 대화 데이터를 Transformer 모델로 학습시켜, 질문에 대한 적절한 답변을 하는 챗봇
+
+Data: 한국어대화데이터셋(오피스데이터) 사용 (AIHUB에 ‘개방데이터-인식기술 언어지능-한국어대화데이터셋’에서 로그인 후 다운로드)
+GPU 사용
+그 외 환경  123batch size = 64buffer size = 20000epochs ",
+        "wordCount": 5038
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/jmj3047" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="dropbox" href="https://www.dropbox.com/home" target="_blank" rel="noopener">
+                        <i class="icon fa fa-dropbox"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google" href="https://www.google.com" target="_blank" rel="noopener">
+                        <i class="icon fa fa-google"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-youtube"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="discord" href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <i class="icon fa fa-discord"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+<!-- 
+    <div class="github-card" data-github="jmj3047" data-width="400" data-height="" data-theme="default">
+    </div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js">    </script> -->
+
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/05/04/HTML_with_Python_Flask&Brython/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            HTML with Python_Flask &amp; Brython
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/04/28/MongoDB_update/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">MongoDB Update Operator</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+
+
+    <div class="widgets-container">
+        
+        
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/17/Speaker_Normalization_for_SER/" class="title">Speaker Normalization for Self-Supervised Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-16T15:00:00.000Z" itemprop="datePublished">2023-07-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/15/SER_for_self_supervised/" class="title">Speech Emotion Recognition Using Self-Supervised Features</a></p>
+                            <p class="item-date"><time datetime="2023-07-14T15:00:00.000Z" itemprop="datePublished">2023-07-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Model/">Model</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps_Part2/" class="title">Machine Learning Data Lifecycle in Production</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Data-Analysis/">Data Analysis</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Data-Analysis/Basic/">Basic</a></p>
+                            <p class="item-title"><a href="/2023/07/11/MLOps2_Quiz/" class="title">Machine Learning Data Lifecycle in Production_Quiz</a></p>
+                            <p class="item-date"><time datetime="2023-07-10T15:00:00.000Z" itemprop="datePublished">2023-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Paper/">Paper</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a></p>
+                            <p class="item-title"><a href="/2023/07/03/DIFL_SI_SER/" class="title">Domain Invariant Feature Learning for Speaker-Independent Speech Emotion Recognition</a></p>
+                            <p class="item-date"><time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/">Data Analysis</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Basic/">Basic</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Analysis/Model/">Model</a><span class="category-list-count">16</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/">Data Platform/Base</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/GCP/">GCP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Data-Platform-Base/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Computer-Vision/">Computer Vision</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Generative-Model/">Generative Model</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Multi-Task-Learning/">Multi-Task Learning</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/NLP/">NLP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Recommendation-System/">Recommendation System</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speaker-Verification/">Speaker Verification</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Emotion-Recognition/">Speech Emotion Recognition</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Paper/Speech-Representations/">Speech Representations</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Django/">Django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/HTML/">HTML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Pyspark/">Pyspark</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/Python/">Python</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Setting/">Setting</a><span class="category-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ACF/" style="font-size: 10px;">ACF</a> <a href="/tags/AI-Studies/" style="font-size: 16.92px;">AI Studies</a> <a href="/tags/AI-tool/" style="font-size: 10px;">AI tool</a> <a href="/tags/ARIMA/" style="font-size: 10px;">ARIMA</a> <a href="/tags/Acoustic-Parameter-Set/" style="font-size: 10px;">Acoustic Parameter Set</a> <a href="/tags/Adversarial-Domain-Adaptation/" style="font-size: 10px;">Adversarial Domain Adaptation</a> <a href="/tags/Adversarial-Speaker-Verification/" style="font-size: 10px;">Adversarial Speaker Verification</a> <a href="/tags/Attention/" style="font-size: 10.77px;">Attention</a> <a href="/tags/Auth/" style="font-size: 10px;">Auth</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bash/" style="font-size: 10px;">Bash</a> <a href="/tags/BeautifulSoup/" style="font-size: 11.54px;">BeautifulSoup</a> <a href="/tags/Big-Query/" style="font-size: 16.15px;">Big Query</a> <a href="/tags/BigQueryML/" style="font-size: 13.85px;">BigQueryML</a> <a href="/tags/Brython/" style="font-size: 10px;">Brython</a> <a href="/tags/CGI/" style="font-size: 10px;">CGI</a> <a href="/tags/Center-Loss/" style="font-size: 10px;">Center Loss</a> <a href="/tags/Chatbot/" style="font-size: 13.08px;">Chatbot</a> <a href="/tags/Clustering/" style="font-size: 13.85px;">Clustering</a> <a href="/tags/Confusion-Matrix/" style="font-size: 10px;">Confusion Matrix</a> <a href="/tags/Convolutional-Neural-Networks/" style="font-size: 10.77px;">Convolutional Neural Networks</a> <a href="/tags/Coursera/" style="font-size: 18.46px;">Coursera</a> <a href="/tags/Cross-domain/" style="font-size: 10px;">Cross-domain</a> <a href="/tags/DBSCAN/" style="font-size: 10px;">DBSCAN</a> <a href="/tags/DCGAN/" style="font-size: 10px;">DCGAN</a> <a href="/tags/DataFlow/" style="font-size: 10px;">DataFlow</a> <a href="/tags/Decision-Tree-Classifier/" style="font-size: 10px;">Decision Tree Classifier</a> <a href="/tags/Deep-Nueral-Networks/" style="font-size: 10.77px;">Deep Nueral Networks</a> <a href="/tags/Deep-Machine-Learning-Paper-Study/" style="font-size: 17.69px;">Deep/Machine Learning Paper Study</a> <a href="/tags/Doc2vec/" style="font-size: 12.31px;">Doc2vec</a> <a href="/tags/Domain-Adaptation/" style="font-size: 10px;">Domain Adaptation</a> <a href="/tags/Domain-Adversarial-Layer/" style="font-size: 10px;">Domain Adversarial Layer</a> <a href="/tags/Domain-Invariant-Feature-Learning/" style="font-size: 10.77px;">Domain Invariant Feature Learning</a> <a href="/tags/English/" style="font-size: 19.23px;">English</a> <a href="/tags/Ensemble-Model/" style="font-size: 10px;">Ensemble Model</a> <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/F1-measure/" style="font-size: 10px;">F1 measure</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/GAN/" style="font-size: 10.77px;">GAN</a> <a href="/tags/GCP/" style="font-size: 10px;">GCP</a> <a href="/tags/Gaussian-Mixture-Model/" style="font-size: 10.77px;">Gaussian Mixture Model</a> <a href="/tags/Gen-App-Builder/" style="font-size: 10px;">Gen App Builder</a> <a href="/tags/Generative-Adversarial-Network/" style="font-size: 10px;">Generative Adversarial Network</a> <a href="/tags/Generative-Model/" style="font-size: 10px;">Generative Model</a> <a href="/tags/Git/" style="font-size: 10.77px;">Git</a> <a href="/tags/Grid-Search-CV/" style="font-size: 10px;">Grid Search CV</a> <a href="/tags/HTML/" style="font-size: 11.54px;">HTML</a> <a href="/tags/Hexo/" style="font-size: 12.31px;">Hexo</a> <a href="/tags/Hueman/" style="font-size: 10px;">Hueman</a> <a href="/tags/Image-Classification/" style="font-size: 11.54px;">Image Classification</a> <a href="/tags/K-Means-Clustering/" style="font-size: 11.54px;">K-Means Clustering</a> <a href="/tags/Kaggle/" style="font-size: 10px;">Kaggle</a> <a href="/tags/Looker-Studio/" style="font-size: 11.54px;">Looker Studio</a> <a href="/tags/ML-Analysis/" style="font-size: 20px;">ML Analysis</a> <a href="/tags/ML-Operations/" style="font-size: 10.77px;">ML Operations</a> <a href="/tags/ML-Process/" style="font-size: 10.77px;">ML Process</a> <a href="/tags/MongoDB/" style="font-size: 11.54px;">MongoDB</a> <a href="/tags/Multi-Task-Learning/" style="font-size: 10.77px;">Multi-Task Learning</a> <a href="/tags/NLP/" style="font-size: 13.08px;">NLP</a> <a href="/tags/Nonprobability-sampling/" style="font-size: 10px;">Nonprobability sampling</a> <a href="/tags/Normal-Distribution/" style="font-size: 10px;">Normal Distribution</a> <a href="/tags/PACF/" style="font-size: 10px;">PACF</a> <a href="/tags/Pandas-Dataframe/" style="font-size: 10px;">Pandas Dataframe</a> <a href="/tags/Precision-Recall/" style="font-size: 10px;">Precision-Recall</a> <a href="/tags/Probabilistic-sampling/" style="font-size: 10px;">Probabilistic sampling</a> <a href="/tags/Probability-Density-Function/" style="font-size: 10px;">Probability Density Function</a> <a href="/tags/Probability-Distribution-Function/" style="font-size: 10px;">Probability Distribution Function</a> <a href="/tags/Python/" style="font-size: 16.92px;">Python</a> <a href="/tags/Quiz/" style="font-size: 14.62px;">Quiz</a> <a href="/tags/ROC-curve/" style="font-size: 10px;">ROC curve</a> <a href="/tags/Recommendation-System/" style="font-size: 10.77px;">Recommendation System</a> <a href="/tags/Self-Supervised-Features/" style="font-size: 10px;">Self-Supervised Features</a> <a href="/tags/Self-Supervised-Learning/" style="font-size: 10.77px;">Self-Supervised Learning</a> <a href="/tags/Speaker-GAN/" style="font-size: 10px;">Speaker GAN</a> <a href="/tags/Speaker-Identification/" style="font-size: 10px;">Speaker Identification</a> <a href="/tags/Speaker-Independent/" style="font-size: 10px;">Speaker Independent</a> <a href="/tags/Speaker-Normalization/" style="font-size: 10px;">Speaker Normalization</a> <a href="/tags/Speaker-Verification/" style="font-size: 10px;">Speaker Verification</a> <a href="/tags/Speech-Emotion-Recognition/" style="font-size: 15.38px;">Speech Emotion Recognition</a> <a href="/tags/Speech-Feature-Extraction/" style="font-size: 10px;">Speech Feature Extraction</a> <a href="/tags/Speech-Representations/" style="font-size: 10px;">Speech Representations</a> <a href="/tags/Standard-Normal-Distribution/" style="font-size: 10px;">Standard Normal Distribution</a> <a href="/tags/TD-SV/" style="font-size: 10px;">TD-SV</a> <a href="/tags/Threshold-Adjustment/" style="font-size: 10px;">Threshold Adjustment</a> <a href="/tags/Time-Series/" style="font-size: 10px;">Time Series</a> <a href="/tags/Transfer-Learning/" style="font-size: 10px;">Transfer Learning</a> <a href="/tags/Transformer/" style="font-size: 11.54px;">Transformer</a> <a href="/tags/Vertex-AI/" style="font-size: 10px;">Vertex AI</a> <a href="/tags/Virtualenv/" style="font-size: 10px;">Virtualenv</a> <a href="/tags/Voice-Trigger-Detection/" style="font-size: 10.77px;">Voice Trigger Detection</a> <a href="/tags/WGAN/" style="font-size: 10px;">WGAN</a> <a href="/tags/WGAN-GP/" style="font-size: 10px;">WGAN-GP</a> <a href="/tags/Wake-Up-Words/" style="font-size: 10px;">Wake-Up Words</a> <a href="/tags/Web-Crawling/" style="font-size: 11.54px;">Web Crawling</a> <a href="/tags/Web-Server/" style="font-size: 10.77px;">Web Server</a> <a href="/tags/kaggle/" style="font-size: 10px;">kaggle</a> <a href="/tags/pyspark/" style="font-size: 12.31px;">pyspark</a>
+        </div>
+    </div>
+
+
+            
+        
+
+    </div>
+</aside>
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Jang Minjee</p>
+                
+                <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+      <script data-ad-client="ca-pub-2182912223281192" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
