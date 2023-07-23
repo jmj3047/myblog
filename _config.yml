@@ -109,5 +109,5 @@ deploy:
 
 sitemap:
     path: sitemap.xml
-    tag: false  #tag 는 사이트맵에서 제외
-    category: false #category 사이트맵에서 제외
+    tag: true  #tag 는 사이트맵에서 제외
+    category: true #category 사이트맵에서 제외
