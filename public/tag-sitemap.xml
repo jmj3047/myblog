@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://jmj3047.github.io/tags/Spoken-Language-Understanding/</loc>
+        <lastmod>2023-08-08T13:50:44.993Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speaker-Verification/</loc>
+        <lastmod>2023-08-08T13:50:44.993Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/HuBERT/</loc>
+        <lastmod>2023-08-08T13:50:44.993Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Wav2vec-2-0/</loc>
+        <lastmod>2023-08-08T13:50:44.993Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jmj3047.github.io/tags/Evaluation/</loc>
         <lastmod>2023-08-08T10:47:10.707Z</lastmod>
         <changefreq>weekly</changefreq>
