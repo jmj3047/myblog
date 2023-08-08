@@ -13,14 +13,11 @@ tags:
 ---
 
 Journal/Conference: arXiv preprint arXiv:2105.01051
-
 Year(published year): 2021
-
 Author: Shu-wen Yang, Po-Han Chi, Yung-Sung Chuang, Cheng-I Jeff Lai, Kushal Lakhotia,
 Yist Y. Lin, Andy T. Liu, Jiatong Shi, Xuankai Chang6, Guan-Ting Lin,
 Tzu-Hsien Huang, Wei-Cheng Tseng, Ko-tik Lee, Da-Rong Liu, Zili Huang, Shuyan Dong,
 Shang-Wen Li, Shinji Watanabe6, Abdelrahman Mohamed, Hung-yi Lee
-
 Subject: Speech, Self-Supervised Learning, Representation Learning, Model Generalization, Benchmark, Evaluation
 
 # SUPERB: Speech processing Universal PERformance Benchmark
