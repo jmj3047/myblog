@@ -9,6 +9,20 @@
 
 
     <url>
+        <loc>https://jmj3047.github.io/categories/Data-Analysis/Basic/</loc>
+        <lastmod>2023-08-17T14:37:02.694Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Data-Analysis/</loc>
+        <lastmod>2023-08-17T14:37:02.694Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jmj3047.github.io/categories/Paper/Speech-Emotion-Recognition/</loc>
         <lastmod>2023-08-08T13:50:44.993Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,20 +39,6 @@
     <url>
         <loc>https://jmj3047.github.io/categories/Paper/Speech-Representations/</loc>
         <lastmod>2023-08-08T10:47:10.707Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/categories/Data-Analysis/Basic/</loc>
-        <lastmod>2023-07-17T11:06:33.517Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/categories/Data-Analysis/</loc>
-        <lastmod>2023-07-17T11:06:33.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
