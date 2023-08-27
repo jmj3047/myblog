@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: http://jmj3047.github.io/post-sitemap.xml

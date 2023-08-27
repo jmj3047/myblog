@@ -400,10 +400,7 @@
 <h2 id="Experiments-with-Features-and-Depth"><a href="#Experiments-with-Features-and-Depth" class="headerlink" title="Experiments with Features and Depth"></a><em>Experiments with Features and Depth</em></h2><p>Adding features and depth significantly improves precision on holdout data as shown in Figure 6. In these experiments, a vocabulary of 1M videos and 1M search tokens were embedded with 256 floats each in a maximum bag size of 50 recent watches and 50 recent searches. The softmax layer outputs a multinomial distribution over the same 1M video classes with a dimension of 256 (which can be thought of as a separate output video embedding). These models were trained until convergence over all YouTube users, corresponding to several epochs over the data. Network structure followed a common “tower” pattern in which the bottom of the network is widest and each successive hidden layer halves the number of units (similar to Figure 3). The depth zero network is effectively a linear factorization scheme which performed very similarly to the predecessor system. Width and depth were added until the incremental benefit diminished and convergence became difficult:</p>
 <p>그림 6에서 볼 수 있듯이 특징과 깊이를 추가하면 홀드아웃 데이터의 정밀도가 크게 향상됩니다. 이 실험에서는 1백만 개의 동영상과 1백만 개의 검색 토큰으로 구성된 어휘를 최근 시청 50개와 최근 검색 50개의 최대 가방 크기에 각각 256개의 플로트로 임베드했습니다. 소프트맥스 레이어는 동일한 1M 동영상 클래스에 대해 256 차원으로 다항식 분포를 출력합니다(별도의 출력 동영상 임베딩으로 생각할 수 있음). 이러한 모델은 데이터의 여러 시대에 해당하는 모든 YouTube 사용자에 대해 수렴할 때까지 학습되었습니다. 네트워크 구조는 네트워크의 맨 아래가 가장 넓고 연속되는 각 숨겨진 레이어가 유닛 수를 절반으로 줄이는 일반적인 “타워” 패턴을 따랐습니다(그림 3과 유사). 깊이 제로 네트워크는 사실상 선형 인수분해 방식이며, 이전 시스템과 매우 유사하게 작동했습니다. 점진적 이득이 감소하고 수렴이 어려워질 때까지 폭과 깊이가 추가되었습니다:</p>
 <ul>
-<li><em>Depth 0: A linear layer simply transforms the concatenation</em></li>
-</ul>
-<p><em>layer to match the softmax dimension of 256</em></p>
-<ul>
+<li><em>Depth 0: A linear layer simply transforms the concatenation</em><br><em>layer to match the softmax dimension of 256</em></li>
 <li><em>Depth 1: 256 ReLU</em></li>
 <li><em>Depth 2: 512 ReLU → 256 ReLU</em></li>
 <li><em>Depth 3: 1024 ReLU → 512 ReLU → 256 ReLU</em></li>
@@ -435,7 +432,7 @@
 
 
 
-    <a data-url="https://jmj3047.github.io/2023/03/31/DNN_Youtube_Rec/" data-id="clgw0znb6000u4du6623uck20" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jmj3047.github.io/2023/03/31/DNN_Youtube_Rec/" data-id="cllsxv886001qmsu6e19t1yj5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

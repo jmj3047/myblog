@@ -32,7 +32,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="keywords" content="Big Query,BigQueryML,ML Analysis,ML Process" />
+    <meta name="keywords" content="ML Analysis,Big Query,BigQueryML,ML Process" />
     
     <meta name="description" content="개요 빅쿼리 ML을 사용하여 다양한 머신러닝 모델을 돌리기 GA4와 빅쿼리 연동 시 추출되는 데이터들을 정제해서 머신러닝 훈련데이터로 만들기 각 모델의 평가, 파라미터들을 알아보고 조정해보기  목표 앱 설치 후 첫 24시간 동안의 사용자 활동을 기반으로 하는 “Flood It!” 데이터 세트를 사용하여 다양한 분류 모델을 시도하여 이탈 성향(1) 또는 이탈">
 <meta property="og:type" content="article">
@@ -45,9 +45,9 @@
 <meta property="article:published_time" content="2023-03-07T15:00:00.000Z">
 <meta property="article:modified_time" content="2023-03-19T07:02:35.325Z">
 <meta property="article:author" content="Jang Minjee">
+<meta property="article:tag" content="ML Analysis">
 <meta property="article:tag" content="Big Query">
 <meta property="article:tag" content="BigQueryML">
-<meta property="article:tag" content="ML Analysis">
 <meta property="article:tag" content="ML Process">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jmj3047.github.io/images/Game_Modeling/Untitled.png">
@@ -350,11 +350,16 @@
 </ul>
 <p><strong><strong><strong><strong>STEP 2: 각 사용자에 대한 인구 통계 데이터 추출</strong></strong></strong></strong></p>
 <ul>
-<li>앱정보, 기기, 이커머스, 이벤트 파라미터, 지역 등 사용자에 대한 인구통계학적 데이터 추출</li>
-<li>자체 데이터 세트를 사용하고 있고 조인 가능한 first-party data가 있는 경우 이 섹션은 GA4에서 쉽게 사용할 수 없는 각 사용자에 대한 추가 속성을 추가할 수 있는 좋은 기회</li>
-<li>인구통계는 변경가능성이 있음.</li>
-<li>간단하게 설명하기 위해 사용자가 앱에 처음접속 했을때 구글 애널리틱스 4가 제공하는 인구통계학적 정보를 MIN(event_timestamp)로 표시된대로만 사용  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE <span class="keyword">VIEW</span> bqmlga4.user_demographics <span class="keyword">AS</span> (</span><br><span class="line"></span><br><span class="line">  <span class="keyword">WITH</span> first_values <span class="keyword">AS</span> (</span><br><span class="line">      <span class="keyword">SELECT</span></span><br><span class="line">          user_pseudo_id,</span><br><span class="line">          geo.country <span class="keyword">as</span> country,</span><br><span class="line">          device.operating_system <span class="keyword">as</span> operating_system,</span><br><span class="line">          device.language <span class="keyword">as</span> <span class="keyword">language</span>,</span><br><span class="line">          <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> user_pseudo_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> event_timestamp <span class="keyword">DESC</span>) <span class="keyword">AS</span> row_num</span><br><span class="line">      <span class="keyword">FROM</span> `firebase<span class="operator">-</span>public<span class="operator">-</span>project.analytics_153293282.events_<span class="operator">*</span>`</span><br><span class="line">      <span class="keyword">WHERE</span> event_name<span class="operator">=</span>&quot;user_engagement&quot;</span><br><span class="line">      )</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">EXCEPT</span> (row_num)</span><br><span class="line">  <span class="keyword">FROM</span> first_values</span><br><span class="line">  <span class="keyword">WHERE</span> row_num <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  bqmlga4.user_demographics</span><br></pre></td></tr></table></figure>
-  <img src="/images/Game_Modeling/Untitled%204.png" alt=" "></li>
+<li><p>앱정보, 기기, 이커머스, 이벤트 파라미터, 지역 등 사용자에 대한 인구통계학적 데이터 추출</p>
+</li>
+<li><p>자체 데이터 세트를 사용하고 있고 조인 가능한 first-party data가 있는 경우 이 섹션은 GA4에서 쉽게 사용할 수 없는 각 사용자에 대한 추가 속성을 추가할 수 있는 좋은 기회</p>
+</li>
+<li><p>인구통계는 변경가능성이 있음.</p>
+</li>
+<li><p>간단하게 설명하기 위해 사용자가 앱에 처음접속 했을때 구글 애널리틱스 4가 제공하는 인구통계학적 정보를 MIN(event_timestamp)로 표시된대로만 사용</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE <span class="keyword">VIEW</span> bqmlga4.user_demographics <span class="keyword">AS</span> (</span><br><span class="line"></span><br><span class="line">  <span class="keyword">WITH</span> first_values <span class="keyword">AS</span> (</span><br><span class="line">      <span class="keyword">SELECT</span></span><br><span class="line">          user_pseudo_id,</span><br><span class="line">          geo.country <span class="keyword">as</span> country,</span><br><span class="line">          device.operating_system <span class="keyword">as</span> operating_system,</span><br><span class="line">          device.language <span class="keyword">as</span> <span class="keyword">language</span>,</span><br><span class="line">          <span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> user_pseudo_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> event_timestamp <span class="keyword">DESC</span>) <span class="keyword">AS</span> row_num</span><br><span class="line">      <span class="keyword">FROM</span> `firebase<span class="operator">-</span>public<span class="operator">-</span>project.analytics_153293282.events_<span class="operator">*</span>`</span><br><span class="line">      <span class="keyword">WHERE</span> event_name<span class="operator">=</span>&quot;user_engagement&quot;</span><br><span class="line">      )</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">EXCEPT</span> (row_num)</span><br><span class="line">  <span class="keyword">FROM</span> first_values</span><br><span class="line">  <span class="keyword">WHERE</span> row_num <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  bqmlga4.user_demographics</span><br></pre></td></tr></table></figure>
+<p>  <img src="/images/Game_Modeling/Untitled%204.png" alt=" "></p>
+</li>
 </ul>
 <p><strong><strong><strong><strong>STEP 3: 각 사용자에 대한 행동 데이터 추출</strong></strong></strong></strong></p>
 <ul>
@@ -489,7 +494,7 @@
 
 
 
-    <a data-url="https://jmj3047.github.io/2023/03/08/Game_Modeling/" data-id="clgw0znba001o4du60p4sa3ed" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://jmj3047.github.io/2023/03/08/Game_Modeling/" data-id="cllsxv88a0038msu67iezf1ol" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -561,7 +566,7 @@
         },
         "headline": "BQML을 이용한 게임유저 경향 모델링",
         "image": "https://jmj3047.github.io/images/Game_Modeling/Untitled.png",
-        "keywords": "Big Query BigQueryML ML Analysis ML Process",
+        "keywords": "ML Analysis Big Query BigQueryML ML Process",
         "genre": "Data Platform/Base GCP",
         "datePublished": "2023-03-08",
         "dateCreated": "2023-03-08",
