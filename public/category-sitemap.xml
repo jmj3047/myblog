@@ -9,6 +9,20 @@
 
 
     <url>
+        <loc>https://jmj3047.github.io/categories/Paper/NLP/</loc>
+        <lastmod>2023-09-11T13:19:14.471Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/</loc>
+        <lastmod>2023-09-11T13:19:14.471Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jmj3047.github.io/categories/Data-Analysis/Basic/</loc>
         <lastmod>2023-08-27T03:53:38.260Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -24,13 +38,6 @@
 
     <url>
         <loc>https://jmj3047.github.io/categories/Paper/Speech-Emotion-Recognition/</loc>
-        <lastmod>2023-08-08T13:50:44.993Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/categories/Paper/</loc>
         <lastmod>2023-08-08T13:50:44.993Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -116,13 +123,6 @@
     <url>
         <loc>https://jmj3047.github.io/categories/Python/Python/</loc>
         <lastmod>2022-10-18T15:05:07.992Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/categories/Paper/NLP/</loc>
-        <lastmod>2022-10-15T08:08:32.440Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
