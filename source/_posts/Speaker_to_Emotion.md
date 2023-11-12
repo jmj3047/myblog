@@ -14,7 +14,7 @@ Year(published year): 2019
 Author: Yuxuan Xi, Pengcheng Li, Yan Song, Yiheng Jiang, Lirong Dai
 Subject: Domain Adaptation, Speech Emotion Recognition
 
-# 1107_Speaker to Emotion: Domain Adaptation for Speech Emotion Recognition with Residual Adapters
+# Speaker to Emotion: Domain Adaptation for Speech Emotion Recognition with Residual Adapters
 
 
 > Summary
@@ -23,7 +23,7 @@ Subject: Domain Adaptation, Speech Emotion Recognition
 - The proposed method transfers information from a speaker corpus to an emotion corpus, resulting in significant improvements in SER performance.
 - The paper demonstrates the effectiveness of the proposed method through experiments and shows that domain-agnostic parameters learned by VoxCeleb2 are necessary for effective domain adaptation in SER.
 
-# Introduction
+## Introduction
 
 Recently, deep learning based systems have achieved significant progress for SER, but to be successful, sufficient labeled data is needed, particularly due to the complexity of emotional information. However, existing corpora, such as IEMOCAP [15], CHEAVD [14], FAU-AIBO [29], and EMODB [30], are generally size-limited, in part due to annotation cost, and also suffer label ambiguity.
 
@@ -41,7 +41,7 @@ In this paper, the residual adapter model is trained using VoxCeleb2 data with s
 
 The main difference lies in that the proposed residual adapter utilizes supervised learning to exploit the relationship between speaker and emotion data. To prove the effectiveness of our method, we first use ResNet that is trained with emotion data only as a baseline system, and then conduct a series of experiments as shown in Fig.1, including: (1) A ResNet trained by VoxCeleb2 data as the feature extractor, then the classifier trained for SER. (2) The same ResNet fine-tuned with emotion data – the common practice in transfer learning. (3) The proposed residual adapter method, furthermore testing the adapter module alone, aiming to demonstrate that features learned from the speaker classification task can be beneficial to SER.
 
-# Overview of Speaker-To-Emotion Domain Adaptation Framework
+## Overview of Speaker-To-Emotion Domain Adaptation Framework
 
 SER encompasses some existing problems. (1) Deep learning based methods have become prevalent in recent years [20], [21], [22], owing to the powerful representation learning ability of neural networks.  In general, increasing network depth benefits performance, but the limited scale of emotion corpora greatly restricts the network complexity in practice.
 
@@ -71,9 +71,9 @@ To address these issues, this paper attempts to establish the third method, a ne
 
 이러한 문제를 해결하기 위해 본 논문에서는 세 번째 방법인 새로운 도메인 적응 방식을 시도 합니다. 이 방법에서는 먼저 평소와 같이 화자 레이블이 있는 VoxCeleb2 데이터를 사용하여 딥러닝 모델을 훈련합니다. 그러나 적응단계 에서는 원래 모델에 몇 가지 추가 감정 관련 파라미터를 더한다음, 감정 코퍼스를 활용하여 이전에 학습된 파라미터를 함께 공존하는 추가 파라미터만 미세조정 합니다. 제안된 프레임워크를 통해 정보 망각 문제를 피할 수 있으며 감정 코퍼스 네트워크의 일부분만 미세조정 하는데 활용하기 때문에 과적합 문제를 완화할 수 있습니다.
 
-# Residual Adapter Model
+## Residual Adapter Model
 
-## Model Design
+### Model Design
 
 The basic idea of constructing an adapter module is to linearly parameterize the convolutional filter group, which is the same as introducing an intermediate convolutional layer.
 
@@ -83,7 +83,7 @@ For the training progress, firstly the model is trained on the initial task, usi
 
 이 문장은 잔여 어댑터를 사용한 도메인 적응을 위한 훈련 과정을 의미합니다. 첫 번째 단계는 초기 작업(이 경우 화자 검증)을 위해 대규모 코퍼스에서 딥러닝 모델을 훈련하는 것입니다. 모델이 학습되면 파라미터가 고정되고 목표 도메인 말뭉치(이 경우 감정 코퍼스)를 사용하여 추가 도메인 어댑터를 학습합니다. 도메인 어댑터를 원래 모델에 추가하고 대상 도메인 코퍼스를 사용하여 미세 조정하여 모델을 새 도메인에 맞게 조정합니다. 제안한 방법은 원래 모델의 파라미터를 고정하고 추가 도메인 어댑터만 미세 조정함으로써 전체 네트워크를 미세 조정할 때 발생할 수 있는 과적합 및 정보 망각 문제를 방지하는 것을 목표로 합니다.
 
-## Adapter module and network structure
+### Adapter module and network structure
 
 ![ ](images/Speaker_to_Emotion/Untitled%201.png)
 
@@ -91,9 +91,9 @@ The residual adapter model is constructed on the ResNet20 model with a network s
 
 ![ ](images/Speaker_to_Emotion/Untitled%202.png)
 
-# EXPERIMENTS AND ANALYSIS
+## EXPERIMENTS AND ANALYSIS
 
-## Data description and pre-processing
+### Data description and pre-processing
 
 In this study, both speaker data and emotion data are utilized. For speaker-labeled data, we choose the VoxCeleb2 corpus [13]. VoxCeleb2 is a large-scale speaker-labeled database, prevalent for SV tasks, that was collected from more than 6000 celebrities on YouTube. VoxCeleb2 consists of 2442 hours, with more than a million speech utterances, covering different ages, genders, accents and scenes.
 
@@ -111,7 +111,7 @@ Magnitude spectrograms are utilized as input features, with the spectrograms ext
 
 For VoxCeleb2 data, we randomly choose 50 speakers to train the ResNet20 with adapters. For IEMOCAP improvised data, we conduct a 5-fold cross-validation, where 4 sections are used to train the network and the remaining 2 speakers are used as validation and test data.
 
-## Experiment setup
+### Experiment setup
 
 ![ ](images/Speaker_to_Emotion/Untitled%203.png)
 
@@ -133,7 +133,7 @@ VoxCeleb2 데이터를 사용하여 일반 ResNet20을 사전 훈련한 다음, 
 
 마지막으로 SER 성능의 개선이 VoxCeleb2가 학습한 도메인에 구애받지 않는 파라미터의 덕분인지, 아니면 단순히 감정 코퍼스로 모델을 학습할 수 있도록 어댑터의 파라미터 수가 적기 때문인지 명확히 하고자 합니다. 이 질문에 답하기 위해 잔여 어댑터와 동일한 실험 구성을 유지하고 모델을 유지하되 3개의 컨볼루션 필터 가중치를 모두 0으로 설정하여 도메인에 구애받지 않는 파라미터가 아무런 정보도 제공하지 않도록 했습니다. 결과적으로 정확도가 크게 떨어지며 도메인에 구애받지 않는 파라미터의 필요성이 입증됩니다.
 
-## Comparison to state-of-the-art systems
+### Comparison to state-of-the-art systems
 
 ![ ](images/Speaker_to_Emotion/Untitled%204.png)
 
