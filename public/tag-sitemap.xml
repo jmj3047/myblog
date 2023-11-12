@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://jmj3047.github.io/tags/Domain-Adaptation/</loc>
+        <lastmod>2023-11-12T14:00:19.038Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Speech-Emotion-Recognition/</loc>
+        <lastmod>2023-11-12T14:00:19.038Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jmj3047.github.io/tags/Cross-Encoder/</loc>
         <lastmod>2023-09-11T13:19:14.471Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -108,13 +122,6 @@
     </url>
 
     <url>
-        <loc>https://jmj3047.github.io/tags/Speech-Emotion-Recognition/</loc>
-        <lastmod>2023-07-18T16:52:28.193Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jmj3047.github.io/tags/Self-Supervised-Features/</loc>
         <lastmod>2023-07-18T00:21:15.630Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -186,13 +193,6 @@
 
     <url>
         <loc>https://jmj3047.github.io/tags/Cross-domain/</loc>
-        <lastmod>2023-06-14T05:46:15.955Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/tags/Domain-Adaptation/</loc>
         <lastmod>2023-06-14T05:46:15.955Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
