@@ -3,7 +3,7 @@ title: Meta Transfer Learning for Few Shot Learning
 date: 2024-01-29
 categories:
   - Paper
-  - Speech Emotion Recognition
+  - Few Shot Learning
 tags: 
   - Meta Transfer Learning
   - Few Shot Learning

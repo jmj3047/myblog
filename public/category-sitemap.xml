@@ -9,15 +9,22 @@
 
 
     <url>
-        <loc>https://jmj3047.github.io/categories/Paper/Speech-Emotion-Recognition/</loc>
-        <lastmod>2024-02-01T05:05:38.800Z</lastmod>
+        <loc>https://jmj3047.github.io/categories/Paper/Few-Shot-Learning/</loc>
+        <lastmod>2024-02-20T10:46:59.840Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://jmj3047.github.io/categories/Paper/</loc>
-        <lastmod>2024-02-01T05:05:38.800Z</lastmod>
+        <lastmod>2024-02-20T10:46:59.840Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Speech-Emotion-Recognition/</loc>
+        <lastmod>2023-11-12T14:07:28.067Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
