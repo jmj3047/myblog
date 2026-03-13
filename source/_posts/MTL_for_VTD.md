@@ -15,7 +15,6 @@ Year(published year): 2020
 Author: Siddharth Sigtia, Pascal Clark, Rob Haynes, Hywel Richards, John Bridle
 Subject: Multi-Task Learning
 
-# Multi-Task Learning for Voice Trigger Detection
 
 > Summary
 - We start by training a general acoustic model that produces phonetic transcriptions given a large labelled training dataset.

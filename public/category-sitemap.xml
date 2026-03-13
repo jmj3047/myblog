@@ -9,6 +9,27 @@
 
 
     <url>
+        <loc>https://jmj3047.github.io/categories/Paper/EEG/</loc>
+        <lastmod>2026-03-13T03:48:46.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/</loc>
+        <lastmod>2026-03-13T03:48:46.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/categories/Paper/Multi-Task-Learning/</loc>
+        <lastmod>2026-03-13T03:32:16.203Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jmj3047.github.io/categories/Quant/</loc>
         <lastmod>2025-05-17T11:01:28.968Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,13 +38,6 @@
 
     <url>
         <loc>https://jmj3047.github.io/categories/Paper/Few-Shot-Learning/</loc>
-        <lastmod>2024-07-05T07:04:11.745Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/categories/Paper/</loc>
         <lastmod>2024-07-05T07:04:11.745Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -81,13 +95,6 @@
     <url>
         <loc>https://jmj3047.github.io/categories/Python/</loc>
         <lastmod>2023-05-17T11:50:35.489Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/categories/Paper/Multi-Task-Learning/</loc>
-        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -3,6 +3,69 @@
 
 
     <url>
+        <loc>https://jmj3047.github.io/tags/Graph/</loc>
+        <lastmod>2026-03-13T03:48:46.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/EEG-Emotion-Recognition/</loc>
+        <lastmod>2026-03-13T03:48:46.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Graph-Neural-Network/</loc>
+        <lastmod>2026-03-13T03:46:10.342Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Functional-medical-data/</loc>
+        <lastmod>2026-03-13T03:46:05.186Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Domain-Generalization/</loc>
+        <lastmod>2026-03-13T03:46:05.186Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Domain-Adaptation/</loc>
+        <lastmod>2026-03-13T03:46:05.186Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Voice-Trigger-Detection/</loc>
+        <lastmod>2026-03-13T03:32:16.203Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/Multi-Task-Learning/</loc>
+        <lastmod>2026-03-13T03:32:16.203Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jmj3047.github.io/tags/English/</loc>
+        <lastmod>2026-03-13T03:32:16.203Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jmj3047.github.io/tags/Quant-Research/</loc>
         <lastmod>2025-05-17T11:01:28.968Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -61,13 +124,6 @@
     <url>
         <loc>https://jmj3047.github.io/tags/Meta-Transfer-Learning/</loc>
         <lastmod>2024-02-20T10:46:01.565Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/tags/Domain-Adaptation/</loc>
-        <lastmod>2023-11-12T14:07:28.067Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -199,13 +255,6 @@
     </url>
 
     <url>
-        <loc>https://jmj3047.github.io/tags/English/</loc>
-        <lastmod>2023-07-17T10:30:48.185Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jmj3047.github.io/tags/Speaker-Independent/</loc>
         <lastmod>2023-07-05T07:14:22.920Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -290,21 +339,7 @@
     </url>
 
     <url>
-        <loc>https://jmj3047.github.io/tags/Voice-Trigger-Detection/</loc>
-        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jmj3047.github.io/tags/Speaker-Verification/</loc>
-        <lastmod>2023-05-17T11:50:35.488Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jmj3047.github.io/tags/Multi-Task-Learning/</loc>
         <lastmod>2023-05-17T11:50:35.488Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
